@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">WarehouseManagementWKeeper</string>
+    <string name="app_name">Warehouse manager</string>
+    <string name="option_home">Home</string>
+    <string name="option_account">Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
