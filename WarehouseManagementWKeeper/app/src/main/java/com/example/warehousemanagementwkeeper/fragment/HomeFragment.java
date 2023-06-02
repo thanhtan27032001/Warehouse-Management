@@ -1,5 +1,6 @@
 package com.example.warehousemanagementwkeeper.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -12,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.warehousemanagementwkeeper.R;
+import com.example.warehousemanagementwkeeper.activity.CreateReceiptActivity;
+
 public class HomeFragment extends Fragment {
 
     private LinearLayout cardCreateReceipt;
@@ -38,7 +41,7 @@ public class HomeFragment extends Fragment {
 
     private void setEvent() {
         cardCreateReceipt.setOnClickListener(view -> {
-            Toast.makeText(getContext(), "Test", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getContext(), CreateReceiptActivity.class));
         });
         cardImportManagement.setOnClickListener(view -> {
             Toast.makeText(getContext(), "Test", Toast.LENGTH_SHORT).show();

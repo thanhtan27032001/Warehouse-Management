@@ -6,4 +6,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tv_create_receipt">Create receipt</string>
     <string name="tv_import_management">Import management</string>
+    <string name="tv_select_order">Select the order of receipt</string>
+    <string name="btn_back">Go back</string>
+    <string name="error_orders_no_data">No order</string>
 </resources>
