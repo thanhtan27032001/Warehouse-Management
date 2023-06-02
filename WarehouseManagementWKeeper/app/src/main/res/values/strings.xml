@@ -9,4 +9,8 @@
     <string name="tv_select_order">Select the order of receipt</string>
     <string name="btn_back">Go back</string>
     <string name="error_orders_no_data">No order</string>
+    <string name="tv_oderId">Order #</string>
+    <string name="tvEmployeeCreate">Created by</string>
+    <string name="tv_supplier_name">Supply by</string>
+    <string name="tv_oder_date">Order at</string>
 </resources>

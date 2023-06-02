@@ -32,8 +32,18 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull OrdersAdapter.ViewHolder holder, int position) {
         Order order = orders.get(position);
-        holder.tvOrderId.setText(String.valueOf(order.getId()));
-        holder.tvEmployeeName.setText(order.getEmployee().getFullName());
+        holder.tvOrderId.setText(context.getText(R.string.tv_oderId).toString().concat(String.valueOf(order.getId())));
+        holder.tvSupplierName.setText(" ".concat(order.getSupplier().getName()));
+        holder.tvOrderDate.setText(context.getText(R.string.tv_oder_date).toString()
+                .concat(" ")
+                .concat(order.getOderDate())
+        );
+        holder.tvEmployeeName.setText(context.getText(R.string.tvEmployeeCreate).toString()
+                .concat(" ")
+                .concat(order.getEmployee().getFullName())
+                .concat(" #")
+                .concat(String.valueOf(order.getEmployee().getId()))
+        );
     }
 
     @Override
@@ -42,11 +52,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvOrderId, tvEmployeeName;
+        private TextView tvOrderId, tvSupplierName, tvOrderDate, tvEmployeeName;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvOrderId = itemView.findViewById(R.id.tvOrderId);
             tvEmployeeName = itemView.findViewById(R.id.tvEmployeeName);
+            tvSupplierName = itemView.findViewById(R.id.tvSupplierName);
+            tvOrderDate = itemView.findViewById(R.id.tvOrderDate);
         }
     }
 }
