@@ -149,6 +149,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Employee employee = response.body().getData();
                                 MyAuthorization.getInstance().setLoginInfo(loginInfo);
                                 MyAuthorization.getInstance().setEmployeeInfo(employee);
+                                MyAuthorization.getInstance().setToken(token);
                                 // open main screen
                                 Intent intent = MainActivityFactory.getActivityIntent(LoginActivity.this, employee.getRole());
                                 if (intent != null){
@@ -204,6 +205,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseLogin> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, R.string.error_500, Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                layoutProgressLogin.setVisibility(View.GONE);
             }
         });
     }

@@ -7,6 +7,7 @@ public class MyAuthorization {
     private static MyAuthorization instance;
     private Employee employeeInfo;
     private LoginInfo loginInfo;
+    private String token;
     public static MyAuthorization getInstance(){
         if (instance == null){
             instance = new MyAuthorization();
@@ -21,6 +22,9 @@ public class MyAuthorization {
     public void setLoginInfo(LoginInfo loginInfo) {
         this.loginInfo = loginInfo;
     }
+    public void setToken(String token){
+        this.token = token;
+    }
 
     public Employee getEmployeeInfo() {
         return employeeInfo;
@@ -28,5 +32,9 @@ public class MyAuthorization {
 
     public LoginInfo getLoginInfo() {
         return loginInfo;
+    }
+
+    public String getToken() {
+        return token;
     }
 }

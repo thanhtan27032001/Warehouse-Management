@@ -3,6 +3,7 @@ package com.example.warehousemanagementwkeeper.rv_adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,9 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 .concat(" #")
                 .concat(String.valueOf(order.getEmployee().getId()))
         );
+        holder.cardOrder.setOnClickListener(view -> {
+            context.showDialogCreateReceipt(order);
+        });
     }
 
     @Override
@@ -52,9 +56,11 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private LinearLayout cardOrder;
         private TextView tvOrderId, tvSupplierName, tvOrderDate, tvEmployeeName;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            cardOrder = itemView.findViewById(R.id.cardOrder);
             tvOrderId = itemView.findViewById(R.id.tvOrderId);
             tvEmployeeName = itemView.findViewById(R.id.tvEmployeeName);
             tvSupplierName = itemView.findViewById(R.id.tvSupplierName);

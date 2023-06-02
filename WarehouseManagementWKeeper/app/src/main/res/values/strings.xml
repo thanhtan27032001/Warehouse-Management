@@ -10,7 +10,7 @@
     <string name="error_orders_no_data">No order</string>
     <string name="tv_oderId">Order #</string>
     <string name="tvEmployeeCreate">Created by</string>
-    <string name="tv_supplier_name">Supply by</string>
+    <string name="tv_supplier_name">Order to</string>
     <string name="tv_oder_date">Order at</string>
     <string name="login_title">Login</string>
     <string name="login_subtitle">To Warehouse management with your role</string>
@@ -25,4 +25,9 @@
     <string name="role_employee">Employee</string>
     <string name="role_warehouse_keeper">Warehouse keeper</string>
     <string name="role_accountant">Accountant</string>
+    <string name="title_create_receipt">Create receipt</string>
+    <string name="btn_submit">Submit</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="message_create_receipt">Are you sure to create receipt for the order id</string>
+    <string name="success_create_receipt">Create receipt successful</string>
 </resources>
