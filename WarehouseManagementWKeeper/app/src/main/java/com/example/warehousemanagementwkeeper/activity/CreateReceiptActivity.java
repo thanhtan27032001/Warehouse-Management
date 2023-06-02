@@ -131,9 +131,11 @@ public class CreateReceiptActivity extends AppCompatActivity {
                 }
                 else {
                     try {
-                        Log.e("error", response.errorBody().string());
+                        String error = response.errorBody().string();
+                        error = MyFormat.getError(error);
+                        Log.e("error", error);
                         Log.e("token", MyAuthorization.getInstance().getToken());
-                        Toast.makeText(CreateReceiptActivity.this, R.string.error_500, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateReceiptActivity.this, error, Toast.LENGTH_SHORT).show();
                     }
                     catch (Exception e){
                         e.printStackTrace();
