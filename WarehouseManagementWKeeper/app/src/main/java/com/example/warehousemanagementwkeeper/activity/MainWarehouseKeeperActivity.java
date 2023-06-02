@@ -9,7 +9,7 @@ import com.example.warehousemanagementwkeeper.fragment.AccountFragment;
 import com.example.warehousemanagementwkeeper.fragment.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainWarehouseKeeperActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     public HomeFragment homeFragment;

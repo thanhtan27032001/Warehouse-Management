@@ -3,6 +3,11 @@ package com.example.warehousemanagementwkeeper.model;
 import com.google.gson.annotations.SerializedName;
 
 public class Employee {
+    public static final String ROLE_EMPLOYEE = "NV";
+    public static final String ROLE_WAREHOUSE_KEEPER = "TK";
+    public static final String ROLE_MANAGER = "QL";
+    public static final String ROLE_ACCOUNTANT = "KT";
+    public static final String ROLE_BUSINESS = "KD";
     @SerializedName("MaNhanVien")
     private int id;
     @SerializedName("Ho")
@@ -17,6 +22,8 @@ public class Employee {
     private boolean isActive;
     @SerializedName("MaBoPhan")
     private int idDepartment;
+    @SerializedName("Role")
+    private String role;
 
     // get employee info in order
     public Employee(int id, String firstName, String lastName, String birthdate, String address, boolean isActive, int idDepartment) {
@@ -27,6 +34,18 @@ public class Employee {
         this.address = address;
         this.isActive = isActive;
         this.idDepartment = idDepartment;
+    }
+
+    // login
+    public Employee(int id, String firstName, String lastName, String birthdate, String address, boolean isActive, int idDepartment, String role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthdate = birthdate;
+        this.address = address;
+        this.isActive = isActive;
+        this.idDepartment = idDepartment;
+        this.role = role;
     }
 
     public String getFullName(){
@@ -59,5 +78,9 @@ public class Employee {
 
     public int getIdDepartment() {
         return idDepartment;
+    }
+
+    public String getRole() {
+        return role;
     }
 }
