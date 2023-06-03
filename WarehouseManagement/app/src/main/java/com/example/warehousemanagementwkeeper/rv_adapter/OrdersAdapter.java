@@ -10,16 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.warehousemanagementwkeeper.R;
-import com.example.warehousemanagementwkeeper.activity.CreateReceiptActivity;
+import com.example.warehousemanagementwkeeper.activity.SelectOrderReceiptActivity;
 import com.example.warehousemanagementwkeeper.model.Order;
 
 import java.util.ArrayList;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
-    private CreateReceiptActivity context;
+    private SelectOrderReceiptActivity context;
     private ArrayList<Order> orders;
 
-    public OrdersAdapter(CreateReceiptActivity context, ArrayList<Order> orders) {
+    public OrdersAdapter(SelectOrderReceiptActivity context, ArrayList<Order> orders) {
         this.context = context;
         this.orders = orders;
     }
@@ -46,7 +46,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 .concat(String.valueOf(order.getEmployee().getId()))
         );
         holder.cardOrder.setOnClickListener(view -> {
-            context.showDialogCreateReceipt(order);
+//            context.showDialogCreateReceipt(order);
+            context.openCreateReceiptActivity(order);
         });
     }
 

@@ -2,7 +2,9 @@ package com.example.warehousemanagementwkeeper.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Employee {
+import java.io.Serializable;
+
+public class Employee implements Serializable {
     public static final String ROLE_EMPLOYEE = "NV";
     public static final String ROLE_WAREHOUSE_KEEPER = "TK";
     public static final String ROLE_MANAGER = "QL";
