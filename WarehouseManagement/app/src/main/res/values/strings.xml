@@ -11,7 +11,7 @@
     <string name="tv_oderId">Order #</string>
     <string name="tvEmployeeCreate">Created by</string>
     <string name="tv_supplier_name">Order to</string>
-    <string name="tv_oder_date">Order at</string>
+    <string name="tv_order_date">Order at</string>
     <string name="login_title">Login</string>
     <string name="login_subtitle">To Warehouse management with your role</string>
     <string name="username_input_hint">Username</string>
@@ -30,4 +30,16 @@
     <string name="btn_cancel">Cancel</string>
     <string name="message_create_receipt">Are you sure to create receipt for the order id</string>
     <string name="success_create_receipt">Create receipt successful</string>
+    <string name="tv_receipt">Receipt</string>
+    <string name="tv_order">Order</string>
+    <string name="tv_name">Name:</string>
+    <string name="tv_order_date_2">Date order:</string>
+    <string name="tv_employee_create">Employee create:</string>
+    <string name="tv_supply">Supply</string>
+    <string name="tv_address">Address:</string>
+    <string name="tv_phone_number">Phone number:</string>
+    <string name="tv_order_detail">Order detail</string>
+    <string name="tv_item">Item</string>
+    <string name="tv_quantity">Quantity</string>
+    <string name="tv_price">Price (VNĐ)</string>
 </resources>

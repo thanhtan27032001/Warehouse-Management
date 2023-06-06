@@ -35,7 +35,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         Order order = orders.get(position);
         holder.tvOrderId.setText(context.getText(R.string.tv_oderId).toString().concat(String.valueOf(order.getId())));
         holder.tvSupplierName.setText(" ".concat(order.getSupplier().getName()));
-        holder.tvOrderDate.setText(context.getText(R.string.tv_oder_date).toString()
+        holder.tvOrderDate.setText(context.getText(R.string.tv_order_date).toString()
                 .concat(" ")
                 .concat(order.getOderDate())
         );
