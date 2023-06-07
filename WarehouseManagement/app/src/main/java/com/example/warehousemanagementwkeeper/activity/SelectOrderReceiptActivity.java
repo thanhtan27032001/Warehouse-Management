@@ -1,5 +1,6 @@
 package com.example.warehousemanagementwkeeper.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,7 +35,6 @@ public class SelectOrderReceiptActivity extends AppCompatActivity {
 
     private ImageButton btnBack;
     private RecyclerView rvOrders;
-    private ArrayList<Order> orders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,18 @@ public class SelectOrderReceiptActivity extends AppCompatActivity {
         setEvent();
         setData();
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            Log.e("test", "result ok");
+            if (requestCode == CreateReceiptActivity.REQUEST_CREATED_RECEIPT){
+                Log.e("test", "request create");
+                setData();
+            }
+        }
     }
 
     private void setView() {
@@ -64,8 +76,12 @@ public class SelectOrderReceiptActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseOrders> call, Response<ResponseOrders> response) {
                 if (response.isSuccessful()){
-                    orders = new ArrayList<>();
-                    orders.addAll(response.body().getData());
+                    ArrayList<Order> orders = new ArrayList<>();
+                    for (Order order: response.body().getData()){
+                        if (!order.isCreatedReceipt()){
+                            orders.add(order);
+                        }
+                    }
                     OrdersAdapter adapter = new OrdersAdapter(SelectOrderReceiptActivity.this, orders);
                     rvOrders.setAdapter(adapter);
                 }
@@ -89,6 +105,6 @@ public class SelectOrderReceiptActivity extends AppCompatActivity {
     public void openCreateReceiptActivity(Order order){
         Intent intent = new Intent(this, CreateReceiptActivity.class);
         intent.putExtra(CreateReceiptActivity.TAG_ORDER_SELECTED, order);
-        startActivity(intent);
+        startActivityForResult(intent, CreateReceiptActivity.REQUEST_CREATED_RECEIPT);
     }
 }

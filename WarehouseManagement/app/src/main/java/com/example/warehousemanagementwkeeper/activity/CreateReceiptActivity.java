@@ -41,6 +41,7 @@ import retrofit2.Response;
 public class CreateReceiptActivity extends AppCompatActivity {
 
     public static final String TAG_ORDER_SELECTED = "TAG_ORDER_SELECTED";
+    public static final int REQUEST_CREATED_RECEIPT = 273;
     private Order orderSelected;
     private ImageButton btnBack;
     private TextView tvInputDate, tvInputTime, tvOrderDate, tvEmployeeName, tvSupplyName,
@@ -158,7 +159,6 @@ public class CreateReceiptActivity extends AppCompatActivity {
         // dd-mm-yyyy to yyyy-mm-dd
         inputDate = MyFormat.toDatabaseDate(inputDate);
         String inputDateTime = inputDate + " " + tvInputTime.getText().toString();
-        Log.e("test", inputDateTime);
         Receipt receipt = new Receipt(orderSelected, false, inputDateTime);
 
         Call<ResponseObject> call = ReceiptApiInstance.getInstance().createReceipt(
@@ -171,6 +171,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
                 if (response.isSuccessful()){
                     Toast.makeText(CreateReceiptActivity.this, R.string.success_create_receipt, Toast.LENGTH_SHORT).show();
+                    CreateReceiptActivity.this.setResult(RESULT_OK);
                     CreateReceiptActivity.this.finish();
                 }
                 else {

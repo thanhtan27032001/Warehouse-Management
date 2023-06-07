@@ -13,13 +13,16 @@ public class Order implements Serializable {
     private Supplier supplier;
     @SerializedName("NhanVien")
     private Employee employee;
+    @SerializedName("DaTaoPhieu")
+    private boolean isCreatedReceipt;
 
     // get order
-    public Order(int id, String oderDate, Supplier supplier, Employee employee) {
+    public Order(int id, String oderDate, Supplier supplier, Employee employee, boolean isCreatedReceipt) {
         this.id = id;
         this.oderDate = oderDate;
         this.supplier = supplier;
         this.employee = employee;
+        this.isCreatedReceipt = isCreatedReceipt;
     }
 
     public int getId() {
@@ -36,5 +39,9 @@ public class Order implements Serializable {
 
     public Employee getEmployee() {
         return employee;
+    }
+
+    public boolean isCreatedReceipt() {
+        return isCreatedReceipt;
     }
 }
