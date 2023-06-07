@@ -14,7 +14,7 @@
         android:theme="@style/Theme.WarehouseManagementWKeeper"
         tools:targetApi="31">
         <activity
-            android:name=".ImportManagement"
+            android:name=".activity.ImportManagementActivity"
             android:exported="false" />
         <activity
             android:name=".activity.CreateReceiptActivity"

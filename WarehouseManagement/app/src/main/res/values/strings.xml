@@ -50,5 +50,6 @@
     <string name="tv_receipt_management">Receipt management</string>
     <string name="btn_more">more</string>
     <string name="tv_supply_by">Supply by</string>
-    <string name="tv_supply_for">Supply for order:</string>
+    <string name="tv_supply_for">Supply for order</string>
+    <string name="tv_input_at">Input at</string>
 </resources>

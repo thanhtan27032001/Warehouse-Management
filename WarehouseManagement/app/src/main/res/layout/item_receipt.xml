@@ -54,7 +54,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tv_input_date"/>
+                    android:text="@string/tv_input_at"/>
                 <TextView
                     android:id="@+id/tvInputDate"
                     android:layout_width="match_parent"

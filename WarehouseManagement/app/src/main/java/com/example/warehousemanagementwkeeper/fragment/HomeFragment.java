@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.warehousemanagementwkeeper.R;
+import com.example.warehousemanagementwkeeper.activity.ImportManagementActivity;
 import com.example.warehousemanagementwkeeper.activity.SelectOrderReceiptActivity;
 
 public class HomeFragment extends Fragment {
@@ -43,7 +44,7 @@ public class HomeFragment extends Fragment {
             startActivity(new Intent(getContext(), SelectOrderReceiptActivity.class));
         });
         cardImportManagement.setOnClickListener(view -> {
-            Toast.makeText(getContext(), "Test", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getContext(), ImportManagementActivity.class));
         });
     }
 }
