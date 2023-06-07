@@ -34,7 +34,7 @@ public class MyAuthorization {
         return loginInfo;
     }
 
-    public String getToken() {
-        return token;
+    public String getBearerToken() {
+        return "Bearer " + token;
     }
 }

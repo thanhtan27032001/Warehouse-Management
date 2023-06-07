@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     // get employee info
                     String token = response.body().getData();
-                    Call<ResponseEmployee> callEmployee = AuthorizationApiInstance.getInstance().getEmployeeInfo(MyFormat.getBearerToken(token));
+                    Call<ResponseEmployee> callEmployee = AuthorizationApiInstance.getInstance().getEmployeeInfo("Bearer " + token);
                     callEmployee.enqueue(new Callback<ResponseEmployee>() {
                         @Override
                         public void onResponse(Call<ResponseEmployee> call, Response<ResponseEmployee> response) {

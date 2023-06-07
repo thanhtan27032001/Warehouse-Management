@@ -42,4 +42,9 @@
     <string name="tv_item">Item</string>
     <string name="tv_quantity">Quantity</string>
     <string name="tv_price">Price (VNĐ)</string>
+    <string name="tv_input_date">Input date</string>
+    <string name="tv_date">Date</string>
+    <string name="tv_input_time">Input time:</string>
+    <string name="tv_input_date_2">Input date:</string>
+    <string name="tv_submit_create_receipt">I have read and confirm create receipt</string>
 </resources>

@@ -4,24 +4,36 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.api_instance.OrderApiInstance;
+import com.example.warehousemanagementwkeeper.api_instance.ReceiptApiInstance;
 import com.example.warehousemanagementwkeeper.model.Order;
 import com.example.warehousemanagementwkeeper.model.OrderDetail;
+import com.example.warehousemanagementwkeeper.model.Receipt;
+import com.example.warehousemanagementwkeeper.model.ResponseObject;
 import com.example.warehousemanagementwkeeper.model.ResponseOrderDetails;
+import com.example.warehousemanagementwkeeper.my_control.MyAuthorization;
 import com.example.warehousemanagementwkeeper.my_control.MyFormat;
 import com.example.warehousemanagementwkeeper.rv_adapter.OrderDetailAdapter;
+import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,7 +43,8 @@ public class CreateReceiptActivity extends AppCompatActivity {
     public static final String TAG_ORDER_SELECTED = "TAG_ORDER_SELECTED";
     private Order orderSelected;
     private ImageButton btnBack;
-    private TextView tvOrderName, tvOrderDate, tvEmployeeName, tvSupplyName, tvSupplyAddress, tvSupplyPhone;
+    private TextView tvInputDate, tvInputTime, tvOrderDate, tvEmployeeName, tvSupplyName,
+            tvSupplyAddress, tvSupplyPhone, tvCreateReceipt;
     private RecyclerView rvOrderDetail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +59,14 @@ public class CreateReceiptActivity extends AppCompatActivity {
     private void setView() {
         btnBack = findViewById(R.id.btnBack);
 
-        tvOrderName = findViewById(R.id.tvOrderName);
+        tvInputDate = findViewById(R.id.tv_input_date);
+        tvInputTime = findViewById(R.id.tv_input_time);
         tvOrderDate = findViewById(R.id.tvOrderDate);
         tvEmployeeName = findViewById(R.id.tvEmployeeName);
         tvSupplyName = findViewById(R.id.tvSupplyName);
         tvSupplyAddress = findViewById(R.id.tvSupplyAddress);
         tvSupplyPhone = findViewById(R.id.tvSupplyPhone);
+        tvCreateReceipt = findViewById(R.id.tvCreateReceipt);
 
         rvOrderDetail = findViewById(R.id.rvOrderDetail);
         rvOrderDetail.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
@@ -59,12 +74,21 @@ public class CreateReceiptActivity extends AppCompatActivity {
 
     private void setEvent() {
         btnBack.setOnClickListener(view -> finish());
+        tvInputDate.setOnClickListener(view -> {
+            showDatePickerDialog();
+        });
+        tvInputTime.setOnClickListener(view -> {
+            showTimePickerDialog();
+        });
+        tvCreateReceipt.setOnClickListener(view -> createReceipt());
     }
 
     private void setData() {
         orderSelected = (Order) getIntent().getSerializableExtra(TAG_ORDER_SELECTED);
         if (orderSelected != null){
-            Toast.makeText(this, String.valueOf(orderSelected.getId()), Toast.LENGTH_SHORT).show();
+            Date date = new Date();
+            tvInputDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(date));
+            tvInputTime.setText(new SimpleDateFormat("HH:mm").format(date));
             tvOrderDate.setText(orderSelected.getOderDate());
             tvEmployeeName.setText(orderSelected.getEmployee().getFullName());
             tvSupplyName.setText(orderSelected.getSupplier().getName());
@@ -95,6 +119,72 @@ public class CreateReceiptActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseOrderDetails> call, Throwable t) {
+                Toast.makeText(CreateReceiptActivity.this, R.string.error_500, Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void showDatePickerDialog() {
+        DatePickerDialog dialog = new DatePickerDialog(this);
+        dialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                String date = i2 + "-" + (i1+1) + "-" + i;
+                tvInputDate.setText(date);
+            }
+        });
+        dialog.show();
+    }
+    private void showTimePickerDialog(){
+        Date date = new Date();
+        TimePickerDialog dialog = new TimePickerDialog(
+                this,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                        String time = i + ":" + i1 + ":00";
+                        tvInputTime.setText(time);
+                    }
+                },
+                date.getHours(),
+                date.getMinutes(),
+                true
+        );
+        dialog.show();
+    }
+    private void createReceipt(){
+        String inputDate = tvInputDate.getText().toString();
+        // dd-mm-yyyy to yyyy-mm-dd
+        inputDate = MyFormat.toDatabaseDate(inputDate);
+        String inputDateTime = inputDate + " " + tvInputTime.getText().toString();
+        Log.e("test", inputDateTime);
+        Receipt receipt = new Receipt(orderSelected, false, inputDateTime);
+
+        Call<ResponseObject> call = ReceiptApiInstance.getInstance().createReceipt(
+                MyAuthorization.getInstance().getBearerToken(),
+                orderSelected.getId(),
+                receipt
+        );
+        call.enqueue(new Callback<ResponseObject>() {
+            @Override
+            public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(CreateReceiptActivity.this, R.string.success_create_receipt, Toast.LENGTH_SHORT).show();
+                    CreateReceiptActivity.this.finish();
+                }
+                else {
+                    try {
+                        Toast.makeText(CreateReceiptActivity.this, MyFormat.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseObject> call, Throwable t) {
                 Toast.makeText(CreateReceiptActivity.this, R.string.error_500, Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
