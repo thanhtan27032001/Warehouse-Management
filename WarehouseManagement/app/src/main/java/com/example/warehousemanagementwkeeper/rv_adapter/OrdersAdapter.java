@@ -39,7 +39,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 .concat(" ")
                 .concat(order.getOderDate())
         );
-        holder.tvEmployeeName.setText(context.getText(R.string.tvEmployeeCreate).toString()
+        holder.tvEmployeeName.setText(context.getText(R.string.tv_created_by).toString()
                 .concat(" ")
                 .concat(order.getEmployee().getFullName())
                 .concat(" #")

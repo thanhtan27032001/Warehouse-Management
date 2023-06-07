@@ -9,7 +9,7 @@
     <string name="btn_back">Go back</string>
     <string name="error_orders_no_data">No order</string>
     <string name="tv_oderId">Order #</string>
-    <string name="tvEmployeeCreate">Created by</string>
+    <string name="tv_created_by">Created by</string>
     <string name="tv_supplier_name">Order to</string>
     <string name="tv_order_date">Order at</string>
     <string name="login_title">Login</string>
@@ -47,4 +47,8 @@
     <string name="tv_input_time">Input time:</string>
     <string name="tv_input_date_2">Input date:</string>
     <string name="tv_submit_create_receipt">I have read and confirm create receipt</string>
+    <string name="tv_receipt_management">Receipt management</string>
+    <string name="btn_more">more</string>
+    <string name="tv_supply_by">Supply by</string>
+    <string name="tv_supply_for">Supply for order:</string>
 </resources>

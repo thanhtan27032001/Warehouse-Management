@@ -84,7 +84,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/tv_input_date_2"/>
                             <TextView
-                                android:id="@+id/tv_input_date"
+                                android:id="@+id/tvInputDate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:padding="4dp"

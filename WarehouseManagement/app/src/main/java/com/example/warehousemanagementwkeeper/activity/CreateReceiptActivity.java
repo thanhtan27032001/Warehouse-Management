@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -25,15 +24,12 @@ import com.example.warehousemanagementwkeeper.model.ResponseOrderDetails;
 import com.example.warehousemanagementwkeeper.my_control.MyAuthorization;
 import com.example.warehousemanagementwkeeper.my_control.MyFormat;
 import com.example.warehousemanagementwkeeper.rv_adapter.OrderDetailAdapter;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,7 +56,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
     private void setView() {
         btnBack = findViewById(R.id.btnBack);
 
-        tvInputDate = findViewById(R.id.tv_input_date);
+        tvInputDate = findViewById(R.id.tvInputDate);
         tvInputTime = findViewById(R.id.tv_input_time);
         tvOrderDate = findViewById(R.id.tvOrderDate);
         tvEmployeeName = findViewById(R.id.tvEmployeeName);
