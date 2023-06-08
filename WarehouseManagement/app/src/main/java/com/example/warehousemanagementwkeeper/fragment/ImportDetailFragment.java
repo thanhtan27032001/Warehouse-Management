@@ -17,12 +17,15 @@ import com.example.warehousemanagementwkeeper.api.OrderApi;
 import com.example.warehousemanagementwkeeper.api_instance.OrderApiInstance;
 import com.example.warehousemanagementwkeeper.api_instance.ReceiptApiInstance;
 import com.example.warehousemanagementwkeeper.model.ImportDetail;
+import com.example.warehousemanagementwkeeper.model.ImportDetailsUpsertInfo;
 import com.example.warehousemanagementwkeeper.model.Item;
 import com.example.warehousemanagementwkeeper.model.Order;
 import com.example.warehousemanagementwkeeper.model.OrderDetail;
 import com.example.warehousemanagementwkeeper.model.Receipt;
 import com.example.warehousemanagementwkeeper.model.ResponseImportDetails;
+import com.example.warehousemanagementwkeeper.model.ResponseObject;
 import com.example.warehousemanagementwkeeper.model.ResponseOrderDetails;
+import com.example.warehousemanagementwkeeper.my_control.MyAuthorization;
 import com.example.warehousemanagementwkeeper.my_control.MyFormat;
 import com.example.warehousemanagementwkeeper.rv_adapter.ImportDetailAdapter;
 
@@ -38,6 +41,7 @@ public class ImportDetailFragment extends Fragment {
     private ArrayList<ImportDetail> importDetails;
     private ArrayList<OrderDetail> orderDetails;
     private RecyclerView rvImportDetail;
+    private ImportDetailAdapter importDetailAdapter;
 
     public ImportDetailFragment(Receipt receipt) {
         this.receipt = receipt;
@@ -82,7 +86,6 @@ public class ImportDetailFragment extends Fragment {
                             if (response.isSuccessful()){
                                 ArrayList<ImportDetail> temp = response.body().getData();
                                 importDetails = new ArrayList<>();
-//                                importDetails.addAll(response.body().getData());
                                 boolean isImported;
                                 for (OrderDetail orderDetail: orderDetails){
                                     isImported = false;
@@ -106,9 +109,24 @@ public class ImportDetailFragment extends Fragment {
                                                 orderDetail.getPrice()));
                                     }
                                 }
-                                ImportDetailAdapter adapter = new ImportDetailAdapter(ImportDetailFragment.this, importDetails);
-                                rvImportDetail.setAdapter(adapter);
+                                importDetailAdapter = new ImportDetailAdapter(ImportDetailFragment.this, importDetails);
+                                rvImportDetail.setAdapter(importDetailAdapter);
                                 Log.e("import detail", response.body().getData().size() + "");
+                            }
+                            else if (response.code() == 400) { // not import any order
+                                importDetails = new ArrayList<>();
+                                for (OrderDetail orderDetail: orderDetails){
+                                    importDetails.add(new ImportDetail(
+                                            receipt.getReceiptId(),
+                                            new Item(orderDetail.getItemId(), orderDetail.getItemName()),
+                                            0,
+                                            orderDetail.getPrice(),
+                                            orderDetail.getQuantity(),
+                                            orderDetail.getPrice()));
+                                }
+                                importDetailAdapter = new ImportDetailAdapter(ImportDetailFragment.this, importDetails);
+                                rvImportDetail.setAdapter(importDetailAdapter);
+                                Log.e("import detail", importDetails.size() + "");
                             }
                             else {
                                 try {
@@ -143,5 +161,50 @@ public class ImportDetailFragment extends Fragment {
                 Toast.makeText(getContext(), R.string.error_500, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void upsertImportDetail(ImportDetail importDetail, int newQuantity, double newPrice){
+        try {
+            ImportDetail temp = (ImportDetail) importDetail.clone();
+            temp.setQuantity(newQuantity);
+            temp.setPrice(newPrice);
+            ArrayList<ImportDetail> body = new ArrayList<>();
+            body.add(temp);
+            Call<ResponseObject> call = ReceiptApiInstance.getInstance().upsertReceiptImportDetail(
+                    MyAuthorization.getInstance().getBearerToken(),
+                    receipt.getReceiptId(),
+                    new ImportDetailsUpsertInfo(body)
+            );
+            call.enqueue(new Callback<ResponseObject>() {
+                @Override
+                public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
+                    if (response.isSuccessful()){
+                        importDetail.setQuantity(newQuantity);
+                        importDetail.setPrice(newPrice);
+                        importDetailAdapter.notifyItemChanged(importDetails.indexOf(importDetail));
+//                        Toast.makeText(getContext(), R.string.success_upsert_import_detail, Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        importDetailAdapter.notifyItemChanged(importDetails.indexOf(importDetail));
+                        try {
+                            Toast.makeText(getContext(), MyFormat.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                        }
+                        catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseObject> call, Throwable t) {
+                    importDetailAdapter.notifyItemChanged(importDetails.indexOf(importDetail));
+                    Toast.makeText(getContext(), R.string.error_500, Toast.LENGTH_SHORT).show();
+                    t.printStackTrace();
+                }
+            });
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 }

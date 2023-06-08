@@ -1,5 +1,9 @@
 package com.example.warehousemanagementwkeeper.rv_adapter;
 
+import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,10 +59,34 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
 
         // event
         holder.btnAdd.setOnClickListener(view -> {
-
+            if (importDetail.getQuantity()+1 <= importDetail.getQuantityOrder()){
+                context.upsertImportDetail(importDetail, importDetail.getQuantity()+1, Double.parseDouble(holder.tvPrice.getText().toString()));
+            }
+            else {
+                Toast.makeText(context.getContext(), R.string.warning_maximum_quantity, Toast.LENGTH_SHORT).show();
+            }
         });
         holder.btnMinus.setOnClickListener(view -> {
-
+            if (importDetail.getQuantity()-1 >= 0){
+                context.upsertImportDetail(importDetail, importDetail.getQuantity()-1, Double.parseDouble(holder.tvPrice.getText().toString()));
+            }
+            else {
+                Toast.makeText(context.getContext(), R.string.warning_minimum_quantity, Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.edtQuantity.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                Toast.makeText(context.getContext(), "Done", Toast.LENGTH_SHORT).show();
+                if (holder.edtQuantity.getText().toString().trim().equals("")){
+                    holder.edtQuantity.setText("0");
+                }
+                else if (Integer.parseInt(holder.edtQuantity.getText().toString()) > importDetail.getQuantityOrder()){
+                    holder.edtQuantity.setText(String.valueOf(importDetail.getQuantityOrder()));
+                }
+                context.upsertImportDetail(importDetail, Integer.parseInt(holder.edtQuantity.getText().toString()), Double.parseDouble(holder.tvPrice.getText().toString()));
+                return false;
+            }
         });
     }
 

@@ -59,4 +59,7 @@
     <string name="tv_status">Status:</string>
     <string name="status_importing">Importing</string>
     <string name="status_done">Finish</string>
+    <string name="warning_minimum_quantity">Quantity cannot be under 0</string>
+    <string name="success_upsert_import_detail">Update import detail successful</string>
+    <string name="warning_maximum_quantity">Quantity cannot be greater than order quantity</string>
 </resources>

@@ -1,9 +1,13 @@
 package com.example.warehousemanagementwkeeper.api;
 
+import com.example.warehousemanagementwkeeper.model.ImportDetail;
+import com.example.warehousemanagementwkeeper.model.ImportDetailsUpsertInfo;
 import com.example.warehousemanagementwkeeper.model.Receipt;
 import com.example.warehousemanagementwkeeper.model.ResponseImportDetails;
 import com.example.warehousemanagementwkeeper.model.ResponseObject;
 import com.example.warehousemanagementwkeeper.model.ResponseReceipts;
+
+import java.util.ArrayList;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -22,4 +26,7 @@ public interface ReceiptApi {
 
     @GET("/api/v1/order/getDetailReceipt/{receiptId}")
     Call<ResponseImportDetails> getReceiptImportDetails(@Path("receiptId") int receiptId);
+
+    @POST("/api/v1/order/createDetailReceipt/{receiptId}")
+    Call<ResponseObject> upsertReceiptImportDetail(@Header("Authorization") String token, @Path("receiptId") int receiptId, @Body ImportDetailsUpsertInfo importDetails);
 }

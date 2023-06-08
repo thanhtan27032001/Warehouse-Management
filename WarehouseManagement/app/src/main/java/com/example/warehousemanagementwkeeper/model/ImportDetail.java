@@ -2,7 +2,7 @@ package com.example.warehousemanagementwkeeper.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ImportDetail {
+public class ImportDetail implements Cloneable{
     @SerializedName("MaPhieuNhap")
     private int receiptId;
     @SerializedName("MatHang")
@@ -30,7 +30,10 @@ public class ImportDetail {
         this.quantityOrder = quantityOrder;
         this.priceOrder = priceOrder;
     }
-
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
     public Item getItem() {
         return item;
     }
@@ -57,5 +60,13 @@ public class ImportDetail {
 
     public void setPriceOrder(double priceOrder) {
         this.priceOrder = priceOrder;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
