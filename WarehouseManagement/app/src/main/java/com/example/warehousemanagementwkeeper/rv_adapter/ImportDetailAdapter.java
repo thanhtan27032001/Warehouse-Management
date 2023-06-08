@@ -49,6 +49,7 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
         holder.tvName.setText(importDetail.getItem().getName());
         holder.tvId.setText(String.valueOf(importDetail.getItem().getItemId()));
         holder.edtQuantity.setText(String.valueOf(importDetail.getQuantity()));
+        holder.tvOrderQuantity.setText(String.valueOf(importDetail.getQuantityOrder()));
         holder.tvPrice.setText(String.valueOf(importDetail.getPrice()));
 
         // event

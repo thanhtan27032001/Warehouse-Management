@@ -13,10 +13,16 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.warehousemanagementwkeeper.R;
+import com.example.warehousemanagementwkeeper.api.OrderApi;
+import com.example.warehousemanagementwkeeper.api_instance.OrderApiInstance;
 import com.example.warehousemanagementwkeeper.api_instance.ReceiptApiInstance;
 import com.example.warehousemanagementwkeeper.model.ImportDetail;
+import com.example.warehousemanagementwkeeper.model.Item;
+import com.example.warehousemanagementwkeeper.model.Order;
+import com.example.warehousemanagementwkeeper.model.OrderDetail;
 import com.example.warehousemanagementwkeeper.model.Receipt;
 import com.example.warehousemanagementwkeeper.model.ResponseImportDetails;
+import com.example.warehousemanagementwkeeper.model.ResponseOrderDetails;
 import com.example.warehousemanagementwkeeper.my_control.MyFormat;
 import com.example.warehousemanagementwkeeper.rv_adapter.ImportDetailAdapter;
 
@@ -30,6 +36,7 @@ public class ImportDetailFragment extends Fragment {
 
     private Receipt receipt;
     private ArrayList<ImportDetail> importDetails;
+    private ArrayList<OrderDetail> orderDetails;
     private RecyclerView rvImportDetail;
 
     public ImportDetailFragment(Receipt receipt) {
@@ -60,16 +67,65 @@ public class ImportDetailFragment extends Fragment {
     }
 
     private void setData() {
-        Call<ResponseImportDetails> call = ReceiptApiInstance.getInstance().getReceiptImportDetails(receipt.getReceiptId());
-        call.enqueue(new Callback<ResponseImportDetails>() {
+        Call<ResponseOrderDetails> call1 = OrderApiInstance.getInstance().getOrderDetails(receipt.getOrder().getId());
+        call1.enqueue(new Callback<ResponseOrderDetails>() {
             @Override
-            public void onResponse(Call<ResponseImportDetails> call, Response<ResponseImportDetails> response) {
+            public void onResponse(Call<ResponseOrderDetails> call, Response<ResponseOrderDetails> response) {
                 if (response.isSuccessful()){
-                    importDetails = new ArrayList<>();
-                    importDetails.addAll(response.body().getData());
-                    ImportDetailAdapter adapter = new ImportDetailAdapter(ImportDetailFragment.this, importDetails);
-                    rvImportDetail.setAdapter(adapter);
-                    Log.e("test", response.body().getData().size() + "");
+                    orderDetails = new ArrayList<>();
+                    orderDetails.addAll(response.body().getData());
+                    Log.e("order detail", response.body().getData().size() + "");
+                    Call<ResponseImportDetails> call2 = ReceiptApiInstance.getInstance().getReceiptImportDetails(receipt.getReceiptId());
+                    call2.enqueue(new Callback<ResponseImportDetails>() {
+                        @Override
+                        public void onResponse(Call<ResponseImportDetails> call, Response<ResponseImportDetails> response) {
+                            if (response.isSuccessful()){
+                                ArrayList<ImportDetail> temp = response.body().getData();
+                                importDetails = new ArrayList<>();
+//                                importDetails.addAll(response.body().getData());
+                                boolean isImported;
+                                for (OrderDetail orderDetail: orderDetails){
+                                    isImported = false;
+                                    for (ImportDetail importDetail: temp){
+                                        if (orderDetail.getItemId() == importDetail.getItem().getItemId()){
+                                            importDetail.setQuantityOrder(orderDetail.getQuantity());
+                                            importDetail.setPriceOrder(orderDetail.getPrice());
+                                            importDetails.add(importDetail);
+                                            temp.remove(importDetail);
+                                            isImported = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!isImported){
+                                        importDetails.add(new ImportDetail(
+                                                receipt.getReceiptId(),
+                                                new Item(orderDetail.getItemId(), orderDetail.getItemName()),
+                                                0,
+                                                orderDetail.getPrice(),
+                                                orderDetail.getQuantity(),
+                                                orderDetail.getPrice()));
+                                    }
+                                }
+                                ImportDetailAdapter adapter = new ImportDetailAdapter(ImportDetailFragment.this, importDetails);
+                                rvImportDetail.setAdapter(adapter);
+                                Log.e("import detail", response.body().getData().size() + "");
+                            }
+                            else {
+                                try {
+                                    Toast.makeText(getContext(), MyFormat.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                                }
+                                catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseImportDetails> call, Throwable t) {
+                            t.printStackTrace();
+                            Toast.makeText(getContext(), R.string.error_500, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
                 else {
                     try {
@@ -82,7 +138,7 @@ public class ImportDetailFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ResponseImportDetails> call, Throwable t) {
+            public void onFailure(Call<ResponseOrderDetails> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(getContext(), R.string.error_500, Toast.LENGTH_SHORT).show();
             }

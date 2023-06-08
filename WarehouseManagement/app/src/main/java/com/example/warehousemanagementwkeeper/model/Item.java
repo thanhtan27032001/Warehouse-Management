@@ -26,6 +26,12 @@ public class Item {
         this.supplierId = supplierId;
     }
 
+    // add to import detail not existed
+    public Item(int itemId, String name) {
+        this.itemId = itemId;
+        this.name = name;
+    }
+
     public int getItemId() {
         return itemId;
     }

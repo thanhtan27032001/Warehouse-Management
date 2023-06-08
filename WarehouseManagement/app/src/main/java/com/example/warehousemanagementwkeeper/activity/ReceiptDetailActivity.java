@@ -8,6 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.fragment.ImportDetailFragment;
@@ -45,6 +46,7 @@ public class ReceiptDetailActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private TabLayoutMediator tabLayoutMediator;
     private FragmentStateAdapter pagerAdapter;
+    private ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +62,11 @@ public class ReceiptDetailActivity extends AppCompatActivity {
     private void setView() {
         viewPager2 = findViewById(R.id.pagerContent);
         tabLayout = findViewById(R.id.tabLayoutContent);
-
+        btnBack = findViewById(R.id.btnBack);
     }
 
     private void setEvent() {
-
+        btnBack.setOnClickListener(view -> finish());
     }
 
     private void setData() {
