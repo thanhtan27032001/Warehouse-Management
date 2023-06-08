@@ -1,6 +1,7 @@
 package com.example.warehousemanagementwkeeper.api;
 
 import com.example.warehousemanagementwkeeper.model.Receipt;
+import com.example.warehousemanagementwkeeper.model.ResponseImportDetails;
 import com.example.warehousemanagementwkeeper.model.ResponseObject;
 import com.example.warehousemanagementwkeeper.model.ResponseReceipts;
 
@@ -18,4 +19,7 @@ public interface ReceiptApi {
 
     @GET("/api/v1/order/getReceipt")
     Call<ResponseReceipts> getAllReceipt();
+
+    @GET("/api/v1/order/getDetailReceipt/{receiptId}")
+    Call<ResponseImportDetails> getReceiptImportDetails(@Path("receiptId") int receiptId);
 }

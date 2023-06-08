@@ -29,7 +29,7 @@ public class ReceiptDetailActivity extends AppCompatActivity {
                 case 0:
                     return new ReceiptFragment(receiptSelected);
                 case 1:
-                    return new ImportDetailFragment();
+                    return new ImportDetailFragment(receiptSelected);
             }
             return new ReceiptFragment(receiptSelected);
         }
