@@ -52,4 +52,11 @@
     <string name="tv_supply_by">Supply by</string>
     <string name="tv_supply_for">Supply for order</string>
     <string name="tv_input_at">Input at</string>
+    <string name="tv_receipt_detail">Receipt detail</string>
+    <string name="tab_receipt_info">Receipt information</string>
+    <string name="tab_import_detail">Import</string>
+    <string name="my_company_name">My company</string>
+    <string name="tv_status">Status:</string>
+    <string name="status_importing">Importing</string>
+    <string name="status_done">Finish</string>
 </resources>

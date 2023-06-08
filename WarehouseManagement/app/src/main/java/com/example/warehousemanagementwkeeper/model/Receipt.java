@@ -2,7 +2,9 @@ package com.example.warehousemanagementwkeeper.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Receipt {
+import java.io.Serializable;
+
+public class Receipt implements Serializable {
     public static final boolean STATUS_DONE = true;
     public static final boolean STATUS_NOT_YET = false;
 

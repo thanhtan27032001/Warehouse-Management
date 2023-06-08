@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.ImportManagementActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.ReceiptDetailActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -22,32 +22,29 @@
             android:background="@drawable/background_ripple_oval"/>
 
         <TextView
+            android:id="@+id/tvUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/tv_receipt_management"
+            android:text="@string/tv_receipt_detail"
             android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_gravity="bottom"/>
 
-        <ImageButton
-            android:id="@+id/btnMore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:layout_gravity="end|center_vertical"
-            android:contentDescription="@string/btn_more"
-            android:src="@drawable/baseline_more_vert_24"
-            android:background="@drawable/background_ripple_oval"/>
-
     </FrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvReceipt"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayoutContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pagerContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

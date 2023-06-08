@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -54,7 +55,9 @@ public class ImportManagementActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseReceipts> call, Response<ResponseReceipts> response) {
                 if (response.isSuccessful()){
                     receipts = new ArrayList<>();
-                    receipts.addAll(response.body().getData());
+                    for (Receipt receipt: response.body().getData()){
+                        receipts.add(0, receipt);
+                    }
                     ReceiptAdapter adapter = new ReceiptAdapter(ImportManagementActivity.this, receipts);
                     rvReceipt.setAdapter(adapter);
                 }
@@ -74,5 +77,11 @@ public class ImportManagementActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+    }
+
+    public void viewReceiptDetail(Receipt receipt){
+        Intent intent = new Intent(this, ReceiptDetailActivity.class);
+        intent.putExtra(ReceiptDetailActivity.TAG_RECEIPT_SELECTED, receipt);
+        startActivity(intent);
     }
 }

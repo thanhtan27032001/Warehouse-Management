@@ -3,6 +3,7 @@ package com.example.warehousemanagementwkeeper.rv_adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,8 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
         holder.tvInputDate.setText(receipt.getInputDateTime());
         holder.tvOrderId.setText("#".concat(String.valueOf(receipt.getOrder().getId())));
         holder.tvEmployeeName.setText(receipt.getEmployee().getFullName());
+
+        holder.cardReceipt.setOnClickListener(view -> context.viewReceiptDetail(receipt));
     }
 
     @Override
@@ -54,9 +57,11 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private LinearLayout cardReceipt;
         private TextView tvReceiptId, tvSupplierName, tvInputDate, tvOrderId, tvEmployeeName;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            cardReceipt = itemView.findViewById(R.id.cardReceipt);
             tvReceiptId = itemView.findViewById(R.id.tvReceiptId);
             tvSupplierName = itemView.findViewById(R.id.tvSupplierName);
             tvInputDate = itemView.findViewById(R.id.tvInputDate);

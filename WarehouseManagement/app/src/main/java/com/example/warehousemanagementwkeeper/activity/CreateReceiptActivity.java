@@ -57,12 +57,12 @@ public class CreateReceiptActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
 
         tvInputDate = findViewById(R.id.tvInputDate);
-        tvInputTime = findViewById(R.id.tv_input_time);
+        tvInputTime = findViewById(R.id.tvInputTime);
         tvOrderDate = findViewById(R.id.tvOrderDate);
         tvEmployeeName = findViewById(R.id.tvEmployeeName);
-        tvSupplyName = findViewById(R.id.tvSupplyName);
-        tvSupplyAddress = findViewById(R.id.tvSupplyAddress);
-        tvSupplyPhone = findViewById(R.id.tvSupplyPhone);
+        tvSupplyName = findViewById(R.id.tvSupplierName);
+        tvSupplyAddress = findViewById(R.id.tvSupplierAddress);
+        tvSupplyPhone = findViewById(R.id.tvSupplierPhone);
         tvCreateReceipt = findViewById(R.id.tvCreateReceipt);
 
         rvOrderDetail = findViewById(R.id.rvOrderDetail);

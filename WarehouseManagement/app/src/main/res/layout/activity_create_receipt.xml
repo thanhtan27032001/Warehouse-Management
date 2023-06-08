@@ -103,7 +103,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/tv_input_time"/>
                             <TextView
-                                android:id="@+id/tv_input_time"
+                                android:id="@+id/tvInputTime"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:padding="4dp"
@@ -233,7 +233,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/tv_name"/>
                             <TextView
-                                android:id="@+id/tvSupplyName"
+                                android:id="@+id/tvSupplierName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
@@ -249,7 +249,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/tv_address"/>
                             <TextView
-                                android:id="@+id/tvSupplyAddress"
+                                android:id="@+id/tvSupplierAddress"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
@@ -265,7 +265,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/tv_phone_number"/>
                             <TextView
-                                android:id="@+id/tvSupplyPhone"
+                                android:id="@+id/tvSupplierPhone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
