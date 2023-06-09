@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background_ripple_rectangle">
 
@@ -19,57 +19,64 @@
 <!--        android:background="@color/gray_200"/>-->
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:background="@color/gray_200">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:padding="4dp"
-            android:text="@string/tv_item"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="1dp"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:padding="4dp"
-            android:gravity="center"
-            android:text="@string/tv_quantity"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="1dp"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:padding="4dp"
-            android:gravity="end"
-            android:text="@string/tv_price"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
-    </LinearLayout>
-
-    <com.google.android.material.divider.MaterialDivider
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvImportDetail"
+        android:id="@+id/layoutAllImportDetails"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"/>
+        android:orientation="vertical"
+        android:visibility="visible">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:background="@color/gray_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:padding="4dp"
+                android:text="@string/tv_item"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:padding="4dp"
+                android:gravity="center"
+                android:text="@string/tv_quantity"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:padding="4dp"
+                android:gravity="end"
+                android:text="@string/tv_price"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvImportDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"/>
+    </LinearLayout>
 
 </LinearLayout>

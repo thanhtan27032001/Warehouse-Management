@@ -62,4 +62,11 @@
     <string name="warning_minimum_quantity">Quantity cannot be under 0</string>
     <string name="success_upsert_import_detail">Update import detail successful</string>
     <string name="warning_maximum_quantity">Quantity cannot be greater than order quantity</string>
+    <string name="tv_item_name">Item name:</string>
+    <string name="tv_oder_price">Order price (VNĐ):</string>
+    <string name="tv_import_price">Import price (VNĐ):</string>
+    <string name="tv_import_quantity">Import quantity:</string>
+    <string name="tv_import_detail">ImportDetail</string>
+    <string name="tv_item_id">Item id (barcode):</string>
+    <string name="btn_apply">Apply</string>
 </resources>

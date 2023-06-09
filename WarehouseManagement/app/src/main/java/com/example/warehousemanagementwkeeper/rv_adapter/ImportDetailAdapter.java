@@ -1,8 +1,5 @@
 package com.example.warehousemanagementwkeeper.rv_adapter;
 
-import android.content.Intent;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,12 +39,12 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
     public void onBindViewHolder(@NonNull ImportDetailAdapter.ViewHolder holder, int position) {
         ImportDetail importDetail = importDetails.get(position);
         if (position % 2 == 0){
-            holder.layoutItem.setBackgroundColor(context.getActivity().getColor(R.color.white));
+            holder.layoutItem.setBackgroundTintList(context.getResources().getColorStateList(R.color.white));
             holder.btnAdd.setBackgroundTintList(context.getResources().getColorStateList(R.color.white));
             holder.btnMinus.setBackgroundTintList(context.getResources().getColorStateList(R.color.white));
         }
         else {
-            holder.layoutItem.setBackgroundColor(context.getActivity().getColor(R.color.gray_200));
+            holder.layoutItem.setBackgroundTintList(context.getResources().getColorStateList(R.color.gray_200));
             holder.btnAdd.setBackgroundTintList(context.getResources().getColorStateList(R.color.gray_200));
             holder.btnMinus.setBackgroundTintList(context.getResources().getColorStateList(R.color.gray_200));
         }
@@ -60,7 +57,7 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
         // event
         holder.btnAdd.setOnClickListener(view -> {
             if (importDetail.getQuantity()+1 <= importDetail.getQuantityOrder()){
-                context.upsertImportDetail(importDetail, importDetail.getQuantity()+1, Double.parseDouble(holder.tvPrice.getText().toString()));
+                context.upsertImportDetail(importDetail, importDetail.getQuantity()+1, Double.parseDouble(holder.tvPrice.getText().toString()), null);
             }
             else {
                 Toast.makeText(context.getContext(), R.string.warning_maximum_quantity, Toast.LENGTH_SHORT).show();
@@ -68,7 +65,7 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
         });
         holder.btnMinus.setOnClickListener(view -> {
             if (importDetail.getQuantity()-1 >= 0){
-                context.upsertImportDetail(importDetail, importDetail.getQuantity()-1, Double.parseDouble(holder.tvPrice.getText().toString()));
+                context.upsertImportDetail(importDetail, importDetail.getQuantity()-1, Double.parseDouble(holder.tvPrice.getText().toString()), null);
             }
             else {
                 Toast.makeText(context.getContext(), R.string.warning_minimum_quantity, Toast.LENGTH_SHORT).show();
@@ -84,9 +81,12 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
                 else if (Integer.parseInt(holder.edtQuantity.getText().toString()) > importDetail.getQuantityOrder()){
                     holder.edtQuantity.setText(String.valueOf(importDetail.getQuantityOrder()));
                 }
-                context.upsertImportDetail(importDetail, Integer.parseInt(holder.edtQuantity.getText().toString()), Double.parseDouble(holder.tvPrice.getText().toString()));
+                context.upsertImportDetail(importDetail, Integer.parseInt(holder.edtQuantity.getText().toString()), Double.parseDouble(holder.tvPrice.getText().toString()), null);
                 return false;
             }
+        });
+        holder.layoutItem.setOnClickListener(view -> {
+            context.showDialogImportDetail(importDetail);
         });
     }
 

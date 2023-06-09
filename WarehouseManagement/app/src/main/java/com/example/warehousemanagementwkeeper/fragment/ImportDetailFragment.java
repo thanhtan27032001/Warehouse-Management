@@ -1,7 +1,10 @@
 package com.example.warehousemanagementwkeeper.fragment;
 
+import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,16 +13,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.warehousemanagementwkeeper.R;
-import com.example.warehousemanagementwkeeper.api.OrderApi;
 import com.example.warehousemanagementwkeeper.api_instance.OrderApiInstance;
 import com.example.warehousemanagementwkeeper.api_instance.ReceiptApiInstance;
 import com.example.warehousemanagementwkeeper.model.ImportDetail;
 import com.example.warehousemanagementwkeeper.model.ImportDetailsUpsertInfo;
 import com.example.warehousemanagementwkeeper.model.Item;
-import com.example.warehousemanagementwkeeper.model.Order;
 import com.example.warehousemanagementwkeeper.model.OrderDetail;
 import com.example.warehousemanagementwkeeper.model.Receipt;
 import com.example.warehousemanagementwkeeper.model.ResponseImportDetails;
@@ -28,6 +31,8 @@ import com.example.warehousemanagementwkeeper.model.ResponseOrderDetails;
 import com.example.warehousemanagementwkeeper.my_control.MyAuthorization;
 import com.example.warehousemanagementwkeeper.my_control.MyFormat;
 import com.example.warehousemanagementwkeeper.rv_adapter.ImportDetailAdapter;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -40,8 +45,8 @@ public class ImportDetailFragment extends Fragment {
     private Receipt receipt;
     private ArrayList<ImportDetail> importDetails;
     private ArrayList<OrderDetail> orderDetails;
-    private RecyclerView rvImportDetail;
     private ImportDetailAdapter importDetailAdapter;
+    private RecyclerView rvImportDetail;
 
     public ImportDetailFragment(Receipt receipt) {
         this.receipt = receipt;
@@ -163,7 +168,7 @@ public class ImportDetailFragment extends Fragment {
         });
     }
 
-    public void upsertImportDetail(ImportDetail importDetail, int newQuantity, double newPrice){
+    public void upsertImportDetail(ImportDetail importDetail, int newQuantity, double newPrice, @Nullable Dialog dialog){
         try {
             ImportDetail temp = (ImportDetail) importDetail.clone();
             temp.setQuantity(newQuantity);
@@ -182,7 +187,9 @@ public class ImportDetailFragment extends Fragment {
                         importDetail.setQuantity(newQuantity);
                         importDetail.setPrice(newPrice);
                         importDetailAdapter.notifyItemChanged(importDetails.indexOf(importDetail));
-//                        Toast.makeText(getContext(), R.string.success_upsert_import_detail, Toast.LENGTH_SHORT).show();
+                        if (dialog != null){
+                            dialog.dismiss();
+                        }
                     }
                     else {
                         importDetailAdapter.notifyItemChanged(importDetails.indexOf(importDetail));
@@ -206,5 +213,48 @@ public class ImportDetailFragment extends Fragment {
         catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void showDialogImportDetail(ImportDetail importDetail) {
+        Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.dialog_import_detail);
+
+        LinearLayout layout = dialog.findViewById(R.id.layoutImportDetail);
+        TextView tvItemName = dialog.findViewById(R.id.tvItemName);
+        TextView tvItemId = dialog.findViewById(R.id.tvItemId);
+        TextView tvOrderPrice = dialog.findViewById(R.id.tvOrderPrice);
+        TextView edtImportPrice = dialog.findViewById(R.id.edtImportPrice);
+        TextView edtImportQuantity = dialog.findViewById(R.id.edtImportQuantity);
+        TextView btnCancel = dialog.findViewById(R.id.btnCancel);
+        TextView btnSubmit = dialog.findViewById(R.id.btnSubmit);
+
+        // set data
+        tvItemName.setText(importDetail.getItem().getName());
+        tvItemId.setText(String.valueOf(importDetail.getItem().getItemId()));
+        tvOrderPrice.setText(String.valueOf(importDetail.getPriceOrder()));
+        edtImportPrice.setText(String.valueOf(importDetail.getPrice()));
+        edtImportQuantity.setText(String.valueOf(importDetail.getPrice()));
+
+        // Adjust dialog width fit to screen
+        try {
+            ViewGroup.LayoutParams params = layout.getLayoutParams();
+            params.width = (int)(getResources().getDisplayMetrics().widthPixels*0.80);
+            layout.requestLayout();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        // set dialog background transparent
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        // event
+        btnCancel.setOnClickListener(view -> dialog.dismiss());
+        btnSubmit.setOnClickListener(view -> {
+            int newQuantity = Integer.parseInt(edtImportQuantity.getText().toString());
+            double newPrice = Double.parseDouble(edtImportPrice.getText().toString());
+            upsertImportDetail(importDetail, newQuantity, newPrice, dialog);
+        });
+
+        dialog.show();
     }
 }
