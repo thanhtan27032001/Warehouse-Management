@@ -15,6 +15,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ReceiptApi {
@@ -29,4 +30,7 @@ public interface ReceiptApi {
 
     @POST("/api/v1/order/createDetailReceipt/{receiptId}")
     Call<ResponseObject> upsertReceiptImportDetail(@Header("Authorization") String token, @Path("receiptId") int receiptId, @Body ImportDetailsUpsertInfo importDetails);
+
+    @PUT("/api/v1/order/updateStatus/{receiptId}")
+    Call<ResponseObject> updateReceiptStatus(@Header("Authorization") String token, @Path("receiptId") int receiptId, @Body Receipt receipt);
 }

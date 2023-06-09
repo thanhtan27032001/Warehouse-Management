@@ -72,4 +72,6 @@
     <string name="scanner_prompt">Move your camera to the barcode</string>
     <string name="tv_show_hide_done_receipt">Show/Hide done receipt</string>
     <string name="warning_item_import_detail_not_found">This item is not in this receipt!</string>
+    <string name="option_set_done_receipt">Finish importing</string>
+    <string name="success_finish_importing">Finished import</string>
 </resources>

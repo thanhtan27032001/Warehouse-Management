@@ -52,6 +52,9 @@ public class ImportManagementActivity extends AppCompatActivity {
             if (requestCode == SelectOrderReceiptActivity.REQUEST_NEW_RECEIPT_CREATED){
                 setData();
             }
+            else if (requestCode == ReceiptDetailActivity.REQUEST_RECEIPT_IS_UPDATED){
+                setData();
+            }
         }
     }
 
@@ -113,7 +116,7 @@ public class ImportManagementActivity extends AppCompatActivity {
     public void viewReceiptDetail(Receipt receipt){
         Intent intent = new Intent(this, ReceiptDetailActivity.class);
         intent.putExtra(ReceiptDetailActivity.TAG_RECEIPT_SELECTED, receipt);
-        startActivity(intent);
+        startActivityForResult(intent, ReceiptDetailActivity.REQUEST_RECEIPT_IS_UPDATED);
     }
 
     private void showMoreMenu() {
@@ -150,7 +153,7 @@ public class ImportManagementActivity extends AppCompatActivity {
         }
         else { // hide done receipt
             for (Receipt receipt: receipts){
-                if (!receipt.isStatus()){
+                if (!receipt.getStatus()){
                     shownReceipts.add(receipt);
                 }
             }
@@ -163,4 +166,6 @@ public class ImportManagementActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SelectOrderReceiptActivity.class);
         startActivityForResult(intent, SelectOrderReceiptActivity.REQUEST_NEW_RECEIPT_CREATED);
     }
+
+
 }

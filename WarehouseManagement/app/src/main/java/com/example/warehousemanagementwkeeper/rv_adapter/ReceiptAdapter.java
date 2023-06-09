@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.helper.widget.Layer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.warehousemanagementwkeeper.R;
@@ -35,7 +34,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
     public void onBindViewHolder(@NonNull ReceiptAdapter.ViewHolder holder, int position) {
         Receipt receipt = receipts.get(position);
         holder.tvReceiptId.setText("#".concat(String.valueOf(receipt.getReceiptId())));
-        if (receipt.isStatus() == Receipt.STATUS_DONE){
+        if (receipt.getStatus() == Receipt.STATUS_DONE){
             holder.tvReceiptId.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getDrawable(R.drawable.baseline_done_24), null);
             holder.tvReceiptId.setBackgroundColor(context.getColor(R.color.green));
         }

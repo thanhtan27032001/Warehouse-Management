@@ -47,11 +47,15 @@ public class Receipt implements Serializable {
         return order;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
     public String getInputDateTime() {
         return inputDateTime;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

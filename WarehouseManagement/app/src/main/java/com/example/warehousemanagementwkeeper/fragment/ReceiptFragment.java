@@ -52,7 +52,7 @@ public class ReceiptFragment extends Fragment {
     }
 
     private void setData() {
-        tvStatus.setText(receipt.isStatus() == Receipt.STATUS_DONE ? R.string.status_done : R.string.status_importing);
+        tvStatus.setText(receipt.getStatus() == Receipt.STATUS_DONE ? R.string.status_done : R.string.status_importing);
         tvInputDate.setText(StringFormatFacade.getDateOnly(receipt.getInputDateTime()));
         tvInputTime.setText(StringFormatFacade.getTimeOnly(receipt.getInputDateTime()));
         tvReceiptEmployeeName.setText(receipt.getEmployee().getFullName());
