@@ -21,8 +21,8 @@ import com.example.warehousemanagementwkeeper.model.OrderDetail;
 import com.example.warehousemanagementwkeeper.model.Receipt;
 import com.example.warehousemanagementwkeeper.model.ResponseObject;
 import com.example.warehousemanagementwkeeper.model.ResponseOrderDetails;
-import com.example.warehousemanagementwkeeper.my_control.MyAuthorization;
-import com.example.warehousemanagementwkeeper.my_control.MyFormat;
+import com.example.warehousemanagementwkeeper.my_control.AuthorizationSingleton;
+import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 import com.example.warehousemanagementwkeeper.rv_adapter.OrderDetailAdapter;
 
 import java.io.IOException;
@@ -107,7 +107,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
                 }
                 else {
                     try {
-                        Toast.makeText(CreateReceiptActivity.this, MyFormat.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateReceiptActivity.this, StringFormatFacade.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -153,12 +153,12 @@ public class CreateReceiptActivity extends AppCompatActivity {
     private void createReceipt(){
         String inputDate = tvInputDate.getText().toString();
         // dd-mm-yyyy to yyyy-mm-dd
-        inputDate = MyFormat.toDatabaseDate(inputDate);
+        inputDate = StringFormatFacade.toDatabaseDate(inputDate);
         String inputDateTime = inputDate + " " + tvInputTime.getText().toString();
         Receipt receipt = new Receipt(orderSelected, false, inputDateTime);
 
         Call<ResponseObject> call = ReceiptApiInstance.getInstance().createReceipt(
-                MyAuthorization.getInstance().getBearerToken(),
+                AuthorizationSingleton.getInstance().getBearerToken(),
                 orderSelected.getId(),
                 receipt
         );
@@ -172,7 +172,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
                 }
                 else {
                     try {
-                        Toast.makeText(CreateReceiptActivity.this, MyFormat.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateReceiptActivity.this, StringFormatFacade.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
                     }
                     catch (Exception e){
                         e.printStackTrace();

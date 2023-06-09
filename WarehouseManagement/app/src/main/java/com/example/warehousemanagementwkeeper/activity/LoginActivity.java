@@ -24,8 +24,7 @@ import com.example.warehousemanagementwkeeper.model.Employee;
 import com.example.warehousemanagementwkeeper.model.LoginInfo;
 import com.example.warehousemanagementwkeeper.model.ResponseEmployee;
 import com.example.warehousemanagementwkeeper.model.ResponseLogin;
-import com.example.warehousemanagementwkeeper.my_control.MyAuthorization;
-import com.example.warehousemanagementwkeeper.my_control.MyFormat;
+import com.example.warehousemanagementwkeeper.my_control.AuthorizationSingleton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -147,9 +146,9 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(Call<ResponseEmployee> call, Response<ResponseEmployee> response) {
                             if (response.isSuccessful()){
                                 Employee employee = response.body().getData();
-                                MyAuthorization.getInstance().setLoginInfo(loginInfo);
-                                MyAuthorization.getInstance().setEmployeeInfo(employee);
-                                MyAuthorization.getInstance().setToken(token);
+                                AuthorizationSingleton.getInstance().setLoginInfo(loginInfo);
+                                AuthorizationSingleton.getInstance().setEmployeeInfo(employee);
+                                AuthorizationSingleton.getInstance().setToken(token);
                                 // open main screen
                                 Intent intent = MainActivityFactory.getActivityIntent(LoginActivity.this, employee.getRole());
                                 if (intent != null){

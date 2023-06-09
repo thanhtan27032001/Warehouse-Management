@@ -28,11 +28,9 @@ import com.example.warehousemanagementwkeeper.model.Receipt;
 import com.example.warehousemanagementwkeeper.model.ResponseImportDetails;
 import com.example.warehousemanagementwkeeper.model.ResponseObject;
 import com.example.warehousemanagementwkeeper.model.ResponseOrderDetails;
-import com.example.warehousemanagementwkeeper.my_control.MyAuthorization;
-import com.example.warehousemanagementwkeeper.my_control.MyFormat;
+import com.example.warehousemanagementwkeeper.my_control.AuthorizationSingleton;
+import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 import com.example.warehousemanagementwkeeper.rv_adapter.ImportDetailAdapter;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -135,7 +133,7 @@ public class ImportDetailFragment extends Fragment {
                             }
                             else {
                                 try {
-                                    Toast.makeText(getContext(), MyFormat.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), StringFormatFacade.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
                                 }
                                 catch (Exception e){
                                     e.printStackTrace();
@@ -152,7 +150,7 @@ public class ImportDetailFragment extends Fragment {
                 }
                 else {
                     try {
-                        Toast.makeText(getContext(), MyFormat.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), StringFormatFacade.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
                     }
                     catch (Exception e){
                         e.printStackTrace();
@@ -176,7 +174,7 @@ public class ImportDetailFragment extends Fragment {
             ArrayList<ImportDetail> body = new ArrayList<>();
             body.add(temp);
             Call<ResponseObject> call = ReceiptApiInstance.getInstance().upsertReceiptImportDetail(
-                    MyAuthorization.getInstance().getBearerToken(),
+                    AuthorizationSingleton.getInstance().getBearerToken(),
                     receipt.getReceiptId(),
                     new ImportDetailsUpsertInfo(body)
             );
@@ -194,7 +192,7 @@ public class ImportDetailFragment extends Fragment {
                     else {
                         importDetailAdapter.notifyItemChanged(importDetails.indexOf(importDetail));
                         try {
-                            Toast.makeText(getContext(), MyFormat.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), StringFormatFacade.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
                         }
                         catch (Exception e){
                             e.printStackTrace();

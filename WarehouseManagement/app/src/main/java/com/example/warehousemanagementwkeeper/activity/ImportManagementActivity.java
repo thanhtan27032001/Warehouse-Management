@@ -13,7 +13,7 @@ import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.api_instance.ReceiptApiInstance;
 import com.example.warehousemanagementwkeeper.model.Receipt;
 import com.example.warehousemanagementwkeeper.model.ResponseReceipts;
-import com.example.warehousemanagementwkeeper.my_control.MyFormat;
+import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 import com.example.warehousemanagementwkeeper.rv_adapter.ReceiptAdapter;
 
 import java.util.ArrayList;
@@ -63,7 +63,7 @@ public class ImportManagementActivity extends AppCompatActivity {
                 }
                 else {
                     try {
-                        Toast.makeText(ImportManagementActivity.this, MyFormat.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ImportManagementActivity.this, StringFormatFacade.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
                     }
                     catch (Exception e){
                         e.printStackTrace();

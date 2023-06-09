@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.model.Receipt;
-import com.example.warehousemanagementwkeeper.my_control.MyFormat;
+import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 
 public class ReceiptFragment extends Fragment {
     private Receipt receipt;
@@ -53,8 +53,8 @@ public class ReceiptFragment extends Fragment {
 
     private void setData() {
         tvStatus.setText(receipt.isStatus() == Receipt.STATUS_DONE ? R.string.status_done : R.string.status_importing);
-        tvInputDate.setText(MyFormat.getDateOnly(receipt.getInputDateTime()));
-        tvInputTime.setText(MyFormat.getTimeOnly(receipt.getInputDateTime()));
+        tvInputDate.setText(StringFormatFacade.getDateOnly(receipt.getInputDateTime()));
+        tvInputTime.setText(StringFormatFacade.getTimeOnly(receipt.getInputDateTime()));
         tvReceiptEmployeeName.setText(receipt.getEmployee().getFullName());
         tvOrderDate.setText(receipt.getOrder().getOderDate());
 //        tvOrderEmployeeName.setText(receipt.getOrder().getEmployee().getFullName());

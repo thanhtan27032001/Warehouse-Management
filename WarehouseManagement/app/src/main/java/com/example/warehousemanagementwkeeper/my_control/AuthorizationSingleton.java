@@ -3,14 +3,14 @@ package com.example.warehousemanagementwkeeper.my_control;
 import com.example.warehousemanagementwkeeper.model.Employee;
 import com.example.warehousemanagementwkeeper.model.LoginInfo;
 
-public class MyAuthorization {
-    private static MyAuthorization instance;
+public class AuthorizationSingleton {
+    private static AuthorizationSingleton instance;
     private Employee employeeInfo;
     private LoginInfo loginInfo;
     private String token;
-    public static MyAuthorization getInstance(){
+    public static AuthorizationSingleton getInstance(){
         if (instance == null){
-            instance = new MyAuthorization();
+            instance = new AuthorizationSingleton();
         }
         return instance;
     }

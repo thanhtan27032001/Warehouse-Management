@@ -2,27 +2,18 @@ package com.example.warehousemanagementwkeeper.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.api_instance.OrderApiInstance;
-import com.example.warehousemanagementwkeeper.api_instance.ReceiptApiInstance;
 import com.example.warehousemanagementwkeeper.model.Order;
-import com.example.warehousemanagementwkeeper.model.ResponseObject;
 import com.example.warehousemanagementwkeeper.model.ResponseOrders;
-import com.example.warehousemanagementwkeeper.my_control.MyAuthorization;
-import com.example.warehousemanagementwkeeper.my_control.MyFormat;
 import com.example.warehousemanagementwkeeper.rv_adapter.OrdersAdapter;
 
 import java.util.ArrayList;
