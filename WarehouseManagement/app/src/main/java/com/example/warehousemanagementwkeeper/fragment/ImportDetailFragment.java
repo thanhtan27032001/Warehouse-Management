@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -221,6 +222,7 @@ public class ImportDetailFragment extends Fragment {
         TextView tvItemName = dialog.findViewById(R.id.tvItemName);
         TextView tvItemId = dialog.findViewById(R.id.tvItemId);
         TextView tvOrderPrice = dialog.findViewById(R.id.tvOrderPrice);
+        TextView tvOrderQuantity = dialog.findViewById(R.id.tvOrderQuantity);
         TextView edtImportPrice = dialog.findViewById(R.id.edtImportPrice);
         TextView edtImportQuantity = dialog.findViewById(R.id.edtImportQuantity);
         TextView btnCancel = dialog.findViewById(R.id.btnCancel);
@@ -230,8 +232,9 @@ public class ImportDetailFragment extends Fragment {
         tvItemName.setText(importDetail.getItem().getName());
         tvItemId.setText(String.valueOf(importDetail.getItem().getItemId()));
         tvOrderPrice.setText(String.valueOf(importDetail.getPriceOrder()));
+        tvOrderQuantity.setText(String.valueOf(importDetail.getQuantityOrder()));
         edtImportPrice.setText(String.valueOf(importDetail.getPrice()));
-        edtImportQuantity.setText(String.valueOf(importDetail.getPrice()));
+        edtImportQuantity.setText(String.valueOf(importDetail.getQuantity()));
 
         // Adjust dialog width fit to screen
         try {
@@ -246,6 +249,27 @@ public class ImportDetailFragment extends Fragment {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         // event
+        edtImportQuantity.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (edtImportQuantity.getText().toString().trim().equals("")){
+                    edtImportQuantity.setText("0");
+                }
+                else if (Integer.parseInt(edtImportQuantity.getText().toString()) > importDetail.getQuantityOrder()){
+                    edtImportQuantity.setText(String.valueOf(importDetail.getQuantityOrder()));
+                }
+                return false;
+            }
+        });
+        edtImportPrice.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (edtImportPrice.getText().toString().trim().equals("")){
+                    edtImportPrice.setText("0");
+                }
+                return false;
+            }
+        });
         btnCancel.setOnClickListener(view -> dialog.dismiss());
         btnSubmit.setOnClickListener(view -> {
             int newQuantity = Integer.parseInt(edtImportQuantity.getText().toString());
