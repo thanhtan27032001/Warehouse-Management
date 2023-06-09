@@ -258,7 +258,7 @@ public class ImportDetailFragment extends Fragment {
         // Adjust dialog width fit to screen
         try {
             ViewGroup.LayoutParams params = layout.getLayoutParams();
-            params.width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
+            params.width = (int)(getResources().getDisplayMetrics().widthPixels*0.85);
             layout.requestLayout();
         }
         catch (Exception e){
