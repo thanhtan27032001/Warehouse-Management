@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Item {
     @SerializedName("MaMatHang")
-    private int itemId;
+    private String itemId;
     @SerializedName("TenMatHang")
     private String name;
     @SerializedName("SoLuongTon")
@@ -17,7 +17,7 @@ public class Item {
     private int supplierId;
 
     // get import detail
-    public Item(int itemId, String name, int inStock, boolean isActive, int typeId, int supplierId) {
+    public Item(String itemId, String name, int inStock, boolean isActive, int typeId, int supplierId) {
         this.itemId = itemId;
         this.name = name;
         this.inStock = inStock;
@@ -27,12 +27,12 @@ public class Item {
     }
 
     // add to import detail not existed
-    public Item(int itemId, String name) {
+    public Item(String itemId, String name) {
         this.itemId = itemId;
         this.name = name;
     }
 
-    public int getItemId() {
+    public String getItemId() {
         return itemId;
     }
 

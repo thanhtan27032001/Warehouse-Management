@@ -113,7 +113,7 @@ public class ImportDetailFragment extends Fragment {
                                 for (OrderDetail orderDetail: orderDetails){
                                     isImported = false;
                                     for (ImportDetail importDetail: temp){
-                                        if (orderDetail.getItemId() == importDetail.getItem().getItemId()){
+                                        if (orderDetail.getItemId().equals(importDetail.getItem().getItemId())){
                                             importDetail.setQuantityOrder(orderDetail.getQuantity());
                                             importDetail.setPriceOrder(orderDetail.getPrice());
                                             importDetails.add(importDetail);
@@ -258,7 +258,7 @@ public class ImportDetailFragment extends Fragment {
         // Adjust dialog width fit to screen
         try {
             ViewGroup.LayoutParams params = layout.getLayoutParams();
-            params.width = (int)(getResources().getDisplayMetrics().widthPixels*0.80);
+            params.width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
             layout.requestLayout();
         }
         catch (Exception e){
@@ -314,18 +314,21 @@ public class ImportDetailFragment extends Fragment {
                 @Override
                 public void onActivityResult(ScanIntentResult result) {
                     if (result.getContents() != null){
-                        searchImportDetailByItemId(Long.parseLong(result.getContents()));
+                        searchImportDetailByItemId(result.getContents());
                         Log.e("test", result.getContents());
                     }
                 }
             }
     );
 
-    private void searchImportDetailByItemId(long itemId) {
-        for (ImportDetail importDetail: importDetails){
-            if (importDetail.getItem().getItemId() == itemId){
-                showDialogImportDetail(importDetail);
+    private void searchImportDetailByItemId(String itemId) {
+        for (int i=0; i<importDetails.size(); i++){
+            if (importDetails.get(i).getItem().getItemId().equals(itemId)){
+                showDialogImportDetail(importDetails.get(i));
                 break;
+            }
+            if (i == importDetails.size()-1){
+                Toast.makeText(getContext(), R.string.warning_item_import_detail_not_found, Toast.LENGTH_SHORT).show();
             }
         }
     }

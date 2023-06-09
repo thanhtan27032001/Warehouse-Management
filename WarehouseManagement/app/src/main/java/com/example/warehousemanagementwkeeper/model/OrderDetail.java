@@ -6,7 +6,7 @@ public class OrderDetail {
     @SerializedName("MaDonDH")
     private int orderId;
     @SerializedName("MaMatHang")
-    private int itemId;
+    private String itemId;
     @SerializedName("TenMatHang")
     private String itemName;
     @SerializedName("SoLuong")
@@ -15,7 +15,7 @@ public class OrderDetail {
     private double price;
 
     // get order detail
-    public OrderDetail(int orderId, int itemId, String itemName, int quantity, double price) {
+    public OrderDetail(int orderId, String itemId, String itemName, int quantity, double price) {
         this.orderId = orderId;
         this.itemId = itemId;
         this.itemName = itemName;
@@ -27,7 +27,7 @@ public class OrderDetail {
         return orderId;
     }
 
-    public int getItemId() {
+    public String getItemId() {
         return itemId;
     }
 

@@ -23,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SelectOrderReceiptActivity extends AppCompatActivity {
-
+    public static final int REQUEST_NEW_RECEIPT_CREATED = 2703;
     private ImageButton btnBack;
     private RecyclerView rvOrders;
 
@@ -45,6 +45,7 @@ public class SelectOrderReceiptActivity extends AppCompatActivity {
             Log.e("test", "result ok");
             if (requestCode == CreateReceiptActivity.REQUEST_CREATED_RECEIPT){
                 Log.e("test", "request create");
+                setResult(RESULT_OK);
                 setData();
             }
         }
