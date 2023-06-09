@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.warehousemanagementwkeeper.R;
+import com.example.warehousemanagementwkeeper.activity.BarcodeScannerActivity;
 import com.example.warehousemanagementwkeeper.api_instance.OrderApiInstance;
 import com.example.warehousemanagementwkeeper.api_instance.ReceiptApiInstance;
 import com.example.warehousemanagementwkeeper.model.ImportDetail;
@@ -30,8 +33,13 @@ import com.example.warehousemanagementwkeeper.model.ResponseImportDetails;
 import com.example.warehousemanagementwkeeper.model.ResponseObject;
 import com.example.warehousemanagementwkeeper.model.ResponseOrderDetails;
 import com.example.warehousemanagementwkeeper.my_control.AuthorizationSingleton;
+import com.example.warehousemanagementwkeeper.my_control.PermissionCheckerFacade;
 import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 import com.example.warehousemanagementwkeeper.rv_adapter.ImportDetailAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanIntentResult;
+import com.journeyapps.barcodescanner.ScanOptions;
 
 import java.util.ArrayList;
 
@@ -46,6 +54,7 @@ public class ImportDetailFragment extends Fragment {
     private ArrayList<OrderDetail> orderDetails;
     private ImportDetailAdapter importDetailAdapter;
     private RecyclerView rvImportDetail;
+    private FloatingActionButton btnScanBarcode;
 
     public ImportDetailFragment(Receipt receipt) {
         this.receipt = receipt;
@@ -64,6 +73,8 @@ public class ImportDetailFragment extends Fragment {
         rvImportDetail = view.findViewById(R.id.rvImportDetail);
         rvImportDetail.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
+        btnScanBarcode = view.findViewById(R.id.btnScanBarcode);
+
         setEvent();
         setData();
 
@@ -71,7 +82,15 @@ public class ImportDetailFragment extends Fragment {
     }
 
     private void setEvent() {
-
+        btnScanBarcode.setOnClickListener(view -> {
+            scanBarcode();
+//            if (PermissionCheckerFacade.checkCameraPermission(getActivity())){
+//                scanBarcode();
+//            }
+//            else {
+////                requestCameraPermission();
+//            }
+        });
     }
 
     private void setData() {
@@ -278,5 +297,36 @@ public class ImportDetailFragment extends Fragment {
         });
 
         dialog.show();
+    }
+
+    private void scanBarcode() {
+        ScanOptions options = new ScanOptions();
+        options.setPrompt(getText(R.string.scanner_prompt).toString());
+        options.setBeepEnabled(true);
+        options.setOrientationLocked(true);
+        options.setCaptureActivity(BarcodeScannerActivity.class);
+        barcodeLauncher.launch(options);
+    }
+
+    ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(
+            new ScanContract(),
+            new ActivityResultCallback<ScanIntentResult>() {
+                @Override
+                public void onActivityResult(ScanIntentResult result) {
+                    if (result.getContents() != null){
+                        searchImportDetailByItemId(Long.parseLong(result.getContents()));
+                        Log.e("test", result.getContents());
+                    }
+                }
+            }
+    );
+
+    private void searchImportDetailByItemId(long itemId) {
+        for (ImportDetail importDetail: importDetails){
+            if (importDetail.getItem().getItemId() == itemId){
+                showDialogImportDetail(importDetail);
+                break;
+            }
+        }
     }
 }

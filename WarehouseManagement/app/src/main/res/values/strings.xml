@@ -69,4 +69,5 @@
     <string name="tv_import_detail">ImportDetail</string>
     <string name="tv_item_id">Item id (barcode):</string>
     <string name="btn_apply">Apply</string>
+    <string name="scanner_prompt">Move your camera to your barcode</string>
 </resources>
