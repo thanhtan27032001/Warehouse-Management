@@ -44,11 +44,11 @@ public class SelectOrderExportActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK){
             Log.e("test", "result ok");
-//            if (requestCode == CreateReceiptActivity.REQUEST_CREATED_RECEIPT){
-//                Log.e("test", "request create");
-//                setResult(RESULT_OK);
-//                setData();
-//            }
+            if (requestCode == CreateDeliveryNoteActivity.REQUEST_CREATED_DELIVERY_NOTE){
+                Log.e("test", "request create");
+                setResult(RESULT_OK);
+                setData();
+            }
         }
     }
 
@@ -95,9 +95,9 @@ public class SelectOrderExportActivity extends AppCompatActivity {
         });
     }
 
-//    public void openCreateDeliveryNoteActivity(OrderExport orderExport){
-//        Intent intent = new Intent(this, CreateReceiptActivity.class);
-//        intent.putExtra(CreateReceiptActivity.TAG_ORDER_SELECTED, orderExport);
-//        startActivityForResult(intent, CreateReceiptActivity.REQUEST_CREATED_RECEIPT);
-//    }
+    public void openCreateDeliveryNoteActivity(OrderExport orderExport){
+        Intent intent = new Intent(this, CreateDeliveryNoteActivity.class);
+        intent.putExtra(CreateDeliveryNoteActivity.TAG_ORDER_SELECTED, orderExport);
+        startActivityForResult(intent, CreateDeliveryNoteActivity.REQUEST_CREATED_DELIVERY_NOTE);
+    }
 }

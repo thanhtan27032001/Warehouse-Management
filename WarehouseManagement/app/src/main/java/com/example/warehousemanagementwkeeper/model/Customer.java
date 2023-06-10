@@ -2,7 +2,9 @@ package com.example.warehousemanagementwkeeper.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer implements Serializable {
     @SerializedName("MaKhachHang")
     private int id;
     @SerializedName("TenKhachHang")

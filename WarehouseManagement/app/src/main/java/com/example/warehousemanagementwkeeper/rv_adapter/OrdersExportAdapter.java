@@ -40,9 +40,9 @@ public class OrdersExportAdapter extends RecyclerView.Adapter<OrdersExportAdapte
                 .concat(" #")
                 .concat(String.valueOf(orderExport.getEmployee().getId()))
         );
-//        holder.cardOrder.setOnClickListener(view -> {
-//            context.openCreateDeliveryNoteActivity(orderExport);
-//        });
+        holder.cardOrder.setOnClickListener(view -> {
+            context.openCreateDeliveryNoteActivity(orderExport);
+        });
     }
 
     @Override
