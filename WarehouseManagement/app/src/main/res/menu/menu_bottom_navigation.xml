@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menuHome"
-        android:title="@string/option_home"
-        android:icon="@drawable/baseline_home_24"/>
+        android:id="@+id/menuImport"
+        android:title="@string/option_import"
+        android:icon="@drawable/baseline_input_24"/>
+
+    <item
+        android:id="@+id/menuExport"
+        android:title="@string/option_export"
+        android:icon="@drawable/baseline_output_24"/>
+
     <item
         android:id="@+id/menuAccount"
         android:title="@string/option_accountant"

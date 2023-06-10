@@ -6,13 +6,15 @@ import android.os.Bundle;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.fragment.AccountFragment;
-import com.example.warehousemanagementwkeeper.fragment.HomeFragment;
+import com.example.warehousemanagementwkeeper.fragment.ExportFragment;
+import com.example.warehousemanagementwkeeper.fragment.ImportFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainWarehouseKeeperActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
-    public HomeFragment homeFragment;
+    private ImportFragment importFragment;
+    private ExportFragment exportFragment;
     private AccountFragment accountFragment;
 
     @Override
@@ -29,13 +31,22 @@ public class MainWarehouseKeeperActivity extends AppCompatActivity {
     private void setEvent() {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
-                case R.id.menuHome:
-                    if (homeFragment == null){
-                        homeFragment = new HomeFragment();
+                case R.id.menuImport:
+                    if (importFragment == null){
+                        importFragment = new ImportFragment();
                     }
                     getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.fragmentContainer, homeFragment)
+                            .replace(R.id.fragmentContainer, importFragment)
+                            .commit();
+                    break;
+                case R.id.menuExport:
+                    if (exportFragment == null){
+                        exportFragment = new ExportFragment();
+                    }
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainer, exportFragment)
                             .commit();
                     break;
                 case R.id.menuAccount:
@@ -51,6 +62,6 @@ public class MainWarehouseKeeperActivity extends AppCompatActivity {
             }
             return true;
         });
-        bottomNavigationView.setSelectedItemId(R.id.menuHome);
+        bottomNavigationView.setSelectedItemId(R.id.menuImport);
     }
 }

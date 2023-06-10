@@ -47,7 +47,6 @@
     <string name="tv_input_time">Input time:</string>
     <string name="tv_input_date_2">Input date:</string>
     <string name="tv_submit_create_receipt">I have read and confirm create receipt</string>
-    <string name="tv_receipt_management">Receipt management</string>
     <string name="btn_more">more</string>
     <string name="tv_supply_by">Supply by</string>
     <string name="tv_supply_for">Supply for order</string>
@@ -74,4 +73,10 @@
     <string name="warning_item_import_detail_not_found">This item is not in this receipt!</string>
     <string name="option_set_done_receipt">Finish importing</string>
     <string name="success_finish_importing">Finished import</string>
+    <string name="option_import">Import</string>
+    <string name="option_export">Export</string>
+    <string name="tv_create_delivery_note">Create delivery note</string>
+    <string name="tv_export_management">Export management</string>
+    <string name="tv_check_item_stock">Check item stock</string>
+    <string name="tv_check_item_stock_delivery">Check delivery stock</string>
 </resources>
