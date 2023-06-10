@@ -14,7 +14,6 @@ import android.widget.TimePicker;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.model.OrderExport;
-import com.example.warehousemanagementwkeeper.model.OrderImport;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,8 +23,8 @@ public class CreateDeliveryNoteActivity extends AppCompatActivity {
     public static final int REQUEST_CREATED_DELIVERY_NOTE = 273;
     private OrderExport orderSelected;
     private ImageButton btnBack;
-    private TextView tvInputDate, tvInputTime, tvOrderDate, tvEmployeeName, tvSupplyName,
-            tvSupplyAddress, tvSupplyPhone, tvCreateReceipt;
+    private TextView tvInputDate, tvInputTime, tvOrderDate, tvEmployeeName, tvCustomerName,
+            tvCustomerAddress, tvCustomerPhone, tvCreateDeliveryNote;
     private RecyclerView rvOrderDetail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +43,10 @@ public class CreateDeliveryNoteActivity extends AppCompatActivity {
         tvInputTime = findViewById(R.id.tvInputTime);
         tvOrderDate = findViewById(R.id.tvOrderDate);
         tvEmployeeName = findViewById(R.id.tvEmployeeName);
-        tvSupplyName = findViewById(R.id.tvSupplierName);
-        tvSupplyAddress = findViewById(R.id.tvSupplierAddress);
-        tvSupplyPhone = findViewById(R.id.tvSupplierPhone);
-        tvCreateReceipt = findViewById(R.id.tvCreateReceipt);
+        tvCustomerName = findViewById(R.id.tvSupplierName);
+        tvCustomerAddress = findViewById(R.id.tvSupplierAddress);
+        tvCustomerPhone = findViewById(R.id.tvSupplierPhone);
+        tvCreateDeliveryNote = findViewById(R.id.tvCreateDeliveryNote);
 
         rvOrderDetail = findViewById(R.id.rvOrderDetail);
         rvOrderDetail.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
@@ -61,7 +60,7 @@ public class CreateDeliveryNoteActivity extends AppCompatActivity {
         tvInputTime.setOnClickListener(view -> {
             showTimePickerDialog();
         });
-        tvCreateReceipt.setOnClickListener(view -> createReceipt());
+        tvCreateDeliveryNote.setOnClickListener(view -> createDeliveryNote());
     }
 
     private void setData() {
@@ -72,9 +71,9 @@ public class CreateDeliveryNoteActivity extends AppCompatActivity {
             tvInputTime.setText(new SimpleDateFormat("HH:mm").format(date));
             tvOrderDate.setText(orderSelected.getOderDate());
             tvEmployeeName.setText(orderSelected.getEmployee().getFullName());
-            tvSupplyName.setText(orderSelected.getCustomer().getName());
-            tvSupplyAddress.setText(orderSelected.getCustomer().getAddress());
-            tvSupplyPhone.setText(orderSelected.getCustomer().getPhone());
+            tvCustomerName.setText(orderSelected.getCustomer().getName());
+            tvCustomerAddress.setText(orderSelected.getCustomer().getAddress());
+            tvCustomerPhone.setText(orderSelected.getCustomer().getPhone());
             setDataRvOrderDetail(orderSelected);
         }
     }
@@ -134,7 +133,7 @@ public class CreateDeliveryNoteActivity extends AppCompatActivity {
         );
         dialog.show();
     }
-    private void createReceipt(){
+    private void createDeliveryNote(){
 //        String inputDate = tvInputDate.getText().toString();
 //        // dd-mm-yyyy to yyyy-mm-dd
 //        inputDate = StringFormatFacade.toDatabaseDate(inputDate);

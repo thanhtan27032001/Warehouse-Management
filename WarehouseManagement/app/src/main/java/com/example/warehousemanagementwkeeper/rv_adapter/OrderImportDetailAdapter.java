@@ -12,33 +12,34 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.activity.CreateReceiptActivity;
 import com.example.warehousemanagementwkeeper.model.OrderImportDetail;
+import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 
 import java.util.ArrayList;
 
-public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.ViewHolder> {
+public class OrderImportDetailAdapter extends RecyclerView.Adapter<OrderImportDetailAdapter.ViewHolder> {
 
     private CreateReceiptActivity context;
     private ArrayList<OrderImportDetail> orderImportDetails;
 
-    public OrderDetailAdapter(CreateReceiptActivity context, ArrayList<OrderImportDetail> orderImportDetails) {
+    public OrderImportDetailAdapter(CreateReceiptActivity context, ArrayList<OrderImportDetail> orderImportDetails) {
         this.context = context;
         this.orderImportDetails = orderImportDetails;
     }
 
     @NonNull
     @Override
-    public OrderDetailAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_detail, parent, false));
+    public OrderImportDetailAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_import_detail, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrderDetailAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull OrderImportDetailAdapter.ViewHolder holder, int position) {
         OrderImportDetail orderImportDetail = orderImportDetails.get(position);
         holder.layoutItem.setBackgroundColor(position % 2 == 0 ? context.getColor(R.color.white) : context.getColor(R.color.gray_200));
-        holder.tvName.setText(orderImportDetail.getItemName());
-        holder.tvId.setText(String.valueOf(orderImportDetail.getItemId()));
+        holder.tvName.setText(orderImportDetail.getItem().getName());
+        holder.tvId.setText(String.valueOf(orderImportDetail.getItem().getItemId()));
         holder.tvQuantity.setText(String.valueOf(orderImportDetail.getQuantity()));
-        holder.tvPrice.setText(String.valueOf(orderImportDetail.getPrice()));
+        holder.tvPrice.setText(StringFormatFacade.getStringPrice(orderImportDetail.getPrice()));
     }
 
     @Override

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.fragment.ImportDetailFragment;
 import com.example.warehousemanagementwkeeper.model.ImportDetail;
+import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 
 import java.util.ArrayList;
 
@@ -52,12 +53,12 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
         holder.tvId.setText(String.valueOf(importDetail.getItem().getItemId()));
         holder.edtQuantity.setText(String.valueOf(importDetail.getQuantity()));
         holder.tvOrderQuantity.setText(String.valueOf(importDetail.getQuantityOrder()));
-        holder.tvPrice.setText(String.valueOf(importDetail.getPrice()));
+        holder.tvPrice.setText(StringFormatFacade.getStringPrice(importDetail.getPrice()));
 
         // event
         holder.btnAdd.setOnClickListener(view -> {
             if (importDetail.getQuantity()+1 <= importDetail.getQuantityOrder()){
-                context.upsertImportDetail(importDetail, importDetail.getQuantity()+1, Double.parseDouble(holder.tvPrice.getText().toString()), null);
+                context.upsertImportDetail(importDetail, importDetail.getQuantity()+1, Long.parseLong(holder.tvPrice.getText().toString()), null);
             }
             else {
                 Toast.makeText(context.getContext(), R.string.warning_maximum_quantity, Toast.LENGTH_SHORT).show();
@@ -65,7 +66,7 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
         });
         holder.btnMinus.setOnClickListener(view -> {
             if (importDetail.getQuantity()-1 >= 0){
-                context.upsertImportDetail(importDetail, importDetail.getQuantity()-1, Double.parseDouble(holder.tvPrice.getText().toString()), null);
+                context.upsertImportDetail(importDetail, importDetail.getQuantity()-1, Long.parseLong(holder.tvPrice.getText().toString()), null);
             }
             else {
                 Toast.makeText(context.getContext(), R.string.warning_minimum_quantity, Toast.LENGTH_SHORT).show();
@@ -81,7 +82,7 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
                 else if (Integer.parseInt(holder.edtQuantity.getText().toString()) > importDetail.getQuantityOrder()){
                     holder.edtQuantity.setText(String.valueOf(importDetail.getQuantityOrder()));
                 }
-                context.upsertImportDetail(importDetail, Integer.parseInt(holder.edtQuantity.getText().toString()), Double.parseDouble(holder.tvPrice.getText().toString()), null);
+                context.upsertImportDetail(importDetail, Integer.parseInt(holder.edtQuantity.getText().toString()), Long.parseLong(holder.tvPrice.getText().toString()), null);
                 return false;
             }
         });

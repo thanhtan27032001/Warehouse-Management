@@ -112,7 +112,7 @@ public class ImportDetailFragment extends Fragment {
                                 for (OrderImportDetail orderImportDetail : orderImportDetails){
                                     isImported = false;
                                     for (ImportDetail importDetail: temp){
-                                        if (orderImportDetail.getItemId().equals(importDetail.getItem().getItemId())){
+                                        if (orderImportDetail.getItem().getItemId().equals(importDetail.getItem().getItemId())){
                                             importDetail.setQuantityOrder(orderImportDetail.getQuantity());
                                             importDetail.setPriceOrder(orderImportDetail.getPrice());
                                             importDetails.add(importDetail);
@@ -124,7 +124,7 @@ public class ImportDetailFragment extends Fragment {
                                     if (!isImported){
                                         importDetails.add(new ImportDetail(
                                                 receipt.getReceiptId(),
-                                                new Item(orderImportDetail.getItemId(), orderImportDetail.getItemName()),
+                                                new Item(orderImportDetail.getItem().getItemId(), orderImportDetail.getItem().getName()),
                                                 0,
                                                 orderImportDetail.getPrice(),
                                                 orderImportDetail.getQuantity(),
@@ -140,7 +140,7 @@ public class ImportDetailFragment extends Fragment {
                                 for (OrderImportDetail orderImportDetail : orderImportDetails){
                                     importDetails.add(new ImportDetail(
                                             receipt.getReceiptId(),
-                                            new Item(orderImportDetail.getItemId(), orderImportDetail.getItemName()),
+                                            new Item(orderImportDetail.getItem().getItemId(), orderImportDetail.getItem().getName()),
                                             0,
                                             orderImportDetail.getPrice(),
                                             orderImportDetail.getQuantity(),
@@ -185,7 +185,7 @@ public class ImportDetailFragment extends Fragment {
         });
     }
 
-    public void upsertImportDetail(ImportDetail importDetail, int newQuantity, double newPrice, @Nullable Dialog dialog){
+    public void upsertImportDetail(ImportDetail importDetail, int newQuantity, long newPrice, @Nullable Dialog dialog){
         try {
             ImportDetail temp = (ImportDetail) importDetail.clone();
             temp.setQuantity(newQuantity);
@@ -249,7 +249,7 @@ public class ImportDetailFragment extends Fragment {
         // set data
         tvItemName.setText(importDetail.getItem().getName());
         tvItemId.setText(String.valueOf(importDetail.getItem().getItemId()));
-        tvOrderPrice.setText(String.valueOf(importDetail.getPriceOrder()));
+        tvOrderPrice.setText(StringFormatFacade.getStringPrice(importDetail.getPriceOrder()));
         tvOrderQuantity.setText(String.valueOf(importDetail.getQuantityOrder()));
         edtImportPrice.setText(String.valueOf(importDetail.getPrice()));
         edtImportQuantity.setText(String.valueOf(importDetail.getQuantity()));
@@ -291,7 +291,7 @@ public class ImportDetailFragment extends Fragment {
         btnCancel.setOnClickListener(view -> dialog.dismiss());
         btnSubmit.setOnClickListener(view -> {
             int newQuantity = Integer.parseInt(edtImportQuantity.getText().toString());
-            double newPrice = Double.parseDouble(edtImportPrice.getText().toString());
+            long newPrice = Long.parseLong(edtImportPrice.getText().toString());
             upsertImportDetail(importDetail, newQuantity, newPrice, dialog);
         });
 

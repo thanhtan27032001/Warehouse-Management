@@ -10,19 +10,19 @@ public class ImportDetail implements Cloneable{
     @SerializedName("SoLuong")
     private int quantity;
     @SerializedName("DonGia")
-    private double price;
+    private long price;
     private int quantityOrder;
-    private double priceOrder;
+    private long priceOrder;
 
     // get import detail
-    public ImportDetail(int receiptId, Item item, int quantity, double price) {
+    public ImportDetail(int receiptId, Item item, int quantity, long price) {
         this.receiptId = receiptId;
         this.item = item;
         this.quantity = quantity;
         this.price = price;
     }
     // add to import detail not existed
-    public ImportDetail(int receiptId, Item item, int quantity, double price, int quantityOrder, double priceOrder) {
+    public ImportDetail(int receiptId, Item item, int quantity, long price, int quantityOrder, long priceOrder) {
         this.receiptId = receiptId;
         this.item = item;
         this.quantity = quantity;
@@ -42,7 +42,7 @@ public class ImportDetail implements Cloneable{
         return quantity;
     }
 
-    public double getPrice() {
+    public long getPrice() {
         return price;
     }
 
@@ -54,11 +54,11 @@ public class ImportDetail implements Cloneable{
         this.quantityOrder = quantityOrder;
     }
 
-    public double getPriceOrder() {
+    public long getPriceOrder() {
         return priceOrder;
     }
 
-    public void setPriceOrder(double priceOrder) {
+    public void setPriceOrder(long priceOrder) {
         this.priceOrder = priceOrder;
     }
 
@@ -66,7 +66,7 @@ public class ImportDetail implements Cloneable{
         this.quantity = quantity;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 }

@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/tv_receipt"
+            android:text="@string/tv_delivery_note"
             android:textStyle="bold"
             android:textSize="18sp"
             android:textColor="@color/black"/>
@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:text="@string/tv_input_date"
+                        android:text="@string/tv_export_date"
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:background="@color/gray_200"/>
@@ -82,7 +82,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/tv_input_date_2"/>
+                                android:text="@string/tv_import_date_2"/>
                             <TextView
                                 android:id="@+id/tvInputDate"
                                 android:layout_width="match_parent"
@@ -101,7 +101,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/tv_input_time"/>
+                                android:text="@string/tv_import_time"/>
                             <TextView
                                 android:id="@+id/tvInputTime"
                                 android:layout_width="match_parent"
@@ -144,86 +144,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="8dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/tv_name"/>
-                            <TextView
-                                android:id="@+id/tvOrderName"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="4dp"
-                                android:text="My company"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/tv_order_date_2"/>
-                            <TextView
-                                android:id="@+id/tvOrderDate"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="4dp"
-                                android:text="06/06/2023"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/tv_employee_create"/>
-                            <TextView
-                                android:id="@+id/tvEmployeeName"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="4dp"
-                                android:text="Nguyễn Thành Tân"/>
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginTop="16dp"
-                app:cardCornerRadius="6dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/background_ripple_rectangle">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="@string/tv_supply"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:background="@color/gray_200"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp">
+                        android:paddingVertical="8dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -272,6 +193,86 @@
                                 android:text="0123456789"/>
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tv_order_date_2"/>
+                            <TextView
+                                android:id="@+id/tvOrderDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="4dp"
+                                android:text="06/06/2023"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/background_ripple_rectangle">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="@string/tv_supply"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:background="@color/gray_200"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tv_name"/>
+                            <TextView
+                                android:id="@+id/tvOrderName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="My company"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tv_employee_create"/>
+                            <TextView
+                                android:id="@+id/tvEmployeeName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="Nguyễn Thành Tân"/>
+                        </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -308,7 +309,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
+                            android:layout_weight="4"
                             android:padding="4dp"
                             android:text="@string/tv_item"
                             android:textStyle="bold" />
@@ -335,6 +336,19 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:padding="4dp"
+                            android:gravity="center"
+                            android:text="@string/tv_in_stock"
+                            android:textStyle="bold"/>
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:padding="4dp"
                             android:gravity="end"
                             android:text="@string/tv_price"
                             android:textStyle="bold"/>
@@ -360,12 +374,12 @@
                 android:layout_marginVertical="32dp"
                 app:cardCornerRadius="6dp">
                 <TextView
-                    android:id="@+id/tvCreateReceipt"
+                    android:id="@+id/tvCreateDeliveryNote"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:gravity="center"
-                    android:text="@string/tv_submit_create_receipt"
+                    android:text="@string/tv_submit_create_delivery_note"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:background="@drawable/background_ripple_rectangle"

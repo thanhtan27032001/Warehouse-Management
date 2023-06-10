@@ -33,7 +33,7 @@
     <string name="tv_receipt">Receipt</string>
     <string name="tv_order">Order</string>
     <string name="tv_name">Name:</string>
-    <string name="tv_order_date_2">Date orderImport:</string>
+    <string name="tv_order_date_2">Date order:</string>
     <string name="tv_employee_create">Employee create:</string>
     <string name="tv_supply">Supply</string>
     <string name="tv_address">Address:</string>
@@ -41,16 +41,16 @@
     <string name="tv_order_detail">Order detail</string>
     <string name="tv_item">Item</string>
     <string name="tv_quantity">Quantity</string>
-    <string name="tv_price">Price (VNĐ)</string>
-    <string name="tv_input_date">Input date</string>
+    <string name="tv_price">Price</string>
+    <string name="tv_import_date">Import date</string>
     <string name="tv_date">Date</string>
-    <string name="tv_input_time">Input time:</string>
-    <string name="tv_input_date_2">Input date:</string>
+    <string name="tv_import_time">Import time:</string>
+    <string name="tv_import_date_2">Import date:</string>
     <string name="tv_submit_create_receipt">I have read and confirm create receipt</string>
     <string name="btn_more">more</string>
     <string name="tv_supply_by">Supply by</string>
     <string name="tv_supply_for">Supply for orderImport</string>
-    <string name="tv_input_at">Input at</string>
+    <string name="tv_import_at">Import at</string>
     <string name="tv_receipt_detail">Receipt detail</string>
     <string name="tab_receipt_info">Receipt information</string>
     <string name="tab_import_detail">Import</string>
@@ -62,8 +62,8 @@
     <string name="success_upsert_import_detail">Update import detail successful</string>
     <string name="warning_maximum_quantity">Quantity cannot be greater than orderImport quantity</string>
     <string name="tv_item_name">Item name:</string>
-    <string name="tv_oder_price">Order price (VNĐ):</string>
-    <string name="tv_import_price">Import price (VNĐ):</string>
+    <string name="tv_oder_price">Order price:</string>
+    <string name="tv_import_price">Import price:</string>
     <string name="tv_import_quantity">Import quantity:</string>
     <string name="tv_import_detail">ImportDetail</string>
     <string name="tv_item_id">Item id (barcode):</string>
@@ -81,4 +81,8 @@
     <string name="tv_check_item_stock_delivery">Check delivery stock</string>
     <string name="tv_order_by">Order by</string>
     <string name="tv_order_at">Order at</string>
+    <string name="tv_delivery_note">Delivery note</string>
+    <string name="tv_export_date">Export date</string>
+    <string name="tv_in_stock">In stock</string>
+    <string name="tv_submit_create_delivery_note">I have read and confirm create delivery note</string>
 </resources>

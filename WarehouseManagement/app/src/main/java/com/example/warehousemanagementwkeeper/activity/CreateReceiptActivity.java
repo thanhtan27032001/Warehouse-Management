@@ -23,7 +23,7 @@ import com.example.warehousemanagementwkeeper.model.ResponseObject;
 import com.example.warehousemanagementwkeeper.model.ResponseOrderImportDetails;
 import com.example.warehousemanagementwkeeper.my_control.AuthorizationSingleton;
 import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
-import com.example.warehousemanagementwkeeper.rv_adapter.OrderDetailAdapter;
+import com.example.warehousemanagementwkeeper.rv_adapter.OrderImportDetailAdapter;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -102,7 +102,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseOrderImportDetails> call, Response<ResponseOrderImportDetails> response) {
                 if (response.isSuccessful()){
                     ArrayList<OrderImportDetail> orderImportDetails = response.body().getData();
-                    OrderDetailAdapter adapter = new OrderDetailAdapter(CreateReceiptActivity.this, orderImportDetails);
+                    OrderImportDetailAdapter adapter = new OrderImportDetailAdapter(CreateReceiptActivity.this, orderImportDetails);
                     rvOrderDetail.setAdapter(adapter);
                 }
                 else {

@@ -2,8 +2,8 @@ package com.example.warehousemanagementwkeeper.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class OrderImportDetail {
-    @SerializedName("MaDonDH")
+public class OrderExportDetail {
+    @SerializedName("MaDonDHX")
     private int orderId;
     @SerializedName("MatHang")
     private Item item;
@@ -15,7 +15,7 @@ public class OrderImportDetail {
     // get order detail
 
 
-    public OrderImportDetail(int orderId, Item item, int quantity, long price) {
+    public OrderExportDetail(int orderId, Item item, int quantity, long price) {
         this.orderId = orderId;
         this.item = item;
         this.quantity = quantity;

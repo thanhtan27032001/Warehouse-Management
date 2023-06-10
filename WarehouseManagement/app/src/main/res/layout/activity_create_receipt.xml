@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:text="@string/tv_input_date"
+                        android:text="@string/tv_import_date"
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:background="@color/gray_200"/>
@@ -82,7 +82,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/tv_input_date_2"/>
+                                android:text="@string/tv_import_date_2"/>
                             <TextView
                                 android:id="@+id/tvInputDate"
                                 android:layout_width="match_parent"
@@ -101,7 +101,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/tv_input_time"/>
+                                android:text="@string/tv_import_time"/>
                             <TextView
                                 android:id="@+id/tvInputTime"
                                 android:layout_width="match_parent"
