@@ -12,7 +12,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -47,6 +49,8 @@ public class CreateDeliveryNoteActivity extends AppCompatActivity {
     private ImageButton btnBack;
     private TextView tvInputDate, tvInputTime, tvOrderDate, tvEmployeeName, tvCustomerName,
             tvCustomerAddress, tvCustomerPhone, tvCreateDeliveryNote;
+    private RadioButton radGoodsDelivery;
+    private EditText edtExportReason;
     private RecyclerView rvOrderDetail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,10 @@ public class CreateDeliveryNoteActivity extends AppCompatActivity {
         tvCustomerAddress = findViewById(R.id.tvSupplierAddress);
         tvCustomerPhone = findViewById(R.id.tvSupplierPhone);
         tvCreateDeliveryNote = findViewById(R.id.tvCreateDeliveryNote);
+
+        radGoodsDelivery = findViewById(R.id.radGoodsDelivery);
+
+        edtExportReason = findViewById(R.id.edtExportReason);
 
         rvOrderDetail = findViewById(R.id.rvOrderDetail);
         rvOrderDetail.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
@@ -213,11 +221,14 @@ public class CreateDeliveryNoteActivity extends AppCompatActivity {
         // dd-mm-yyyy to yyyy-mm-dd
         inputDate = StringFormatFacade.toDatabaseDate(inputDate);
         String inputDateTime = inputDate + " " + tvInputTime.getText().toString();
+        String exportReason = edtExportReason.getText().toString();
+        String exportType = radGoodsDelivery.isChecked() ? DeliveryNote.TYPE_EXPORT_NORMAL : DeliveryNote.TYPE_EXPORT_DESTROY;
+
         DeliveryNote deliveryNote = new DeliveryNote(
                 false,
                 inputDateTime,
-                "test test test",
-                DeliveryNote.TYPE_EXPORT_NORMAL
+                exportReason,
+                exportType
         );
 
         Call<ResponseObject> call = DeliveryNoteApiInstance.getInstance().createDeliveryNote(

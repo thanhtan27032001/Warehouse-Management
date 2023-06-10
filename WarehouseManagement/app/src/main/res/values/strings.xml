@@ -90,4 +90,9 @@
     <string name="warning_create_delivery_note_title">Warning create delivery note</string>
     <string name="warning_create_delivery_note_message">The quantity in stock are not available. Are you sure about creating delivery note for this order?</string>
     <string name="success_create_delivery_note">Create delivery note successful</string>
+    <string name="tv_export_date_and_reason">Export date and reason</string>
+    <string name="tv_export_type">Export type:</string>
+    <string name="export_type_goods_delivery">Goods delivery</string>
+    <string name="export_type_goods_destroy">Goods detroy</string>
+    <string name="tv_export_reason">Export reason:</string>
 </resources>
