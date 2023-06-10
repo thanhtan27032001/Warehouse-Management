@@ -11,12 +11,24 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.warehousemanagementwkeeper.R;
+import com.example.warehousemanagementwkeeper.api_instance.OrderApiInstance;
 import com.example.warehousemanagementwkeeper.model.OrderExport;
+import com.example.warehousemanagementwkeeper.model.OrderExportDetail;
+import com.example.warehousemanagementwkeeper.model.ResponseOrderExportDetails;
+import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
+import com.example.warehousemanagementwkeeper.rv_adapter.OrderExportDetailAdapter;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateDeliveryNoteActivity extends AppCompatActivity {
     public static final String TAG_ORDER_SELECTED = "TAG_ORDER_SELECTED";
@@ -78,31 +90,31 @@ public class CreateDeliveryNoteActivity extends AppCompatActivity {
         }
     }
 
-    private void setDataRvOrderDetail(OrderExport orderImportSelected) {
-//        Call<ResponseOrderImportDetails> call = OrderApiInstance.getInstance().getOrderImportDetails(orderImportSelected.getId());
-//        call.enqueue(new Callback<ResponseOrderImportDetails>() {
-//            @Override
-//            public void onResponse(Call<ResponseOrderImportDetails> call, Response<ResponseOrderImportDetails> response) {
-//                if (response.isSuccessful()){
-//                    ArrayList<OrderImportDetail> orderImportDetails = response.body().getData();
-//                    OrderDetailAdapter adapter = new OrderDetailAdapter(CreateReceiptActivity.this, orderImportDetails);
-//                    rvOrderDetail.setAdapter(adapter);
-//                }
-//                else {
-//                    try {
-//                        Toast.makeText(CreateReceiptActivity.this, StringFormatFacade.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseOrderImportDetails> call, Throwable t) {
-//                Toast.makeText(CreateReceiptActivity.this, R.string.error_500, Toast.LENGTH_SHORT).show();
-//                t.printStackTrace();
-//            }
-//        });
+    private void setDataRvOrderDetail(OrderExport orderSelected) {
+        Call<ResponseOrderExportDetails> call = OrderApiInstance.getInstance().getOrderExportDetails(orderSelected.getId());
+        call.enqueue(new Callback<ResponseOrderExportDetails>() {
+            @Override
+            public void onResponse(Call<ResponseOrderExportDetails> call, Response<ResponseOrderExportDetails> response) {
+                if (response.isSuccessful()){
+                    ArrayList<OrderExportDetail> orderExportDetails = response.body().getData();
+                    OrderExportDetailAdapter adapter = new OrderExportDetailAdapter(CreateDeliveryNoteActivity.this, orderExportDetails);
+                    rvOrderDetail.setAdapter(adapter);
+                }
+                else {
+                    try {
+                        Toast.makeText(CreateDeliveryNoteActivity.this, StringFormatFacade.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseOrderExportDetails> call, Throwable t) {
+                Toast.makeText(CreateDeliveryNoteActivity.this, R.string.error_500, Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
     }
 
     private void showDatePickerDialog() {

@@ -1,5 +1,6 @@
 package com.example.warehousemanagementwkeeper.api;
 
+import com.example.warehousemanagementwkeeper.model.ResponseOrderExportDetails;
 import com.example.warehousemanagementwkeeper.model.ResponseOrderImportDetails;
 import com.example.warehousemanagementwkeeper.model.ResponseOrdersExport;
 import com.example.warehousemanagementwkeeper.model.ResponseOrdersImport;
@@ -18,6 +19,6 @@ public interface OrderApi {
     @GET("/api/v1/sell/getAllOrder")
     Call<ResponseOrdersExport> getAllOrdersExport();
 
-//    @GET("/api/v1/sell/getDetailOrder/{orderId}")
-//    Call<ResponseOrderExportDetails> getOrderExportDetails(@Path("orderId") int orderId);
+    @GET("/api/v1/sell/getDetailOrder/{orderId}")
+    Call<ResponseOrderExportDetails> getOrderExportDetails(@Path("orderId") int orderId);
 }

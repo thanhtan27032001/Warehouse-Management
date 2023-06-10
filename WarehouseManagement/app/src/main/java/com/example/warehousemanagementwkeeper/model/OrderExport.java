@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class OrderExport implements Serializable {
-    @SerializedName("MaDonDH")
+    @SerializedName("MaDonDHX")
     private int id;
     @SerializedName("NgayDatHang")
     private String oderDate;
