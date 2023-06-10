@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.activity.ImportManagementActivity;
-import com.example.warehousemanagementwkeeper.activity.SelectOrderReceiptActivity;
+import com.example.warehousemanagementwkeeper.activity.SelectOrderImportActivity;
 
 public class ImportFragment extends Fragment {
 
@@ -40,7 +40,7 @@ public class ImportFragment extends Fragment {
 
     private void setEvent() {
         cardCreateReceipt.setOnClickListener(view -> {
-            startActivity(new Intent(getContext(), SelectOrderReceiptActivity.class));
+            startActivity(new Intent(getContext(), SelectOrderImportActivity.class));
         });
         cardImportManagement.setOnClickListener(view -> {
             startActivity(new Intent(getContext(), ImportManagementActivity.class));

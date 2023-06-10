@@ -13,24 +13,24 @@ public class Receipt implements Serializable {
     @SerializedName("NhanVien")
     private Employee employee;
     @SerializedName("DonDatHang")
-    private Order order;
+    private OrderImport orderImport;
     @SerializedName("TrangThai")
     private boolean status;
     @SerializedName("NgayNhap")
     private String inputDateTime;
 
     // create receipt
-    public Receipt(Order order, boolean status, String inputDateTime) {
-        this.order = order;
+    public Receipt(OrderImport orderImport, boolean status, String inputDateTime) {
+        this.orderImport = orderImport;
         this.status = status;
         this.inputDateTime = inputDateTime;
     }
 
     // get all receipt
-    public Receipt(int receiptId, Employee employee, Order order, boolean status, String inputDateTime) {
+    public Receipt(int receiptId, Employee employee, OrderImport orderImport, boolean status, String inputDateTime) {
         this.receiptId = receiptId;
         this.employee = employee;
-        this.order = order;
+        this.orderImport = orderImport;
         this.status = status;
         this.inputDateTime = inputDateTime;
     }
@@ -43,8 +43,8 @@ public class Receipt implements Serializable {
         return employee;
     }
 
-    public Order getOrder() {
-        return order;
+    public OrderImport getOrder() {
+        return orderImport;
     }
 
     public boolean getStatus() {

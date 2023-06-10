@@ -27,13 +27,12 @@ import com.example.warehousemanagementwkeeper.api_instance.ReceiptApiInstance;
 import com.example.warehousemanagementwkeeper.model.ImportDetail;
 import com.example.warehousemanagementwkeeper.model.ImportDetailsUpsertInfo;
 import com.example.warehousemanagementwkeeper.model.Item;
-import com.example.warehousemanagementwkeeper.model.OrderDetail;
+import com.example.warehousemanagementwkeeper.model.OrderImportDetail;
 import com.example.warehousemanagementwkeeper.model.Receipt;
 import com.example.warehousemanagementwkeeper.model.ResponseImportDetails;
 import com.example.warehousemanagementwkeeper.model.ResponseObject;
-import com.example.warehousemanagementwkeeper.model.ResponseOrderDetails;
+import com.example.warehousemanagementwkeeper.model.ResponseOrderImportDetails;
 import com.example.warehousemanagementwkeeper.my_control.AuthorizationSingleton;
-import com.example.warehousemanagementwkeeper.my_control.PermissionCheckerFacade;
 import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 import com.example.warehousemanagementwkeeper.rv_adapter.ImportDetailAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -51,7 +50,7 @@ public class ImportDetailFragment extends Fragment {
 
     private Receipt receipt;
     private ArrayList<ImportDetail> importDetails;
-    private ArrayList<OrderDetail> orderDetails;
+    private ArrayList<OrderImportDetail> orderImportDetails;
     private ImportDetailAdapter importDetailAdapter;
     private RecyclerView rvImportDetail;
     private FloatingActionButton btnScanBarcode;
@@ -94,13 +93,13 @@ public class ImportDetailFragment extends Fragment {
     }
 
     private void setData() {
-        Call<ResponseOrderDetails> call1 = OrderApiInstance.getInstance().getOrderDetails(receipt.getOrder().getId());
-        call1.enqueue(new Callback<ResponseOrderDetails>() {
+        Call<ResponseOrderImportDetails> call1 = OrderApiInstance.getInstance().getOrderImportDetails(receipt.getOrder().getId());
+        call1.enqueue(new Callback<ResponseOrderImportDetails>() {
             @Override
-            public void onResponse(Call<ResponseOrderDetails> call, Response<ResponseOrderDetails> response) {
+            public void onResponse(Call<ResponseOrderImportDetails> call, Response<ResponseOrderImportDetails> response) {
                 if (response.isSuccessful()){
-                    orderDetails = new ArrayList<>();
-                    orderDetails.addAll(response.body().getData());
+                    orderImportDetails = new ArrayList<>();
+                    orderImportDetails.addAll(response.body().getData());
                     Log.e("order detail", response.body().getData().size() + "");
                     Call<ResponseImportDetails> call2 = ReceiptApiInstance.getInstance().getReceiptImportDetails(receipt.getReceiptId());
                     call2.enqueue(new Callback<ResponseImportDetails>() {
@@ -110,12 +109,12 @@ public class ImportDetailFragment extends Fragment {
                                 ArrayList<ImportDetail> temp = response.body().getData();
                                 importDetails = new ArrayList<>();
                                 boolean isImported;
-                                for (OrderDetail orderDetail: orderDetails){
+                                for (OrderImportDetail orderImportDetail : orderImportDetails){
                                     isImported = false;
                                     for (ImportDetail importDetail: temp){
-                                        if (orderDetail.getItemId().equals(importDetail.getItem().getItemId())){
-                                            importDetail.setQuantityOrder(orderDetail.getQuantity());
-                                            importDetail.setPriceOrder(orderDetail.getPrice());
+                                        if (orderImportDetail.getItemId().equals(importDetail.getItem().getItemId())){
+                                            importDetail.setQuantityOrder(orderImportDetail.getQuantity());
+                                            importDetail.setPriceOrder(orderImportDetail.getPrice());
                                             importDetails.add(importDetail);
                                             temp.remove(importDetail);
                                             isImported = true;
@@ -125,11 +124,11 @@ public class ImportDetailFragment extends Fragment {
                                     if (!isImported){
                                         importDetails.add(new ImportDetail(
                                                 receipt.getReceiptId(),
-                                                new Item(orderDetail.getItemId(), orderDetail.getItemName()),
+                                                new Item(orderImportDetail.getItemId(), orderImportDetail.getItemName()),
                                                 0,
-                                                orderDetail.getPrice(),
-                                                orderDetail.getQuantity(),
-                                                orderDetail.getPrice()));
+                                                orderImportDetail.getPrice(),
+                                                orderImportDetail.getQuantity(),
+                                                orderImportDetail.getPrice()));
                                     }
                                 }
                                 importDetailAdapter = new ImportDetailAdapter(ImportDetailFragment.this, importDetails);
@@ -138,14 +137,14 @@ public class ImportDetailFragment extends Fragment {
                             }
                             else if (response.code() == 400) { // not import any order
                                 importDetails = new ArrayList<>();
-                                for (OrderDetail orderDetail: orderDetails){
+                                for (OrderImportDetail orderImportDetail : orderImportDetails){
                                     importDetails.add(new ImportDetail(
                                             receipt.getReceiptId(),
-                                            new Item(orderDetail.getItemId(), orderDetail.getItemName()),
+                                            new Item(orderImportDetail.getItemId(), orderImportDetail.getItemName()),
                                             0,
-                                            orderDetail.getPrice(),
-                                            orderDetail.getQuantity(),
-                                            orderDetail.getPrice()));
+                                            orderImportDetail.getPrice(),
+                                            orderImportDetail.getQuantity(),
+                                            orderImportDetail.getPrice()));
                                 }
                                 importDetailAdapter = new ImportDetailAdapter(ImportDetailFragment.this, importDetails);
                                 rvImportDetail.setAdapter(importDetailAdapter);
@@ -179,7 +178,7 @@ public class ImportDetailFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ResponseOrderDetails> call, Throwable t) {
+            public void onFailure(Call<ResponseOrderImportDetails> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(getContext(), R.string.error_500, Toast.LENGTH_SHORT).show();
             }

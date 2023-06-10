@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -15,9 +15,12 @@
         android:theme="@style/Theme.WarehouseManagementWKeeper"
         tools:targetApi="31">
         <activity
+            android:name=".activity.SelectOrderExportActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.BarcodeScannerActivity"
             android:screenOrientation="portrait"
-            android:stateNotNeeded="true"/>
+            android:stateNotNeeded="true" />
         <activity
             android:name=".activity.ReceiptDetailActivity"
             android:exported="false" />
@@ -34,7 +37,7 @@
             android:name=".activity.MainEmployeeActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SelectOrderReceiptActivity"
+            android:name=".activity.SelectOrderImportActivity"
             android:exported="false" />
         <activity
             android:name=".activity.MainWarehouseKeeperActivity"

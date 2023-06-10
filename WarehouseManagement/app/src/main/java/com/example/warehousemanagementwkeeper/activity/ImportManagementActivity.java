@@ -49,7 +49,7 @@ public class ImportManagementActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK){
-            if (requestCode == SelectOrderReceiptActivity.REQUEST_NEW_RECEIPT_CREATED){
+            if (requestCode == SelectOrderImportActivity.REQUEST_NEW_RECEIPT_CREATED){
                 setData();
             }
             else if (requestCode == ReceiptDetailActivity.REQUEST_RECEIPT_IS_UPDATED){
@@ -163,8 +163,8 @@ public class ImportManagementActivity extends AppCompatActivity {
     }
 
     private void openCreateReceiptActivity() {
-        Intent intent = new Intent(this, SelectOrderReceiptActivity.class);
-        startActivityForResult(intent, SelectOrderReceiptActivity.REQUEST_NEW_RECEIPT_CREATED);
+        Intent intent = new Intent(this, SelectOrderImportActivity.class);
+        startActivityForResult(intent, SelectOrderImportActivity.REQUEST_NEW_RECEIPT_CREATED);
     }
 
 

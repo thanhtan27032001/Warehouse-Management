@@ -2,27 +2,25 @@ package com.example.warehousemanagementwkeeper.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class Order implements Serializable {
+public class OrderExport {
     @SerializedName("MaDonDH")
     private int id;
     @SerializedName("NgayDatHang")
     private String oderDate;
-    @SerializedName("NhaCungCap")
-    private Supplier supplier;
+    @SerializedName("KhachHang")
+    private Customer customer;
     @SerializedName("NhanVien")
     private Employee employee;
     @SerializedName("DaTaoPhieu")
-    private boolean isCreatedReceipt;
+    private boolean isCreatedDeliveryNote;
 
     // get order
-    public Order(int id, String oderDate, Supplier supplier, Employee employee, boolean isCreatedReceipt) {
+    public OrderExport(int id, String oderDate, Customer customer, Employee employee, boolean isCreatedDeliveryNote) {
         this.id = id;
         this.oderDate = oderDate;
-        this.supplier = supplier;
+        this.customer = customer;
         this.employee = employee;
-        this.isCreatedReceipt = isCreatedReceipt;
+        this.isCreatedDeliveryNote = isCreatedDeliveryNote;
     }
 
     public int getId() {
@@ -33,15 +31,15 @@ public class Order implements Serializable {
         return oderDate;
     }
 
-    public Supplier getSupplier() {
-        return supplier;
+    public Customer getCustomer() {
+        return customer;
     }
 
     public Employee getEmployee() {
         return employee;
     }
 
-    public boolean isCreatedReceipt() {
-        return isCreatedReceipt;
+    public boolean isCreatedDeliveryNote() {
+        return isCreatedDeliveryNote;
     }
 }

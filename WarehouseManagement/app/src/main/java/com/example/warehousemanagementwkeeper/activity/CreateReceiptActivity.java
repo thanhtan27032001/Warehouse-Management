@@ -16,11 +16,11 @@ import android.widget.Toast;
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.api_instance.OrderApiInstance;
 import com.example.warehousemanagementwkeeper.api_instance.ReceiptApiInstance;
-import com.example.warehousemanagementwkeeper.model.Order;
-import com.example.warehousemanagementwkeeper.model.OrderDetail;
+import com.example.warehousemanagementwkeeper.model.OrderImport;
+import com.example.warehousemanagementwkeeper.model.OrderImportDetail;
 import com.example.warehousemanagementwkeeper.model.Receipt;
 import com.example.warehousemanagementwkeeper.model.ResponseObject;
-import com.example.warehousemanagementwkeeper.model.ResponseOrderDetails;
+import com.example.warehousemanagementwkeeper.model.ResponseOrderImportDetails;
 import com.example.warehousemanagementwkeeper.my_control.AuthorizationSingleton;
 import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 import com.example.warehousemanagementwkeeper.rv_adapter.OrderDetailAdapter;
@@ -38,7 +38,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
 
     public static final String TAG_ORDER_SELECTED = "TAG_ORDER_SELECTED";
     public static final int REQUEST_CREATED_RECEIPT = 273;
-    private Order orderSelected;
+    private OrderImport orderImportSelected;
     private ImageButton btnBack;
     private TextView tvInputDate, tvInputTime, tvOrderDate, tvEmployeeName, tvSupplyName,
             tvSupplyAddress, tvSupplyPhone, tvCreateReceipt;
@@ -81,28 +81,28 @@ public class CreateReceiptActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        orderSelected = (Order) getIntent().getSerializableExtra(TAG_ORDER_SELECTED);
-        if (orderSelected != null){
+        orderImportSelected = (OrderImport) getIntent().getSerializableExtra(TAG_ORDER_SELECTED);
+        if (orderImportSelected != null){
             Date date = new Date();
             tvInputDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(date));
             tvInputTime.setText(new SimpleDateFormat("HH:mm").format(date));
-            tvOrderDate.setText(orderSelected.getOderDate());
-            tvEmployeeName.setText(orderSelected.getEmployee().getFullName());
-            tvSupplyName.setText(orderSelected.getSupplier().getName());
-            tvSupplyAddress.setText(orderSelected.getSupplier().getAddress());
-            tvSupplyPhone.setText(orderSelected.getSupplier().getPhone());
-            setDataRvOrderDetail(orderSelected);
+            tvOrderDate.setText(orderImportSelected.getOderDate());
+            tvEmployeeName.setText(orderImportSelected.getEmployee().getFullName());
+            tvSupplyName.setText(orderImportSelected.getSupplier().getName());
+            tvSupplyAddress.setText(orderImportSelected.getSupplier().getAddress());
+            tvSupplyPhone.setText(orderImportSelected.getSupplier().getPhone());
+            setDataRvOrderDetail(orderImportSelected);
         }
     }
 
-    private void setDataRvOrderDetail(Order orderSelected) {
-        Call<ResponseOrderDetails> call = OrderApiInstance.getInstance().getOrderDetails(orderSelected.getId());
-        call.enqueue(new Callback<ResponseOrderDetails>() {
+    private void setDataRvOrderDetail(OrderImport orderImportSelected) {
+        Call<ResponseOrderImportDetails> call = OrderApiInstance.getInstance().getOrderImportDetails(orderImportSelected.getId());
+        call.enqueue(new Callback<ResponseOrderImportDetails>() {
             @Override
-            public void onResponse(Call<ResponseOrderDetails> call, Response<ResponseOrderDetails> response) {
+            public void onResponse(Call<ResponseOrderImportDetails> call, Response<ResponseOrderImportDetails> response) {
                 if (response.isSuccessful()){
-                    ArrayList<OrderDetail> orderDetails = response.body().getData();
-                    OrderDetailAdapter adapter = new OrderDetailAdapter(CreateReceiptActivity.this, orderDetails);
+                    ArrayList<OrderImportDetail> orderImportDetails = response.body().getData();
+                    OrderDetailAdapter adapter = new OrderDetailAdapter(CreateReceiptActivity.this, orderImportDetails);
                     rvOrderDetail.setAdapter(adapter);
                 }
                 else {
@@ -115,7 +115,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ResponseOrderDetails> call, Throwable t) {
+            public void onFailure(Call<ResponseOrderImportDetails> call, Throwable t) {
                 Toast.makeText(CreateReceiptActivity.this, R.string.error_500, Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
@@ -155,11 +155,11 @@ public class CreateReceiptActivity extends AppCompatActivity {
         // dd-mm-yyyy to yyyy-mm-dd
         inputDate = StringFormatFacade.toDatabaseDate(inputDate);
         String inputDateTime = inputDate + " " + tvInputTime.getText().toString();
-        Receipt receipt = new Receipt(orderSelected, false, inputDateTime);
+        Receipt receipt = new Receipt(orderImportSelected, false, inputDateTime);
 
         Call<ResponseObject> call = ReceiptApiInstance.getInstance().createReceipt(
                 AuthorizationSingleton.getInstance().getBearerToken(),
-                orderSelected.getId(),
+                orderImportSelected.getId(),
                 receipt
         );
         call.enqueue(new Callback<ResponseObject>() {

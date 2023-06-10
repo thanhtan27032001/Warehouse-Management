@@ -2,7 +2,7 @@ package com.example.warehousemanagementwkeeper.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class OrderDetail {
+public class OrderImportDetail {
     @SerializedName("MaDonDH")
     private int orderId;
     @SerializedName("MaMatHang")
@@ -15,7 +15,7 @@ public class OrderDetail {
     private double price;
 
     // get order detail
-    public OrderDetail(int orderId, String itemId, String itemName, int quantity, double price) {
+    public OrderImportDetail(int orderId, String itemId, String itemName, int quantity, double price) {
         this.orderId = orderId;
         this.itemId = itemId;
         this.itemName = itemName;

@@ -12,9 +12,9 @@ import android.widget.ImageButton;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.api_instance.OrderApiInstance;
-import com.example.warehousemanagementwkeeper.model.Order;
-import com.example.warehousemanagementwkeeper.model.ResponseOrders;
-import com.example.warehousemanagementwkeeper.rv_adapter.OrdersAdapter;
+import com.example.warehousemanagementwkeeper.model.OrderImport;
+import com.example.warehousemanagementwkeeper.model.ResponseOrdersImport;
+import com.example.warehousemanagementwkeeper.rv_adapter.OrdersImportAdapter;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SelectOrderReceiptActivity extends AppCompatActivity {
+public class SelectOrderImportActivity extends AppCompatActivity {
     public static final int REQUEST_NEW_RECEIPT_CREATED = 2703;
     private ImageButton btnBack;
     private RecyclerView rvOrders;
@@ -30,7 +30,7 @@ public class SelectOrderReceiptActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_order_receipt);
+        setContentView(R.layout.activity_select_order_import);
 
         setView();
         setEvent();
@@ -63,18 +63,18 @@ public class SelectOrderReceiptActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        Call<ResponseOrders> call = OrderApiInstance.getInstance().getAllOrders();
-        call.enqueue(new Callback<ResponseOrders>() {
+        Call<ResponseOrdersImport> call = OrderApiInstance.getInstance().getAllOrdersImport();
+        call.enqueue(new Callback<ResponseOrdersImport>() {
             @Override
-            public void onResponse(Call<ResponseOrders> call, Response<ResponseOrders> response) {
+            public void onResponse(Call<ResponseOrdersImport> call, Response<ResponseOrdersImport> response) {
                 if (response.isSuccessful()){
-                    ArrayList<Order> orders = new ArrayList<>();
-                    for (Order order: response.body().getData()){
-                        if (!order.isCreatedReceipt()){
-                            orders.add(order);
+                    ArrayList<OrderImport> orderImports = new ArrayList<>();
+                    for (OrderImport orderImport : response.body().getData()){
+                        if (!orderImport.isCreatedReceipt()){
+                            orderImports.add(orderImport);
                         }
                     }
-                    OrdersAdapter adapter = new OrdersAdapter(SelectOrderReceiptActivity.this, orders);
+                    OrdersImportAdapter adapter = new OrdersImportAdapter(SelectOrderImportActivity.this, orderImports);
                     rvOrders.setAdapter(adapter);
                 }
                 else {
@@ -88,15 +88,15 @@ public class SelectOrderReceiptActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ResponseOrders> call, Throwable t) {
+            public void onFailure(Call<ResponseOrdersImport> call, Throwable t) {
                 t.printStackTrace();
             }
         });
     }
 
-    public void openCreateReceiptActivity(Order order){
+    public void openCreateReceiptActivity(OrderImport orderImport){
         Intent intent = new Intent(this, CreateReceiptActivity.class);
-        intent.putExtra(CreateReceiptActivity.TAG_ORDER_SELECTED, order);
+        intent.putExtra(CreateReceiptActivity.TAG_ORDER_SELECTED, orderImport);
         startActivityForResult(intent, CreateReceiptActivity.REQUEST_CREATED_RECEIPT);
     }
 }
