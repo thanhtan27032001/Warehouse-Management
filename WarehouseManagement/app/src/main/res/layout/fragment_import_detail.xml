@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="32dp"
-        android:backgroundTint="@color/red"
+        android:backgroundTint="@color/primary"
         android:src="@drawable/baseline_qr_code_scanner_24"
         app:tint="@color/white"
         app:borderWidth="0dp"/>

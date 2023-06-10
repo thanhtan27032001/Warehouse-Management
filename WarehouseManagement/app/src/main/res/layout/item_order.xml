@@ -22,7 +22,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:background="@color/red"
+            android:background="@color/primary"
             app:drawableEndCompat="@drawable/baseline_navigate_next_24"
             android:drawableTint="@color/white"/>
 

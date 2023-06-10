@@ -369,7 +369,7 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:background="@drawable/background_ripple_rectangle"
-                    android:backgroundTint="@color/red"/>
+                    android:backgroundTint="@color/primary"/>
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>

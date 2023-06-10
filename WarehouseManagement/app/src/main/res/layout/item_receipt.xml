@@ -22,7 +22,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:background="@color/red"
+            android:background="@color/primary"
             android:drawableTint="@color/white"/>
 
         <LinearLayout

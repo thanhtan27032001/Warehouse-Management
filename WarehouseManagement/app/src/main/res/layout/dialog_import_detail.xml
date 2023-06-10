@@ -161,7 +161,7 @@
                 android:padding="8dp"
                 android:text="@string/btn_cancel"
                 android:textStyle="bold"
-                android:textColor="@color/red"
+                android:textColor="@color/primary"
                 android:background="@drawable/background_ripple_rectangle"/>
 
             <TextView
@@ -171,7 +171,7 @@
                 android:padding="8dp"
                 android:text="@string/btn_submit"
                 android:textStyle="bold"
-                android:textColor="@color/red"
+                android:textColor="@color/primary"
                 android:background="@drawable/background_ripple_rectangle"/>
         </LinearLayout>
 

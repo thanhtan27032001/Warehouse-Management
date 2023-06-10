@@ -7,12 +7,12 @@
     <color name="negative">#DD1717</color>
     <color name="transparent">#00FFFFFF</color>
     <!--    My color-->
-    <color name="red">#b71c1c</color>
-    <color name="red_dark">#7f0000</color>
-    <color name="red_light">#f05545</color>
-    <color name="green">#00bcd4</color>
-    <color name="green_dark">#008ba3</color>
-    <color name="green_light">#62efff</color>
+    <color name="primary">#379080</color>
+    <color name="primary_dark">#2e7364</color>
+    <color name="primary_light">#5eb1a4</color>
+    <color name="complementary">#903747</color>
+    <color name="complementary_dark">#6a2f3f</color>
+    <color name="complementary_light">#ba4250</color>
 
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
