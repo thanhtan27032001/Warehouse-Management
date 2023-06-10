@@ -84,7 +84,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
         orderImportSelected = (OrderImport) getIntent().getSerializableExtra(TAG_ORDER_SELECTED);
         if (orderImportSelected != null){
             Date date = new Date();
-            tvInputDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(date));
+            tvInputDate.setText(new SimpleDateFormat("dd-MM-yyyy").format(date));
             tvInputTime.setText(new SimpleDateFormat("HH:mm").format(date));
             tvOrderDate.setText(orderImportSelected.getOderDate());
             tvEmployeeName.setText(orderImportSelected.getEmployee().getFullName());

@@ -79,7 +79,7 @@ public class CreateDeliveryNoteActivity extends AppCompatActivity {
         orderSelected = (OrderExport) getIntent().getSerializableExtra(TAG_ORDER_SELECTED);
         if (orderSelected != null){
             Date date = new Date();
-            tvInputDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(date));
+            tvInputDate.setText(new SimpleDateFormat("dd-MM-yyyy").format(date));
             tvInputTime.setText(new SimpleDateFormat("HH:mm").format(date));
             tvOrderDate.setText(orderSelected.getOderDate());
             tvEmployeeName.setText(orderSelected.getEmployee().getFullName());

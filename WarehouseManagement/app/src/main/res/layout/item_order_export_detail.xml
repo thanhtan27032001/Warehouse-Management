@@ -46,7 +46,8 @@
         android:layout_weight="2"
         android:padding="4dp"
         android:gravity="center"
-        android:text="@string/tv_in_stock"/>
+        android:text="@string/tv_in_stock"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/tvItemPrice"

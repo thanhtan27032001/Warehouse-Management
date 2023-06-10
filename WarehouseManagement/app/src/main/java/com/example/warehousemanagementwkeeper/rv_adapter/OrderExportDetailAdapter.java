@@ -34,13 +34,16 @@ public class OrderExportDetailAdapter extends RecyclerView.Adapter<OrderExportDe
 
     @Override
     public void onBindViewHolder(@NonNull OrderExportDetailAdapter.ViewHolder holder, int position) {
-        OrderExportDetail orderImportDetail = orderImportDetails.get(position);
+        OrderExportDetail orderExportDetail = orderImportDetails.get(position);
         holder.layoutItem.setBackgroundColor(position % 2 == 0 ? context.getColor(R.color.white) : context.getColor(R.color.gray_200));
-        holder.tvName.setText(orderImportDetail.getItem().getName());
-        holder.tvId.setText(String.valueOf(orderImportDetail.getItem().getItemId()));
-        holder.tvQuantity.setText(String.valueOf(orderImportDetail.getQuantity()));
-        holder.tvInStock.setText(String.valueOf(orderImportDetail.getItem().getInStock()));
-        holder.tvPrice.setText(StringFormatFacade.getStringPrice(orderImportDetail.getPrice()));
+        holder.tvName.setText(orderExportDetail.getItem().getName());
+        holder.tvId.setText(String.valueOf(orderExportDetail.getItem().getItemId()));
+        holder.tvQuantity.setText(String.valueOf(orderExportDetail.getQuantity()));
+        holder.tvInStock.setText(String.valueOf(orderExportDetail.getItem().getInStock()));
+        holder.tvInStock.setTextColor(orderExportDetail.getQuantity() <= orderExportDetail.getItem().getInStock()
+                ? context.getColor(R.color.positive)
+                : context.getColor(R.color.negative));
+        holder.tvPrice.setText(StringFormatFacade.getStringPrice(orderExportDetail.getPrice()));
     }
 
     @Override
