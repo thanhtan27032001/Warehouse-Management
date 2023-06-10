@@ -36,4 +36,8 @@ public class StringFormatFacade {
         }
         return moneyFormat.format(price);
     }
+
+    public static boolean isBarcode(String s){
+        return s.matches("\\d+");
+    }
 }

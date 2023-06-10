@@ -95,4 +95,5 @@
     <string name="export_type_goods_delivery">Goods delivery</string>
     <string name="export_type_goods_destroy">Goods detroy</string>
     <string name="tv_export_reason">Export reason:</string>
+    <string name="hint_item_search">Enter item id or name</string>
 </resources>
