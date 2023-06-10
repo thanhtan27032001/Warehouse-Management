@@ -85,4 +85,9 @@
     <string name="tv_export_date">Export date</string>
     <string name="tv_in_stock">In stock</string>
     <string name="tv_submit_create_delivery_note">I have read and confirm create delivery note</string>
+    <string name="warning_do_not_have_enough">Do not have enough quatity of</string>
+    <string name="in_stock_available">Quantiy in stock are available for this export</string>
+    <string name="warning_create_delivery_note_title">Warning create delivery note</string>
+    <string name="warning_create_delivery_note_message">The quantity in stock are not available. Are you sure about creating delivery note for this order?</string>
+    <string name="success_create_delivery_note">Create delivery note successful</string>
 </resources>
