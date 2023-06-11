@@ -15,6 +15,9 @@
         android:theme="@style/Theme.WarehouseManagementWKeeper"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ItemStockActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.CheckItemStockActivity"
             android:exported="false" />
         <activity

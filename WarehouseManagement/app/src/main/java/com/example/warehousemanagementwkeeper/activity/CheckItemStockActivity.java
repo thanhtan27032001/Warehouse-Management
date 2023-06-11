@@ -6,12 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -19,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.warehousemanagementwkeeper.R;
-import com.example.warehousemanagementwkeeper.api.ItemApi;
 import com.example.warehousemanagementwkeeper.api_instance.ItemApiInstance;
 import com.example.warehousemanagementwkeeper.model.Item;
 import com.example.warehousemanagementwkeeper.model.ResponseItems;
@@ -180,7 +177,9 @@ public class CheckItemStockActivity extends AppCompatActivity {
         });
     }
 
-    public void showResult(Item item) {
-
+    public void viewItemLocation(Item item) {
+        Intent intent = new Intent(this, ItemStockActivity.class);
+        intent.putExtra(ItemStockActivity.TAG_SELECTED_ITEM, item);
+        startActivity(intent);
     }
 }

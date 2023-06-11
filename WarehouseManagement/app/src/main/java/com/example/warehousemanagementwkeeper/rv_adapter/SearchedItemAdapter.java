@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.activity.CheckItemStockActivity;
-import com.example.warehousemanagementwkeeper.api.ItemApi;
 import com.example.warehousemanagementwkeeper.model.Item;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class SearchedItemAdapter extends RecyclerView.Adapter<SearchedItemAdapte
         holder.tvItemName.setText(item.getName());
         holder.tvItemId.setText(item.getItemId());
         holder.layout.setOnClickListener(view -> {
-            context.showResult(item);
+            context.viewItemLocation(item);
         });
     }
 
