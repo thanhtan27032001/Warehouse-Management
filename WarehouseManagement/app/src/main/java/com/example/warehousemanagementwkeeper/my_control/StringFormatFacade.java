@@ -1,10 +1,14 @@
 package com.example.warehousemanagementwkeeper.my_control;
 
+import android.content.Context;
+import android.content.ContextWrapper;
+
+import com.example.warehousemanagementwkeeper.R;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
 public class StringFormatFacade {
-
     private static NumberFormat moneyFormat;
     private static Locale dong;
 
@@ -39,5 +43,13 @@ public class StringFormatFacade {
 
     public static boolean isBarcode(String s){
         return s.matches("\\d+");
+    }
+
+    public static String getItemLocation(Context context, String boxId){
+        // format KHU01KE01O01
+        String area = context.getText(R.string.area) + " " + boxId.substring(3, 5);
+        String shelf = context.getText(R.string.shelf) + " " + boxId.substring(7, 9);
+        String box = context.getText(R.string.box) + " " + boxId.substring(10);
+        return area + " " + shelf + " " + box;
     }
 }

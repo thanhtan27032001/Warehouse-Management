@@ -7,9 +7,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.warehousemanagementwkeeper.R;
+import com.example.warehousemanagementwkeeper.api_instance.ItemApiInstance;
 import com.example.warehousemanagementwkeeper.model.Item;
+import com.example.warehousemanagementwkeeper.model.ItemLocation;
+import com.example.warehousemanagementwkeeper.model.ResponseItemLocations;
+import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
+import com.example.warehousemanagementwkeeper.rv_adapter.ItemLocationAdapter;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ItemStockActivity extends AppCompatActivity {
 
@@ -49,6 +61,36 @@ public class ItemStockActivity extends AppCompatActivity {
             tvItemId.setText(item.getItemId());
             tvItemName.setText(item.getName());
             tvItemInStock.setText(String.valueOf(item.getInStock()));
+            //
+            setDataRv();
         }
+    }
+
+    private void setDataRv() {
+        Call<ResponseItemLocations> call = ItemApiInstance.getInstance().getItemLocations(item.getItemId());
+        call.enqueue(new Callback<ResponseItemLocations>() {
+            @Override
+            public void onResponse(Call<ResponseItemLocations> call, Response<ResponseItemLocations> response) {
+                if (response.isSuccessful()){
+                    ArrayList<ItemLocation> itemLocations = response.body().getData();
+                    ItemLocationAdapter adapter = new ItemLocationAdapter(ItemStockActivity.this, itemLocations);
+                    rvItemLocation.setAdapter(adapter);
+                }
+                else {
+                    try {
+                        Toast.makeText(ItemStockActivity.this, StringFormatFacade.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseItemLocations> call, Throwable t) {
+                Toast.makeText(ItemStockActivity.this, R.string.error_500, Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
     }
 }

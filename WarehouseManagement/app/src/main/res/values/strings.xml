@@ -96,4 +96,10 @@
     <string name="export_type_goods_destroy">Goods detroy</string>
     <string name="tv_export_reason">Export reason:</string>
     <string name="hint_item_search">Enter item id or name</string>
+    <string name="tv_item_location">Location in stock</string>
+    <string name="tv_quantity_initial">Initial</string>
+    <string name="tv_quantity_current">Current</string>
+    <string name="area">Area</string>
+    <string name="shelf">Shelf</string>
+    <string name="box">Box</string>
 </resources>
