@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -75,13 +77,23 @@ public class CheckItemStockActivity extends AppCompatActivity {
     }
 
     private void setEvent() {
+//        // focus edittext
+//        edtSearchItem.requestFocus();
+//        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.showSoftInput(edtSearchItem, InputMethodManager.SHOW_IMPLICIT);
+        //
         btnBack.setOnClickListener(view -> finish());
         btnScanBarcode.setOnClickListener(view -> scanBarcode());
         edtSearchItem.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 String content = edtSearchItem.getText().toString();
-                searchItem(content);
+                if (!content.trim().equals("")){
+                    searchItem(content);
+                }
+                else {
+                    rvItem.setVisibility(View.GONE);
+                }
                 return false;
             }
         });
@@ -108,11 +120,38 @@ public class CheckItemStockActivity extends AppCompatActivity {
             searchItemByName(content);
         }
     }
-    private void searchItemByBarcode(String content) {
+    private void searchItemByBarcode(String itemId) {
+        rvItem.setVisibility(View.GONE);
+        Call<ResponseItems> call = ItemApiInstance.getInstance().getItemsById(itemId);
+        call.enqueue(new Callback<ResponseItems>() {
+            @Override
+            public void onResponse(Call<ResponseItems> call, Response<ResponseItems> response) {
+                if (response.isSuccessful()){
+                    ArrayList<Item> items = response.body().getData();
+                    SearchedItemAdapter adapter = new SearchedItemAdapter(CheckItemStockActivity.this, items);
+                    rvItem.setAdapter(adapter);
+                    rvItem.setVisibility(View.VISIBLE);
+                }
+                else {
+                    try {
+                        Toast.makeText(CheckItemStockActivity.this, StringFormatFacade.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ResponseItems> call, Throwable t) {
+                Toast.makeText(CheckItemStockActivity.this, R.string.error_500, Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
     }
 
     private void searchItemByName(String itemName) {
+        rvItem.setVisibility(View.GONE);
         Call<ResponseItems> call = ItemApiInstance.getInstance().getItemsByName(itemName);
         call.enqueue(new Callback<ResponseItems>() {
             @Override
