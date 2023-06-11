@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.activity.CheckItemStockActivity;
+import com.example.warehousemanagementwkeeper.activity.ExportManagementActivity;
 import com.example.warehousemanagementwkeeper.activity.SelectOrderExportActivity;
 
 public class ExportFragment extends Fragment {
@@ -35,6 +36,7 @@ public class ExportFragment extends Fragment {
 
         cardCreateDeliveryNote = view.findViewById(R.id.cardCreateDeliveryNote);
         cardCheckItemStock = view.findViewById(R.id.cardCheckItemStock);
+        cardExportManagement = view.findViewById(R.id.cardExportManagement);
 
         setEvent();
         setData();
@@ -43,9 +45,8 @@ public class ExportFragment extends Fragment {
     }
 
     private void setEvent() {
-        cardCreateDeliveryNote.setOnClickListener(view -> {
-            startActivity(new Intent(getContext(), SelectOrderExportActivity.class));
-        });
+        cardCreateDeliveryNote.setOnClickListener(view -> startActivity(new Intent(getContext(), SelectOrderExportActivity.class)));
+        cardExportManagement.setOnClickListener(view -> startActivity(new Intent(getContext(), ExportManagementActivity.class)));
         cardCheckItemStock.setOnClickListener(view -> startActivity(new Intent(getContext(), CheckItemStockActivity.class)));
     }
 

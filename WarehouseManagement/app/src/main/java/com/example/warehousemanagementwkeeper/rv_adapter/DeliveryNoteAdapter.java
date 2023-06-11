@@ -10,16 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.warehousemanagementwkeeper.R;
+import com.example.warehousemanagementwkeeper.activity.ExportManagementActivity;
 import com.example.warehousemanagementwkeeper.activity.ImportManagementActivity;
+import com.example.warehousemanagementwkeeper.model.DeliveryNote;
 import com.example.warehousemanagementwkeeper.model.Receipt;
 
 import java.util.ArrayList;
 
-public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHolder> {
-    private ImportManagementActivity context;
-    private ArrayList<Receipt> receipts;
+public class DeliveryNoteAdapter extends RecyclerView.Adapter<DeliveryNoteAdapter.ViewHolder> {
+    private ExportManagementActivity context;
+    private ArrayList<DeliveryNote> receipts;
 
-    public ReceiptAdapter(ImportManagementActivity context, ArrayList<Receipt> receipts) {
+    public DeliveryNoteAdapter(ExportManagementActivity context, ArrayList<DeliveryNote> receipts) {
         this.context = context;
         this.receipts = receipts;
     }
@@ -27,14 +29,14 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_receipt, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_delivery_note, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReceiptAdapter.ViewHolder holder, int position) {
-        Receipt receipt = receipts.get(position);
-        holder.tvReceiptId.setText(context.getText(R.string.tv_delivery_note).toString().concat(" #".concat(String.valueOf(receipt.getReceiptId()))));
-        if (receipt.getStatus() == Receipt.STATUS_DONE){
+    public void onBindViewHolder(@NonNull DeliveryNoteAdapter.ViewHolder holder, int position) {
+        DeliveryNote deliveryNote = receipts.get(position);
+        holder.tvReceiptId.setText(context.getText(R.string.tv_delivery_note).toString().concat(" #".concat(String.valueOf(deliveryNote.getDeliveryNoteId()))));
+        if (deliveryNote.getStatus() == Receipt.STATUS_DONE){
             holder.tvReceiptId.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getDrawable(R.drawable.baseline_done_24), null);
             holder.tvReceiptId.setBackgroundColor(context.getColor(R.color.primary_light));
         }
@@ -42,12 +44,11 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
             holder.tvReceiptId.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getDrawable(R.drawable.baseline_input_24), null);
             holder.tvReceiptId.setBackgroundColor(context.getColor(R.color.complementary_light));
         }
-        holder.tvSupplierName.setText(receipt.getOrder().getSupplier().getName());
-        holder.tvInputDate.setText(receipt.getInputDateTime());
-        holder.tvOrderId.setText(context.getText(R.string.tv_order).toString().concat(" #".concat(String.valueOf(receipt.getOrder().getId()))));
-        holder.tvEmployeeName.setText(receipt.getEmployee().getFullName());
-
-        holder.cardReceipt.setOnClickListener(view -> context.viewReceiptDetail(receipt));
+        holder.tvSupplierName.setText(deliveryNote.getOrder().getCustomer().getName());
+        holder.tvInputDate.setText(deliveryNote.getExportDateTime());
+        holder.tvOrderId.setText(context.getText(R.string.tv_order).toString().concat(" #".concat(String.valueOf(deliveryNote.getOrder().getId()))));
+        holder.tvEmployeeName.setText(deliveryNote.getEmployee().getFullName());
+        holder.cardReceipt.setOnClickListener(view -> context.viewReceiptDetail(deliveryNote));
     }
 
     @Override

@@ -13,7 +13,7 @@ public class DeliveryNote implements Serializable {
     private int deliveryNoteId;
     @SerializedName("NhanVien")
     private Employee employee;
-    @SerializedName("DonDatHang")
+    @SerializedName("DonDatHangXuat")
     private OrderExport orderExport;
     @SerializedName("DaNhanHang")
     private boolean status;
@@ -25,9 +25,18 @@ public class DeliveryNote implements Serializable {
     private String exportType;
 
     // create delivery note
-
-
     public DeliveryNote(boolean status, String exportDateTime, String reason, String exportType) {
+        this.status = status;
+        this.exportDateTime = exportDateTime;
+        this.reason = reason;
+        this.exportType = exportType;
+    }
+
+    // get all delivery note
+    public DeliveryNote(int deliveryNoteId, Employee employee, OrderExport orderExport, boolean status, String exportDateTime, String reason, String exportType) {
+        this.deliveryNoteId = deliveryNoteId;
+        this.employee = employee;
+        this.orderExport = orderExport;
         this.status = status;
         this.exportDateTime = exportDateTime;
         this.reason = reason;

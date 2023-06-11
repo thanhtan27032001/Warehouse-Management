@@ -102,4 +102,7 @@
     <string name="area">Area</string>
     <string name="shelf">Shelf</string>
     <string name="box">Box</string>
+    <string name="tv_export_to">Export to</string>
+    <string name="tv_export_at">Export at</string>
+    <string name="tv_export_for">Export for</string>
 </resources>
