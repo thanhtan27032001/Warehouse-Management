@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/optionCreateDeliveryNote"
+        android:title="@string/tv_create_delivery_note"/>
+
+    <item
+        android:id="@+id/optionShowHideDoneDeliveryNote"
+        android:title="@string/tv_show_hide_done_delivery_note"/>
+</menu>

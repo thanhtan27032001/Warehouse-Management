@@ -15,6 +15,9 @@
         android:theme="@style/Theme.WarehouseManagementWKeeper"
         tools:targetApi="31">
         <activity
+            android:name=".activity.DeliveryNoteDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.ExportManagementActivity"
             android:exported="false" />
         <activity

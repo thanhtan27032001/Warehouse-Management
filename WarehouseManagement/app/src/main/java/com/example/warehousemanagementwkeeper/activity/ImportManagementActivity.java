@@ -121,7 +121,7 @@ public class ImportManagementActivity extends AppCompatActivity {
 
     private void showMoreMenu() {
         PopupMenu menu = new PopupMenu(this, btnMore);
-        menu.getMenuInflater().inflate(R.menu.menu_receipt_management, menu.getMenu());
+        menu.getMenuInflater().inflate(R.menu.menu_import_management, menu.getMenu());
         // event
         menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override

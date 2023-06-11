@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface DeliveryNoteApi {
@@ -18,4 +19,11 @@ public interface DeliveryNoteApi {
 
     @GET("/api/v1/sell/getDeliveryBill")
     Call<ResponseDeliveryNotes> getAllDeliveryNotes();
+
+    @PUT("/api/v1/sell/updateStatus/{deliveryNoteId}")
+    Call<ResponseObject> updateDeliveryNoteStatus(
+            @Header("Authorization") String token,
+            @Path("deliveryNoteId") int deliveryNoteId,
+            @Body DeliveryNote deliveryNote
+    );
 }

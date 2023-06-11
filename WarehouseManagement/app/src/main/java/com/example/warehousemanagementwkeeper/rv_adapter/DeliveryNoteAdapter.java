@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.activity.ExportManagementActivity;
-import com.example.warehousemanagementwkeeper.activity.ImportManagementActivity;
 import com.example.warehousemanagementwkeeper.model.DeliveryNote;
 import com.example.warehousemanagementwkeeper.model.Receipt;
 
@@ -48,7 +47,7 @@ public class DeliveryNoteAdapter extends RecyclerView.Adapter<DeliveryNoteAdapte
         holder.tvInputDate.setText(deliveryNote.getExportDateTime());
         holder.tvOrderId.setText(context.getText(R.string.tv_order).toString().concat(" #".concat(String.valueOf(deliveryNote.getOrder().getId()))));
         holder.tvEmployeeName.setText(deliveryNote.getEmployee().getFullName());
-        holder.cardReceipt.setOnClickListener(view -> context.viewReceiptDetail(deliveryNote));
+        holder.cardReceipt.setOnClickListener(view -> context.viewDeliveryNoteDetail(deliveryNote));
     }
 
     @Override

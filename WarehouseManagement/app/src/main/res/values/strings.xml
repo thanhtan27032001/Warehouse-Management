@@ -105,4 +105,7 @@
     <string name="tv_export_to">Export to</string>
     <string name="tv_export_at">Export at</string>
     <string name="tv_export_for">Export for</string>
+    <string name="tv_delivery_note_detail">Delivery note detail</string>
+    <string name="tv_show_hide_done_delivery_note">Show/Hide delivery note</string>
+    <string name="success_finish_exporting">Finished export</string>
 </resources>

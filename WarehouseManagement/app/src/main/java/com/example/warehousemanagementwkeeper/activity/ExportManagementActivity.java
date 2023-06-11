@@ -1,6 +1,5 @@
 package com.example.warehousemanagementwkeeper.activity;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,14 +14,10 @@ import android.widget.Toast;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.api_instance.DeliveryNoteApiInstance;
-import com.example.warehousemanagementwkeeper.api_instance.ReceiptApiInstance;
 import com.example.warehousemanagementwkeeper.model.DeliveryNote;
-import com.example.warehousemanagementwkeeper.model.Receipt;
 import com.example.warehousemanagementwkeeper.model.ResponseDeliveryNotes;
-import com.example.warehousemanagementwkeeper.model.ResponseReceipts;
 import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 import com.example.warehousemanagementwkeeper.rv_adapter.DeliveryNoteAdapter;
-import com.example.warehousemanagementwkeeper.rv_adapter.ReceiptAdapter;
 
 import java.util.ArrayList;
 
@@ -93,7 +88,7 @@ public class ExportManagementActivity extends AppCompatActivity {
                     for (DeliveryNote deliveryNote: response.body().getData()){
                         deliveryNotes.add(0, deliveryNote);
                     }
-                    showHideDoneReceipt();
+                    showHideDoneDeliveryNote();
 //                    ReceiptAdapter adapter = new ReceiptAdapter(ImportManagementActivity.this, receipts);
 //                    rvReceipt.setAdapter(adapter);
                 }
@@ -116,27 +111,27 @@ public class ExportManagementActivity extends AppCompatActivity {
         });
     }
 
-    public void viewReceiptDetail(DeliveryNote deliveryNote){
-        Intent intent = new Intent(this, ReceiptDetailActivity.class);
-        intent.putExtra(ReceiptDetailActivity.TAG_RECEIPT_SELECTED, deliveryNote);
-        startActivityForResult(intent, ReceiptDetailActivity.REQUEST_RECEIPT_IS_UPDATED);
+    public void viewDeliveryNoteDetail(DeliveryNote deliveryNote){
+        Intent intent = new Intent(this, DeliveryNoteDetailActivity.class);
+        intent.putExtra(DeliveryNoteDetailActivity.TAG_DELIVERY_NOTE_SELECTED, deliveryNote);
+        startActivityForResult(intent, DeliveryNoteDetailActivity.REQUEST_DELIVERY_NOTE_IS_UPDATED);
     }
 
     private void showMoreMenu() {
         PopupMenu menu = new PopupMenu(this, btnMore);
-        menu.getMenuInflater().inflate(R.menu.menu_receipt_management, menu.getMenu());
+        menu.getMenuInflater().inflate(R.menu.menu_export_management, menu.getMenu());
         // event
         menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    case R.id.option_create_receipt:
-                        openCreateReceiptActivity();
+                    case R.id.optionCreateDeliveryNote:
+                        openCreateDeliveryNoteActivity();
                         break;
-                    case R.id.option_show_hide_done_receipt:
+                    case R.id.optionShowHideDoneDeliveryNote:
                         if (deliveryNotes != null){
                             isDoneReceiptShown = !isDoneReceiptShown;
-                            showHideDoneReceipt();
+                            showHideDoneDeliveryNote();
                         }
                         break;
                 }
@@ -147,7 +142,7 @@ public class ExportManagementActivity extends AppCompatActivity {
         menu.show();
     }
 
-    private void showHideDoneReceipt() {
+    private void showHideDoneDeliveryNote() {
         shownDeliveryNotes = new ArrayList<>();
         if (isDoneReceiptShown){ // show done receipt
             shownDeliveryNotes.addAll(deliveryNotes);
@@ -165,8 +160,8 @@ public class ExportManagementActivity extends AppCompatActivity {
         }
     }
 
-    private void openCreateReceiptActivity() {
-        Intent intent = new Intent(this, SelectOrderImportActivity.class);
-        startActivityForResult(intent, SelectOrderImportActivity.REQUEST_NEW_RECEIPT_CREATED);
+    private void openCreateDeliveryNoteActivity() {
+        Intent intent = new Intent(this, SelectOrderExportActivity.class);
+        startActivityForResult(intent, SelectOrderExportActivity.REQUEST_NEW_DELIVERY_NOTE_CREATED);
     }
 }
