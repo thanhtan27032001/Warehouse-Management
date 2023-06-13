@@ -33,7 +33,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ReceiptAdapter.ViewHolder holder, int position) {
         Receipt receipt = receipts.get(position);
-        holder.tvReceiptId.setText(context.getText(R.string.tv_delivery_note).toString().concat(" #".concat(String.valueOf(receipt.getReceiptId()))));
+        holder.tvReceiptId.setText(context.getText(R.string.tv_receipt).toString().concat(" #".concat(String.valueOf(receipt.getReceiptId()))));
         if (receipt.getStatus() == Receipt.STATUS_DONE){
             holder.tvReceiptId.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getDrawable(R.drawable.baseline_done_24), null);
             holder.tvReceiptId.setBackgroundColor(context.getColor(R.color.primary_light));

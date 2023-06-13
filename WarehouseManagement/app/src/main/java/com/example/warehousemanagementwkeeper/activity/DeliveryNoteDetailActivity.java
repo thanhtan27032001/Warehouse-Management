@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.api_instance.DeliveryNoteApiInstance;
 import com.example.warehousemanagementwkeeper.fragment.DeliveryNoteFragment;
+import com.example.warehousemanagementwkeeper.fragment.ExportDetailFragment;
 import com.example.warehousemanagementwkeeper.model.DeliveryNote;
 import com.example.warehousemanagementwkeeper.model.ResponseObject;
 import com.example.warehousemanagementwkeeper.my_control.AuthorizationSingleton;
@@ -40,7 +41,7 @@ public class DeliveryNoteDetailActivity extends AppCompatActivity {
                 case 0:
                     return new DeliveryNoteFragment(deliveryNote);
                 case 1:
-//                    return new ImportDetailFragment(receiptSelected);
+                    return new ExportDetailFragment(deliveryNote);
             }
             return new DeliveryNoteFragment(deliveryNote);
         }
@@ -97,6 +98,7 @@ public class DeliveryNoteDetailActivity extends AppCompatActivity {
                         break;
                     case 1:
                         tab.setText(R.string.tab_export_detail);
+                        break;
                 }
             }
         });

@@ -14,31 +14,33 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.warehousemanagementwkeeper.R;
+import com.example.warehousemanagementwkeeper.fragment.ExportDetailFragment;
 import com.example.warehousemanagementwkeeper.fragment.ImportDetailFragment;
+import com.example.warehousemanagementwkeeper.model.ExportDetail;
 import com.example.warehousemanagementwkeeper.model.ImportDetail;
 import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 
 import java.util.ArrayList;
 
-public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapter.ViewHolder> {
+public class ExportDetailAdapter extends RecyclerView.Adapter<ExportDetailAdapter.ViewHolder> {
 
-    private ImportDetailFragment context;
-    private ArrayList<ImportDetail> importDetails;
+    private ExportDetailFragment context;
+    private ArrayList<ExportDetail> importDetails;
 
-    public ImportDetailAdapter(ImportDetailFragment context, ArrayList<ImportDetail> importDetails) {
+    public ExportDetailAdapter(ExportDetailFragment context, ArrayList<ExportDetail> importDetails) {
         this.context = context;
         this.importDetails = importDetails;
     }
 
     @NonNull
     @Override
-    public ImportDetailAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ExportDetailAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_import_detail, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ImportDetailAdapter.ViewHolder holder, int position) {
-        ImportDetail importDetail = importDetails.get(position);
+    public void onBindViewHolder(@NonNull ExportDetailAdapter.ViewHolder holder, int position) {
+        ExportDetail exportDetail = importDetails.get(position);
         if (position % 2 == 0){
             holder.layoutItem.setBackgroundTintList(context.getResources().getColorStateList(R.color.white));
             holder.btnAdd.setBackgroundTintList(context.getResources().getColorStateList(R.color.white));
@@ -49,24 +51,24 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
             holder.btnAdd.setBackgroundTintList(context.getResources().getColorStateList(R.color.gray_200));
             holder.btnMinus.setBackgroundTintList(context.getResources().getColorStateList(R.color.gray_200));
         }
-        holder.tvName.setText(importDetail.getItem().getName());
-        holder.tvId.setText(String.valueOf(importDetail.getItem().getItemId()));
-        holder.edtQuantity.setText(String.valueOf(importDetail.getQuantity()));
-        holder.tvOrderQuantity.setText(String.valueOf(importDetail.getQuantityOrder()));
-        holder.tvPrice.setText(StringFormatFacade.getStringPrice(importDetail.getPrice()));
+        holder.tvName.setText(exportDetail.getItem().getName());
+        holder.tvId.setText(String.valueOf(exportDetail.getItem().getItemId()));
+        holder.edtQuantity.setText(String.valueOf(exportDetail.getQuantity()));
+        holder.tvOrderQuantity.setText(String.valueOf(exportDetail.getQuantityOrder()));
+        holder.tvPrice.setText(StringFormatFacade.getStringPrice(exportDetail.getPrice()));
 
         // event
         holder.btnAdd.setOnClickListener(view -> {
-            if (importDetail.getQuantity()+1 <= importDetail.getQuantityOrder()){
-                context.upsertImportDetail(importDetail, importDetail.getQuantity()+1, importDetail.getPrice(), null);
+            if (exportDetail.getQuantity()+1 <= exportDetail.getQuantityOrder()){
+                context.upsertExportDetail(exportDetail, exportDetail.getQuantity()+1, exportDetail.getPrice(), null);
             }
             else {
                 Toast.makeText(context.getContext(), R.string.warning_maximum_quantity, Toast.LENGTH_SHORT).show();
             }
         });
         holder.btnMinus.setOnClickListener(view -> {
-            if (importDetail.getQuantity()-1 >= 0){
-                context.upsertImportDetail(importDetail, importDetail.getQuantity()-1, importDetail.getPrice(), null);
+            if (exportDetail.getQuantity()-1 >= 0){
+                context.upsertExportDetail(exportDetail, exportDetail.getQuantity()-1, exportDetail.getPrice(), null);
             }
             else {
                 Toast.makeText(context.getContext(), R.string.warning_minimum_quantity, Toast.LENGTH_SHORT).show();
@@ -79,15 +81,15 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
                 if (holder.edtQuantity.getText().toString().trim().equals("")){
                     holder.edtQuantity.setText("0");
                 }
-                else if (Integer.parseInt(holder.edtQuantity.getText().toString()) > importDetail.getQuantityOrder()){
-                    holder.edtQuantity.setText(String.valueOf(importDetail.getQuantityOrder()));
+                else if (Integer.parseInt(holder.edtQuantity.getText().toString()) > exportDetail.getQuantityOrder()){
+                    holder.edtQuantity.setText(String.valueOf(exportDetail.getQuantityOrder()));
                 }
-                context.upsertImportDetail(importDetail, Integer.parseInt(holder.edtQuantity.getText().toString()), Long.parseLong(holder.tvPrice.getText().toString()), null);
+                context.upsertExportDetail(exportDetail, Integer.parseInt(holder.edtQuantity.getText().toString()), Long.parseLong(holder.tvPrice.getText().toString()), null);
                 return false;
             }
         });
         holder.layoutItem.setOnClickListener(view -> {
-            context.showDialogImportDetail(importDetail);
+            context.showDialogExportDetail(exportDetail);
         });
     }
 

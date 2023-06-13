@@ -1,8 +1,10 @@
 package com.example.warehousemanagementwkeeper.api;
 
 import com.example.warehousemanagementwkeeper.model.DeliveryNote;
+import com.example.warehousemanagementwkeeper.model.ExportDetailsUpsertInfo;
 import com.example.warehousemanagementwkeeper.model.Receipt;
 import com.example.warehousemanagementwkeeper.model.ResponseDeliveryNotes;
+import com.example.warehousemanagementwkeeper.model.ResponseExportDetails;
 import com.example.warehousemanagementwkeeper.model.ResponseObject;
 
 import retrofit2.Call;
@@ -26,4 +28,13 @@ public interface DeliveryNoteApi {
             @Path("deliveryNoteId") int deliveryNoteId,
             @Body DeliveryNote deliveryNote
     );
+
+    @GET("/api/v1/sell/getDetailDeliveryBill/{deliveryNoteId}")
+    Call<ResponseExportDetails> getExportDetails(@Path("deliveryNoteId") int deliveryNoteId);
+
+    @POST("/api/v1/sell/createDetailDeliveryBill/{deliveryNoteId}")
+    Call<ResponseObject> upsertReceiptImportDetail(
+            @Header("Authorization") String token,
+            @Path("deliveryNoteId") int deliveryNoteId,
+            @Body ExportDetailsUpsertInfo info);
 }
