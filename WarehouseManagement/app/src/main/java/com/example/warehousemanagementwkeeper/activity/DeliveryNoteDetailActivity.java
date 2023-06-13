@@ -2,6 +2,8 @@ package com.example.warehousemanagementwkeeper.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -14,12 +16,10 @@ import android.widget.Toast;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.api_instance.DeliveryNoteApiInstance;
-import com.example.warehousemanagementwkeeper.api_instance.ReceiptApiInstance;
+import com.example.warehousemanagementwkeeper.fragment.DeliveryNoteFragment;
 import com.example.warehousemanagementwkeeper.model.DeliveryNote;
-import com.example.warehousemanagementwkeeper.model.Receipt;
 import com.example.warehousemanagementwkeeper.model.ResponseObject;
 import com.example.warehousemanagementwkeeper.my_control.AuthorizationSingleton;
-import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -29,27 +29,27 @@ import retrofit2.Response;
 
 public class DeliveryNoteDetailActivity extends AppCompatActivity {
 
-//    private class ScreenSlidePagerAdapter extends FragmentStateAdapter {
-//        public ScreenSlidePagerAdapter(FragmentActivity fa) {
-//            super(fa);
-//        }
-//
-//        @Override
-//        public Fragment createFragment(int position) {
-//            switch (position){
-//                case 0:
-//                    return new ReceiptFragment(receiptSelected);
-//                case 1:
+    private class ScreenSlidePagerAdapter extends FragmentStateAdapter {
+        public ScreenSlidePagerAdapter(FragmentActivity fa) {
+            super(fa);
+        }
+
+        @Override
+        public Fragment createFragment(int position) {
+            switch (position){
+                case 0:
+                    return new DeliveryNoteFragment(deliveryNote);
+                case 1:
 //                    return new ImportDetailFragment(receiptSelected);
-//            }
-//            return new ReceiptFragment(receiptSelected);
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return 2;
-//        }
-//    }
+            }
+            return new DeliveryNoteFragment(deliveryNote);
+        }
+
+        @Override
+        public int getItemCount() {
+            return 2;
+        }
+    }
     public static final int REQUEST_DELIVERY_NOTE_IS_UPDATED = 1111;
     public static final String TAG_DELIVERY_NOTE_SELECTED = "TAG_RECEIPT_SELECTED";
     private DeliveryNote deliveryNote;
@@ -86,21 +86,21 @@ public class DeliveryNoteDetailActivity extends AppCompatActivity {
         deliveryNote = (DeliveryNote) getIntent().getSerializableExtra(TAG_DELIVERY_NOTE_SELECTED);
 
         // set fragment
-//        pagerAdapter = new DeliveryNoteDetailActivity.ScreenSlidePagerAdapter(this);
-//        viewPager2.setAdapter(pagerAdapter);
-//        tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-//            @Override
-//            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-//                switch (position){
-//                    case 0:
-//                        tab.setText(getText(R.string.tv_receipt));
-//                        break;
-//                    case 1:
-//                        tab.setText(R.string.tab_import_detail);
-//                }
-//            }
-//        });
-//        tabLayoutMediator.attach();
+        pagerAdapter = new DeliveryNoteDetailActivity.ScreenSlidePagerAdapter(this);
+        viewPager2.setAdapter(pagerAdapter);
+        tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                switch (position){
+                    case 0:
+                        tab.setText(getText(R.string.tv_delivery_note));
+                        break;
+                    case 1:
+                        tab.setText(R.string.tab_export_detail);
+                }
+            }
+        });
+        tabLayoutMediator.attach();
     }
 
     private void showMoreOptionReceiptDetail() {
