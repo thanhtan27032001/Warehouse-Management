@@ -54,7 +54,7 @@ public class DeliveryNoteFragment extends Fragment {
     }
 
     private void setData() {
-        tvStatus.setText(receipt.getStatus() == Receipt.STATUS_DONE ? R.string.status_done : R.string.status_importing);
+        tvStatus.setText(receipt.getStatus() == Receipt.STATUS_DONE ? R.string.status_done : R.string.status_exporting);
         tvInputDate.setText(StringFormatFacade.getDateOnly(receipt.getExportDateTime()));
         tvInputTime.setText(StringFormatFacade.getTimeOnly(receipt.getExportDateTime()));
         tvReceiptEmployeeName.setText(receipt.getEmployee().getFullName());

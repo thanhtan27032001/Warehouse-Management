@@ -84,7 +84,7 @@ public class ExportDetailFragment extends Fragment {
 
     private void setEvent() {
         btnScanBarcode.setOnClickListener(view -> {
-//            scanBarcode();
+            scanBarcode();
         });
     }
 
@@ -294,37 +294,37 @@ public class ExportDetailFragment extends Fragment {
         dialog.show();
     }
 
-//    private void scanBarcode() {
-//        ScanOptions options = new ScanOptions();
-//        options.setPrompt(getText(R.string.scanner_prompt).toString());
-//        options.setBeepEnabled(true);
-//        options.setOrientationLocked(true);
-//        options.setCaptureActivity(BarcodeScannerActivity.class);
-//        barcodeLauncher.launch(options);
-//    }
-//
-//    ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(
-//            new ScanContract(),
-//            new ActivityResultCallback<ScanIntentResult>() {
-//                @Override
-//                public void onActivityResult(ScanIntentResult result) {
-//                    if (result.getContents() != null){
-//                        searchExportDetailByItemId(result.getContents());
-//                        Log.e("test", result.getContents());
-//                    }
-//                }
-//            }
-//    );
+    private void scanBarcode() {
+        ScanOptions options = new ScanOptions();
+        options.setPrompt(getText(R.string.scanner_prompt).toString());
+        options.setBeepEnabled(true);
+        options.setOrientationLocked(true);
+        options.setCaptureActivity(BarcodeScannerActivity.class);
+        barcodeLauncher.launch(options);
+    }
 
-//    private void searchExportDetailByItemId(String itemId) {
-//        for (int i = 0; i< exportDetails.size(); i++){
-//            if (exportDetails.get(i).getItem().getItemId().equals(itemId)){
-//                showDialogImportDetail(exportDetails.get(i));
-//                break;
-//            }
-//            if (i == exportDetails.size()-1){
-//                Toast.makeText(getContext(), R.string.warning_item_import_detail_not_found, Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
+    ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(
+            new ScanContract(),
+            new ActivityResultCallback<ScanIntentResult>() {
+                @Override
+                public void onActivityResult(ScanIntentResult result) {
+                    if (result.getContents() != null){
+                        searchExportDetailByItemId(result.getContents());
+                        Log.e("test", result.getContents());
+                    }
+                }
+            }
+    );
+
+    private void searchExportDetailByItemId(String itemId) {
+        for (int i = 0; i< exportDetails.size(); i++){
+            if (exportDetails.get(i).getItem().getItemId().equals(itemId)){
+                showDialogExportDetail(exportDetails.get(i));
+                break;
+            }
+            if (i == exportDetails.size()-1){
+                Toast.makeText(getContext(), R.string.warning_item_import_detail_not_found, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
