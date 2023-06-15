@@ -12,12 +12,12 @@ import android.widget.LinearLayout;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.activity.ImportManagementActivity;
+import com.example.warehousemanagementwkeeper.activity.PutItemToShelfActivity;
 import com.example.warehousemanagementwkeeper.activity.SelectOrderImportActivity;
 
 public class ImportFragment extends Fragment {
 
-    private LinearLayout cardCreateReceipt;
-    private LinearLayout cardImportManagement;
+    private LinearLayout cardCreateReceipt, cardImportManagement, cardPutItemToShelf;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,7 @@ public class ImportFragment extends Fragment {
 
         cardCreateReceipt = view.findViewById(R.id.cardCreateReceipt);
         cardImportManagement = view.findViewById(R.id.cardImportManagement);
+        cardPutItemToShelf = view.findViewById(R.id.cardPutItemToShelf);
 
         setEvent();
 
@@ -44,6 +45,9 @@ public class ImportFragment extends Fragment {
         });
         cardImportManagement.setOnClickListener(view -> {
             startActivity(new Intent(getContext(), ImportManagementActivity.class));
+        });
+        cardPutItemToShelf.setOnClickListener(view -> {
+            startActivity(new Intent(getContext(), PutItemToShelfActivity.class));
         });
     }
 }

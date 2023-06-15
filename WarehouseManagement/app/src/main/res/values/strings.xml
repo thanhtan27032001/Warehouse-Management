@@ -66,7 +66,7 @@
     <string name="tv_import_price">Import price:</string>
     <string name="tv_import_quantity">Import quantity:</string>
     <string name="tv_import_detail">ImportDetail</string>
-    <string name="tv_item_id">Item id (barcode):</string>
+    <string name="tv_item_id">Item id:</string>
     <string name="btn_apply">Apply</string>
     <string name="scanner_prompt">Move your camera to the barcode</string>
     <string name="tv_show_hide_done_receipt">Show/Hide done receipt</string>
@@ -112,4 +112,7 @@
     <string name="status_exporting">Exporting</string>
     <string name="tv_export_date_2">Export date:</string>
     <string name="tv_export_time">Export time:</string>
+    <string name="tv_put_item_to_shelf">Put item to shelf</string>
+    <string name="tv_box_id">Box id:</string>
+    <string name="tv_quantity_2">Quantity:</string>
 </resources>
