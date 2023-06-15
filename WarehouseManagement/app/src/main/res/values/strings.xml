@@ -115,4 +115,9 @@
     <string name="tv_put_item_to_shelf">Put item to shelf</string>
     <string name="tv_box_id">Box id:</string>
     <string name="tv_quantity_2">Quantity:</string>
+    <string name="success_put_item_to_shelf">Put item to shelf successful</string>
+    <string name="warning_miss_item_id">Please scan or enter item id</string>
+    <string name="warning_miss_box_id">Please scan or enter box id</string>
+    <string name="warning_quantity_invalid">Item quantity cannot be less than 1</string>
+    <string name="tv_quantity_not_in_shelf">Not in shelf</string>
 </resources>
