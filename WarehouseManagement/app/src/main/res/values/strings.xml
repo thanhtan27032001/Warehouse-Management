@@ -120,4 +120,5 @@
     <string name="warning_miss_box_id">Please scan or enter box id</string>
     <string name="warning_quantity_invalid">Item quantity cannot be less than 1</string>
     <string name="tv_quantity_not_in_shelf">Not in shelf</string>
+    <string name="warning_item_not_found">Item not found</string>
 </resources>
