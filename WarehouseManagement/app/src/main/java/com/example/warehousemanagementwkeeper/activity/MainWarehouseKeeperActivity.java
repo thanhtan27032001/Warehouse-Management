@@ -8,6 +8,7 @@ import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.fragment.AccountFragment;
 import com.example.warehousemanagementwkeeper.fragment.ExportFragment;
 import com.example.warehousemanagementwkeeper.fragment.ImportFragment;
+import com.example.warehousemanagementwkeeper.fragment.ItemFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainWarehouseKeeperActivity extends AppCompatActivity {
@@ -15,6 +16,7 @@ public class MainWarehouseKeeperActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private ImportFragment importFragment;
     private ExportFragment exportFragment;
+    private ItemFragment itemFragment;
     private AccountFragment accountFragment;
 
     @Override
@@ -47,6 +49,15 @@ public class MainWarehouseKeeperActivity extends AppCompatActivity {
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.fragmentContainer, exportFragment)
+                            .commit();
+                    break;
+                case R.id.menuItem:
+                    if (itemFragment == null){
+                        itemFragment = new ItemFragment();
+                    }
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainer, itemFragment)
                             .commit();
                     break;
                 case R.id.menuAccount:

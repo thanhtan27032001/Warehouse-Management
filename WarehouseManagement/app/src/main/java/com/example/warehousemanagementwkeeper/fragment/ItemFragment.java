@@ -1,5 +1,6 @@
 package com.example.warehousemanagementwkeeper.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,13 +8,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.warehousemanagementwkeeper.R;
-public class ItemFragment extends Fragment {
+import com.example.warehousemanagementwkeeper.activity.ImportManagementActivity;
+import com.example.warehousemanagementwkeeper.activity.PutItemToShelfActivity;
+import com.example.warehousemanagementwkeeper.activity.SelectOrderImportActivity;
 
-    public ItemFragment() {
-        // Required empty public constructor
-    }
+public class ItemFragment extends Fragment {
+    private LinearLayout cardPutItemToShelf;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,18 @@ public class ItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item, container, false);
+        View view = inflater.inflate(R.layout.fragment_item, container, false);
+
+        cardPutItemToShelf = view.findViewById(R.id.cardPutItemToShelf);
+
+        setEvent();
+
+        return view;
+    }
+
+    private void setEvent() {
+        cardPutItemToShelf.setOnClickListener(view -> {
+            startActivity(new Intent(getContext(), PutItemToShelfActivity.class));
+        });
     }
 }

@@ -11,6 +11,11 @@
         android:icon="@drawable/baseline_output_24"/>
 
     <item
+        android:id="@+id/menuItem"
+        android:title="@string/tv_item_management"
+        android:icon="@drawable/baseline_fact_check_24"/>
+
+    <item
         android:id="@+id/menuAccount"
         android:title="@string/option_accountant"
         android:icon="@drawable/baseline_account_circle_24"/>
