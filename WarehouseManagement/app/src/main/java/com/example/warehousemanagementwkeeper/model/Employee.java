@@ -1,5 +1,8 @@
 package com.example.warehousemanagementwkeeper.model;
 
+import android.content.Context;
+
+import com.example.warehousemanagementwkeeper.R;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -20,6 +23,8 @@ public class Employee implements Serializable {
     private String birthdate;
     @SerializedName("DiaChi")
     private String address;
+    @SerializedName("SDT")
+    private String phone;
     @SerializedName("isActive")
     private boolean isActive;
     @SerializedName("MaBoPhan")
@@ -39,17 +44,29 @@ public class Employee implements Serializable {
     }
 
     // login
-    public Employee(int id, String firstName, String lastName, String birthdate, String address, boolean isActive, int idDepartment, String role) {
+    public Employee(int id, String firstName, String lastName, String birthdate, String address, String phone, boolean isActive, int idDepartment, String role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;
         this.address = address;
+        this.phone = phone;
         this.isActive = isActive;
         this.idDepartment = idDepartment;
         this.role = role;
     }
 
+    public String getRoleName(Context context){
+        switch (role){
+            case ROLE_EMPLOYEE:
+                return context.getText(R.string.role_employee).toString();
+            case ROLE_WAREHOUSE_KEEPER:
+                return context.getText(R.string.role_warehouse_keeper).toString();
+            case ROLE_ACCOUNTANT:
+                return context.getText(R.string.role_accountant).toString();
+        }
+        return context.getText(R.string.error_role_not_found).toString();
+    }
     public String getFullName(){
         return firstName + " " + lastName;
     }
@@ -84,5 +101,9 @@ public class Employee implements Serializable {
 
     public String getRole() {
         return role;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 }
