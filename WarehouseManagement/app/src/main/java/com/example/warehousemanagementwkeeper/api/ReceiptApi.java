@@ -35,6 +35,6 @@ public interface ReceiptApi {
     @PUT("/api/v1/order/updateStatus/{receiptId}")
     Call<ResponseObject> updateReceiptStatus(@Header("Authorization") String token, @Path("receiptId") int receiptId, @Body Receipt receipt);
 
-    @DELETE("/api/v1/sell/delete/{receiptId}")
-    Call<ResponseObject> deleteReceipt(@Path("receiptId") int receiptId);
+    @DELETE("/api/v1/order/delete/{receiptId}")
+    Call<ResponseObject> deleteReceipt(@Header("Authorization") String token, @Path("receiptId") int receiptId);
 }

@@ -134,12 +134,16 @@ public class ReceiptDetailActivity extends AppCompatActivity {
     }
 
     private void deleteReceipt() {
-        Call<ResponseObject> call = ReceiptApiInstance.getInstance().deleteReceipt(receiptSelected.getReceiptId());
+        Call<ResponseObject> call = ReceiptApiInstance.getInstance().deleteReceipt(
+                AuthorizationSingleton.getInstance().getBearerToken(),
+                receiptSelected.getReceiptId());
         call.enqueue(new Callback<ResponseObject>() {
             @Override
             public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
                 if (response.isSuccessful()){
                     Toast.makeText(ReceiptDetailActivity.this, R.string.success_delete_receipt, Toast.LENGTH_SHORT).show();
+                    ReceiptDetailActivity.this.setResult(RESULT_OK);
+                    ReceiptDetailActivity.this.finish();
                 }
                 else {
                     try {
