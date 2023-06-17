@@ -1,12 +1,14 @@
 package com.example.warehousemanagementwkeeper.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -123,7 +125,7 @@ public class ReceiptDetailActivity extends AppCompatActivity {
                         finishImporting();
                         break;
                     case R.id.optionDelete:
-                        deleteReceipt();
+                        showDialogDeleteReceipt();
                         break;
                 }
                 return false;
@@ -131,6 +133,27 @@ public class ReceiptDetailActivity extends AppCompatActivity {
         });
 
         menu.show();
+    }
+
+    private void showDialogDeleteReceipt() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setTitle(R.string.title_delete_receipt)
+                .setMessage(R.string.message_delete_receipt)
+                .setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .setPositiveButton(R.string.btn_submit, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deleteReceipt();
+                    }
+                })
+                .create()
+                .show();
     }
 
     private void deleteReceipt() {

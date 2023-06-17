@@ -133,4 +133,8 @@
     <string name="option_set_done_delivery_note">Finish exporting</string>
     <string name="success_delete_delivery_note">Delete delivery note successful</string>
     <string name="success_delete_receipt">Delete receipt successful</string>
+    <string name="title_delete_receipt">Delete receipt</string>
+    <string name="message_delete_receipt">Are you sure to delete this receipt? You can still create another receipt from order.</string>
+    <string name="title_delete_delivery_note">Delete delivery note</string>
+    <string name="message_delete_delivery_note">Are you sure to delete this receipt? You can still create another receipt from order.</string>
 </resources>
