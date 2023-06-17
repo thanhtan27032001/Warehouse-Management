@@ -241,8 +241,8 @@ public class ImportDetailFragment extends Fragment {
         TextView tvItemId = dialog.findViewById(R.id.tvItemId);
         TextView tvOrderPrice = dialog.findViewById(R.id.tvOrderPrice);
         TextView tvOrderQuantity = dialog.findViewById(R.id.tvOrderQuantity);
-        TextView edtImportPrice = dialog.findViewById(R.id.edtImportPrice);
-        TextView edtImportQuantity = dialog.findViewById(R.id.edtImportQuantity);
+        TextView edtImportPrice = dialog.findViewById(R.id.edtImExportPrice);
+        TextView edtImportQuantity = dialog.findViewById(R.id.edtImExportQuantity);
         TextView btnCancel = dialog.findViewById(R.id.btnCancel);
         TextView btnSubmit = dialog.findViewById(R.id.btnSubmit);
 

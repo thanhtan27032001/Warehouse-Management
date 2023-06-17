@@ -89,6 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/tvImExportPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_import_price"
@@ -96,7 +97,7 @@
                 app:drawableStartCompat="@drawable/baseline_monetization_on_16"
                 android:drawablePadding="4dp"/>
             <EditText
-                android:id="@+id/edtImportPrice"
+                android:id="@+id/edtImExportPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="8dp"
@@ -106,6 +107,16 @@
                 android:textStyle="bold"
                 android:inputType="number"
                 android:imeOptions="actionDone"/>
+            <TextView
+                android:id="@+id/tvImExportPriceValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="16dp"
+                android:text="100000.0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <LinearLayout
@@ -113,6 +124,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
             <TextView
+                android:id="@+id/tvImExportQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_import_quantity"
@@ -120,7 +132,7 @@
                 app:drawableStartCompat="@drawable/baseline_input_16"
                 android:drawablePadding="4dp"/>
             <EditText
-                android:id="@+id/edtImportQuantity"
+                android:id="@+id/edtImExportQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="8dp"
@@ -132,6 +144,19 @@
                 android:textColor="@color/black"
                 android:inputType="number"
                 android:imeOptions="actionDone"/>
+
+            <TextView
+                android:id="@+id/tvImExportQuantityValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:gravity="center"
+                android:text="100"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:visibility="gone"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -157,7 +182,6 @@
                 android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:padding="8dp"
                 android:text="@string/btn_cancel"
                 android:textStyle="bold"
@@ -168,8 +192,20 @@
                 android:id="@+id/btnSubmit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:padding="8dp"
                 android:text="@string/btn_submit"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:background="@drawable/background_ripple_rectangle"/>
+
+            <TextView
+                android:id="@+id/btnOk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:padding="8dp"
+                android:text="@string/btn_ok"
                 android:textStyle="bold"
                 android:textColor="@color/primary"
                 android:background="@drawable/background_ripple_rectangle"/>

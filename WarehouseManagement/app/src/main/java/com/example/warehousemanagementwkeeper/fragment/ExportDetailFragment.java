@@ -16,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,12 +25,9 @@ import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.activity.BarcodeScannerActivity;
 import com.example.warehousemanagementwkeeper.api_instance.DeliveryNoteApiInstance;
 import com.example.warehousemanagementwkeeper.api_instance.OrderApiInstance;
-import com.example.warehousemanagementwkeeper.api_instance.ReceiptApiInstance;
 import com.example.warehousemanagementwkeeper.model.DeliveryNote;
 import com.example.warehousemanagementwkeeper.model.ExportDetail;
 import com.example.warehousemanagementwkeeper.model.ExportDetailsUpsertInfo;
-import com.example.warehousemanagementwkeeper.model.ImportDetail;
-import com.example.warehousemanagementwkeeper.model.ImportDetailsUpsertInfo;
 import com.example.warehousemanagementwkeeper.model.Item;
 import com.example.warehousemanagementwkeeper.model.OrderExportDetail;
 import com.example.warehousemanagementwkeeper.model.ResponseExportDetails;
@@ -127,7 +125,7 @@ public class ExportDetailFragment extends Fragment {
                                                 orderExportDetail.getPrice()));
                                     }
                                 }
-                                exportDetailAdapter = new ExportDetailAdapter(ExportDetailFragment.this, exportDetails);
+                                exportDetailAdapter = new ExportDetailAdapter(ExportDetailFragment.this, exportDetails, deliveryNote.getStatus());
                                 rvExportDetail.setAdapter(exportDetailAdapter);
                                 Log.e("import detail", response.body().getData().size() + "");
                             }
@@ -142,7 +140,7 @@ public class ExportDetailFragment extends Fragment {
                                             orderExportDetail.getQuantity(),
                                             orderExportDetail.getPrice()));
                                 }
-                                exportDetailAdapter = new ExportDetailAdapter(ExportDetailFragment.this, exportDetails);
+                                exportDetailAdapter = new ExportDetailAdapter(ExportDetailFragment.this, exportDetails, deliveryNote.getStatus());
                                 rvExportDetail.setAdapter(exportDetailAdapter);
                                 Log.e("import detail", exportDetails.size() + "");
                             }
@@ -237,18 +235,48 @@ public class ExportDetailFragment extends Fragment {
         TextView tvItemId = dialog.findViewById(R.id.tvItemId);
         TextView tvOrderPrice = dialog.findViewById(R.id.tvOrderPrice);
         TextView tvOrderQuantity = dialog.findViewById(R.id.tvOrderQuantity);
-        TextView edtImportPrice = dialog.findViewById(R.id.edtImportPrice);
-        TextView edtImportQuantity = dialog.findViewById(R.id.edtImportQuantity);
         TextView btnCancel = dialog.findViewById(R.id.btnCancel);
         TextView btnSubmit = dialog.findViewById(R.id.btnSubmit);
+        TextView btnOk = dialog.findViewById(R.id.btnOk);
+        TextView tvImExportPrice = dialog.findViewById(R.id.tvImExportPrice);
+        TextView tvImExportQuantity = dialog.findViewById(R.id.tvImExportQuantity);
+        TextView tvImExportPriceValue = dialog.findViewById(R.id.tvImExportPriceValue);
+        TextView tvImExportQuantityValue = dialog.findViewById(R.id.tvImExportQuantityValue);
+
+        EditText edtImExportPrice = dialog.findViewById(R.id.edtImExportPrice);
+        EditText edtImExportQuantity = dialog.findViewById(R.id.edtImExportQuantity);
 
         // set data
         tvItemName.setText(exportDetail.getItem().getName());
         tvItemId.setText(String.valueOf(exportDetail.getItem().getItemId()));
         tvOrderPrice.setText(StringFormatFacade.getStringPrice(exportDetail.getPriceOrder()));
         tvOrderQuantity.setText(String.valueOf(exportDetail.getQuantityOrder()));
-        edtImportPrice.setText(String.valueOf(exportDetail.getPrice()));
-        edtImportQuantity.setText(String.valueOf(exportDetail.getQuantity()));
+        tvImExportPrice.setText(R.string.tv_export_price);
+        tvImExportQuantity.setText(R.string.tv_export_quantity);
+        tvImExportPriceValue.setText(String.valueOf(exportDetail.getPrice()));
+        tvImExportQuantityValue.setText(String.valueOf(exportDetail.getQuantity()));
+        edtImExportPrice.setText(String.valueOf(exportDetail.getPrice()));
+        edtImExportQuantity.setText(String.valueOf(exportDetail.getQuantity()));
+
+        // disable edit
+        if (deliveryNote.getStatus() == DeliveryNote.STATUS_DONE){
+            edtImExportPrice.setVisibility(View.GONE);
+            edtImExportQuantity.setVisibility(View.GONE);
+            tvImExportPriceValue.setVisibility(View.VISIBLE);
+            tvImExportQuantityValue.setVisibility(View.VISIBLE);
+            btnCancel.setVisibility(View.GONE);
+            btnSubmit.setVisibility(View.GONE);
+            btnOk.setVisibility(View.VISIBLE);
+        }
+        else {
+            edtImExportPrice.setVisibility(View.VISIBLE);
+            edtImExportQuantity.setVisibility(View.VISIBLE);
+            tvImExportPriceValue.setVisibility(View.GONE);
+            tvImExportQuantityValue.setVisibility(View.GONE);
+            btnCancel.setVisibility(View.VISIBLE);
+            btnSubmit.setVisibility(View.VISIBLE);
+            btnOk.setVisibility(View.GONE);
+        }
 
         // Adjust dialog width fit to screen
         try {
@@ -263,31 +291,32 @@ public class ExportDetailFragment extends Fragment {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         // event
-        edtImportQuantity.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        edtImExportQuantity.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (edtImportQuantity.getText().toString().trim().equals("")){
-                    edtImportQuantity.setText("0");
+                if (edtImExportQuantity.getText().toString().trim().equals("")){
+                    edtImExportQuantity.setText("0");
                 }
-                else if (Integer.parseInt(edtImportQuantity.getText().toString()) > exportDetail.getQuantityOrder()){
-                    edtImportQuantity.setText(String.valueOf(exportDetail.getQuantityOrder()));
+                else if (Integer.parseInt(edtImExportQuantity.getText().toString()) > exportDetail.getQuantityOrder()){
+                    edtImExportQuantity.setText(String.valueOf(exportDetail.getQuantityOrder()));
                 }
                 return false;
             }
         });
-        edtImportPrice.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        edtImExportPrice.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (edtImportPrice.getText().toString().trim().equals("")){
-                    edtImportPrice.setText("0");
+                if (edtImExportPrice.getText().toString().trim().equals("")){
+                    edtImExportPrice.setText("0");
                 }
                 return false;
             }
         });
         btnCancel.setOnClickListener(view -> dialog.dismiss());
+        btnOk.setOnClickListener(view -> dialog.dismiss());
         btnSubmit.setOnClickListener(view -> {
-            int newQuantity = Integer.parseInt(edtImportQuantity.getText().toString());
-            long newPrice = Long.parseLong(edtImportPrice.getText().toString());
+            int newQuantity = Integer.parseInt(edtImExportQuantity.getText().toString());
+            long newPrice = Long.parseLong(edtImExportPrice.getText().toString());
             upsertExportDetail(exportDetail, newQuantity, newPrice, dialog);
         });
 

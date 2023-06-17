@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -86,6 +87,13 @@ public class DeliveryNoteDetailActivity extends AppCompatActivity {
     private void setData() {
         deliveryNote = (DeliveryNote) getIntent().getSerializableExtra(TAG_DELIVERY_NOTE_SELECTED);
 
+        // set btn finish
+        if (deliveryNote.getStatus() == DeliveryNote.STATUS_DONE){
+            btnMore.setVisibility(View.GONE);
+        }
+        else {
+            btnMore.setVisibility(View.VISIBLE);
+        }
         // set fragment
         pagerAdapter = new DeliveryNoteDetailActivity.ScreenSlidePagerAdapter(this);
         viewPager2.setAdapter(pagerAdapter);

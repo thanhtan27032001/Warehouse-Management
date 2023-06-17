@@ -5,8 +5,7 @@
     android:id="@+id/layoutItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="8dp"
-    android:paddingVertical="4dp"
+    android:padding="8dp"
     android:gravity="center_vertical"
     android:background="@drawable/background_ripple_rectangle">
 
@@ -66,6 +65,17 @@
                 android:inputType="number"
                 android:background="@null"
                 android:imeOptions="actionDone"/>
+
+            <TextView
+                android:id="@+id/tvItemQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="100"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
 
             <ImageView
                 android:id="@+id/btnMinus"
