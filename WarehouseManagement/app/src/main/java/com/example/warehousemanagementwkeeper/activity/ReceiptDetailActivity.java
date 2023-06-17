@@ -119,8 +119,11 @@ public class ReceiptDetailActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    case R.id.optionFinishReceipt:
+                    case R.id.optionFinish:
                         finishImporting();
+                        break;
+                    case R.id.optionDelete:
+                        deleteReceipt();
                         break;
                 }
                 return false;
@@ -128,6 +131,32 @@ public class ReceiptDetailActivity extends AppCompatActivity {
         });
 
         menu.show();
+    }
+
+    private void deleteReceipt() {
+        Call<ResponseObject> call = ReceiptApiInstance.getInstance().deleteReceipt(receiptSelected.getReceiptId());
+        call.enqueue(new Callback<ResponseObject>() {
+            @Override
+            public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(ReceiptDetailActivity.this, R.string.success_delete_receipt, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    try {
+                        Toast.makeText(ReceiptDetailActivity.this, StringFormatFacade.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseObject> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(ReceiptDetailActivity.this, R.string.error_500, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void finishImporting() {

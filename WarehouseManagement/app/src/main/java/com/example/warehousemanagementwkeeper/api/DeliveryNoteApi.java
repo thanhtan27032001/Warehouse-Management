@@ -9,6 +9,7 @@ import com.example.warehousemanagementwkeeper.model.ResponseObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -37,4 +38,7 @@ public interface DeliveryNoteApi {
             @Header("Authorization") String token,
             @Path("deliveryNoteId") int deliveryNoteId,
             @Body ExportDetailsUpsertInfo info);
+
+    @DELETE("/api/v1/sell/delete/{deliveryNoteId}")
+    Call<ResponseObject> deleteDeliveryNote(@Header("Authorization") String token, @Path("deliveryNoteId") int deliveryNoteId);
 }

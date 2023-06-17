@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -33,4 +34,7 @@ public interface ReceiptApi {
 
     @PUT("/api/v1/order/updateStatus/{receiptId}")
     Call<ResponseObject> updateReceiptStatus(@Header("Authorization") String token, @Path("receiptId") int receiptId, @Body Receipt receipt);
+
+    @DELETE("/api/v1/sell/delete/{receiptId}")
+    Call<ResponseObject> deleteReceipt(@Path("receiptId") int receiptId);
 }

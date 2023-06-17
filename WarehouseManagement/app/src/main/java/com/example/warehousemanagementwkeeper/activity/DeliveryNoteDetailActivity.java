@@ -22,6 +22,7 @@ import com.example.warehousemanagementwkeeper.fragment.ExportDetailFragment;
 import com.example.warehousemanagementwkeeper.model.DeliveryNote;
 import com.example.warehousemanagementwkeeper.model.ResponseObject;
 import com.example.warehousemanagementwkeeper.my_control.AuthorizationSingleton;
+import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -115,14 +116,17 @@ public class DeliveryNoteDetailActivity extends AppCompatActivity {
 
     private void showMoreOptionReceiptDetail() {
         PopupMenu menu = new PopupMenu(this, btnMore);
-        menu.getMenuInflater().inflate(R.menu.menu_receipt_detail, menu.getMenu());
+        menu.getMenuInflater().inflate(R.menu.menu_delivery_note_detail, menu.getMenu());
 
         menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    case R.id.optionFinishReceipt:
-                        finishImporting();
+                    case R.id.optionFinish:
+                        finishExporting();
+                        break;
+                    case R.id.optionDelete:
+                        deleteDeliveryNote();
                         break;
                 }
                 return false;
@@ -132,7 +136,38 @@ public class DeliveryNoteDetailActivity extends AppCompatActivity {
         menu.show();
     }
 
-    private void finishImporting() {
+    private void deleteDeliveryNote() {
+        Call<ResponseObject> call = DeliveryNoteApiInstance.getInstance().deleteDeliveryNote(
+                AuthorizationSingleton.getInstance().getBearerToken(),
+                deliveryNote.getDeliveryNoteId());
+        call.enqueue(new Callback<ResponseObject>() {
+            @Override
+            public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(DeliveryNoteDetailActivity.this, R.string.success_delete_delivery_note, Toast.LENGTH_SHORT).show();
+                    DeliveryNoteDetailActivity.this.setResult(RESULT_OK);
+                    DeliveryNoteDetailActivity.this.finish();
+                }
+                else {
+                    try {
+                        Log.e("error", response.errorBody().string());
+//                        Toast.makeText(DeliveryNoteDetailActivity.this, StringFormatFacade.getError(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseObject> call, Throwable t) {
+                Toast.makeText(DeliveryNoteDetailActivity.this, R.string.error_500, Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void finishExporting() {
         deliveryNote.setStatus(true);
         Call<ResponseObject> call = DeliveryNoteApiInstance.getInstance().updateDeliveryNoteStatus(
                 AuthorizationSingleton.getInstance().getBearerToken(),

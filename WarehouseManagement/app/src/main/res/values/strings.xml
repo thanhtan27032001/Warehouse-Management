@@ -128,4 +128,9 @@
     <string name="tv_log_out">Log out</string>
     <string name="tv_change_password">Change password</string>
     <string name="error_role_not_found">Role not found</string>
+    <string name="option_delete_receipt">Delete receipt</string>
+    <string name="option_delete_delivery_note">Delete delivery note</string>
+    <string name="option_set_done_delivery_note">Finish exporting</string>
+    <string name="success_delete_delivery_note">Delete delivery note successful</string>
+    <string name="success_delete_receipt">Delete receipt successful</string>
 </resources>
