@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.api_instance.ReceiptApiInstance;
 import com.example.warehousemanagementwkeeper.fragment.ImportDetailFragment;
 import com.example.warehousemanagementwkeeper.fragment.ReceiptFragment;
+import com.example.warehousemanagementwkeeper.model.DeliveryNote;
 import com.example.warehousemanagementwkeeper.model.Receipt;
 import com.example.warehousemanagementwkeeper.model.ResponseObject;
 import com.example.warehousemanagementwkeeper.my_control.AuthorizationSingleton;
@@ -84,7 +86,13 @@ public class ReceiptDetailActivity extends AppCompatActivity {
 
     private void setData() {
         receiptSelected = (Receipt) getIntent().getSerializableExtra(TAG_RECEIPT_SELECTED);
-
+        // set btn finish
+        if (receiptSelected.getStatus() == DeliveryNote.STATUS_DONE){
+            btnMore.setVisibility(View.GONE);
+        }
+        else {
+            btnMore.setVisibility(View.VISIBLE);
+        }
         // set fragment
         pagerAdapter = new ScreenSlidePagerAdapter(this);
         viewPager2.setAdapter(pagerAdapter);

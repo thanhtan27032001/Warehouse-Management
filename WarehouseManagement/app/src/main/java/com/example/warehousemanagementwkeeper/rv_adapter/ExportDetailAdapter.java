@@ -24,24 +24,24 @@ import java.util.ArrayList;
 public class ExportDetailAdapter extends RecyclerView.Adapter<ExportDetailAdapter.ViewHolder> {
 
     private ExportDetailFragment context;
-    private ArrayList<ExportDetail> importDetails;
+    private ArrayList<ExportDetail> exportDetails;
     private boolean deliveryStatus;
 
-    public ExportDetailAdapter(ExportDetailFragment context, ArrayList<ExportDetail> importDetails, boolean deliveryStatus) {
+    public ExportDetailAdapter(ExportDetailFragment context, ArrayList<ExportDetail> exportDetails, boolean deliveryStatus) {
         this.context = context;
-        this.importDetails = importDetails;
+        this.exportDetails = exportDetails;
         this.deliveryStatus = deliveryStatus;
     }
 
     @NonNull
     @Override
     public ExportDetailAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_import_detail, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_import_export_detail, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ExportDetailAdapter.ViewHolder holder, int position) {
-        ExportDetail exportDetail = importDetails.get(position);
+        ExportDetail exportDetail = exportDetails.get(position);
         if (position % 2 == 0){
             holder.layoutItem.setBackgroundTintList(context.getResources().getColorStateList(R.color.white));
             holder.btnAdd.setBackgroundTintList(context.getResources().getColorStateList(R.color.white));
@@ -111,7 +111,7 @@ public class ExportDetailAdapter extends RecyclerView.Adapter<ExportDetailAdapte
 
     @Override
     public int getItemCount() {
-        return importDetails.size();
+        return exportDetails.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

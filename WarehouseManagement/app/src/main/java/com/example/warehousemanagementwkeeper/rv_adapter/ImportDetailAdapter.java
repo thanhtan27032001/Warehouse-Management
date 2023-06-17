@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.fragment.ImportDetailFragment;
+import com.example.warehousemanagementwkeeper.model.DeliveryNote;
+import com.example.warehousemanagementwkeeper.model.ExportDetail;
 import com.example.warehousemanagementwkeeper.model.ImportDetail;
 import com.example.warehousemanagementwkeeper.my_control.StringFormatFacade;
 
@@ -24,21 +26,23 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
 
     private ImportDetailFragment context;
     private ArrayList<ImportDetail> importDetails;
+    private boolean receiptStatus;
 
-    public ImportDetailAdapter(ImportDetailFragment context, ArrayList<ImportDetail> importDetails) {
+    public ImportDetailAdapter(ImportDetailFragment context, ArrayList<ImportDetail> importDetails, boolean receiptStatus) {
         this.context = context;
         this.importDetails = importDetails;
+        this.receiptStatus = receiptStatus;
     }
 
     @NonNull
     @Override
     public ImportDetailAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_import_detail, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_import_export_detail, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ImportDetailAdapter.ViewHolder holder, int position) {
-        ImportDetail importDetail = importDetails.get(position);
+        ImportDetail exportDetail = importDetails.get(position);
         if (position % 2 == 0){
             holder.layoutItem.setBackgroundTintList(context.getResources().getColorStateList(R.color.white));
             holder.btnAdd.setBackgroundTintList(context.getResources().getColorStateList(R.color.white));
@@ -49,45 +53,60 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
             holder.btnAdd.setBackgroundTintList(context.getResources().getColorStateList(R.color.gray_200));
             holder.btnMinus.setBackgroundTintList(context.getResources().getColorStateList(R.color.gray_200));
         }
-        holder.tvName.setText(importDetail.getItem().getName());
-        holder.tvId.setText(String.valueOf(importDetail.getItem().getItemId()));
-        holder.edtQuantity.setText(String.valueOf(importDetail.getQuantity()));
-        holder.tvOrderQuantity.setText(String.valueOf(importDetail.getQuantityOrder()));
-        holder.tvPrice.setText(StringFormatFacade.getStringPrice(importDetail.getPrice()));
+        holder.tvName.setText(exportDetail.getItem().getName());
+        holder.tvId.setText(String.valueOf(exportDetail.getItem().getItemId()));
+        holder.edtQuantity.setText(String.valueOf(exportDetail.getQuantity()));
+        holder.tvQuantity.setText(String.valueOf(exportDetail.getQuantity()));
+        holder.tvOrderQuantity.setText(String.valueOf(exportDetail.getQuantityOrder()));
+        holder.tvPrice.setText(StringFormatFacade.getStringPrice(exportDetail.getPrice()));
 
-        // event
-        holder.btnAdd.setOnClickListener(view -> {
-            if (importDetail.getQuantity()+1 <= importDetail.getQuantityOrder()){
-                context.upsertImportDetail(importDetail, importDetail.getQuantity()+1, importDetail.getPrice(), null);
-            }
-            else {
-                Toast.makeText(context.getContext(), R.string.warning_maximum_quantity, Toast.LENGTH_SHORT).show();
-            }
-        });
-        holder.btnMinus.setOnClickListener(view -> {
-            if (importDetail.getQuantity()-1 >= 0){
-                context.upsertImportDetail(importDetail, importDetail.getQuantity()-1, importDetail.getPrice(), null);
-            }
-            else {
-                Toast.makeText(context.getContext(), R.string.warning_minimum_quantity, Toast.LENGTH_SHORT).show();
-            }
-        });
-        holder.edtQuantity.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                Toast.makeText(context.getContext(), "Done", Toast.LENGTH_SHORT).show();
-                if (holder.edtQuantity.getText().toString().trim().equals("")){
-                    holder.edtQuantity.setText("0");
+        // disable edit
+        if (receiptStatus == DeliveryNote.STATUS_DONE){
+            holder.btnAdd.setVisibility(View.GONE);
+            holder.btnMinus.setVisibility(View.GONE);
+            holder.edtQuantity.setVisibility(View.GONE);
+            holder.tvQuantity.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.btnAdd.setVisibility(View.VISIBLE);
+            holder.btnMinus.setVisibility(View.VISIBLE);
+            holder.edtQuantity.setVisibility(View.VISIBLE);
+            holder.tvQuantity.setVisibility(View.GONE);
+            // event edit
+            holder.btnAdd.setOnClickListener(view -> {
+                if (exportDetail.getQuantity()+1 <= exportDetail.getQuantityOrder()){
+                    context.upsertImportDetail(exportDetail, exportDetail.getQuantity()+1, exportDetail.getPrice(), null);
                 }
-                else if (Integer.parseInt(holder.edtQuantity.getText().toString()) > importDetail.getQuantityOrder()){
-                    holder.edtQuantity.setText(String.valueOf(importDetail.getQuantityOrder()));
+                else {
+                    Toast.makeText(context.getContext(), R.string.warning_maximum_quantity, Toast.LENGTH_SHORT).show();
                 }
-                context.upsertImportDetail(importDetail, Integer.parseInt(holder.edtQuantity.getText().toString()), Long.parseLong(holder.tvPrice.getText().toString()), null);
-                return false;
-            }
-        });
+            });
+            holder.btnMinus.setOnClickListener(view -> {
+                if (exportDetail.getQuantity()-1 >= 0){
+                    context.upsertImportDetail(exportDetail, exportDetail.getQuantity()-1, exportDetail.getPrice(), null);
+                }
+                else {
+                    Toast.makeText(context.getContext(), R.string.warning_minimum_quantity, Toast.LENGTH_SHORT).show();
+                }
+            });
+            holder.edtQuantity.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                    Toast.makeText(context.getContext(), "Done", Toast.LENGTH_SHORT).show();
+                    if (holder.edtQuantity.getText().toString().trim().equals("")){
+                        holder.edtQuantity.setText("0");
+                    }
+                    else if (Integer.parseInt(holder.edtQuantity.getText().toString()) > exportDetail.getQuantityOrder()){
+                        holder.edtQuantity.setText(String.valueOf(exportDetail.getQuantityOrder()));
+                    }
+                    context.upsertImportDetail(exportDetail, Integer.parseInt(holder.edtQuantity.getText().toString()), exportDetail.getPrice(), null);
+                    return false;
+                }
+            });
+        }
+
         holder.layoutItem.setOnClickListener(view -> {
-            context.showDialogImportDetail(importDetail);
+            context.showDialogImportDetail(exportDetail);
         });
     }
 
@@ -98,7 +117,7 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout layoutItem;
-        private TextView tvName, tvId, tvOrderQuantity, tvPrice;
+        private TextView tvName, tvId, tvOrderQuantity, tvPrice, tvQuantity;
         private EditText edtQuantity;
         private ImageView btnAdd, btnMinus;
         public ViewHolder(@NonNull View itemView) {
@@ -108,6 +127,7 @@ public class ImportDetailAdapter extends RecyclerView.Adapter<ImportDetailAdapte
             tvId = itemView.findViewById(R.id.tvItemId);
             tvOrderQuantity = itemView.findViewById(R.id.tvOrderQuantity);
             tvPrice = itemView.findViewById(R.id.tvItemPrice);
+            tvQuantity = itemView.findViewById(R.id.tvItemQuantity);
             edtQuantity = itemView.findViewById(R.id.edtItemQuantity);
             btnAdd = itemView.findViewById(R.id.btnAdd);
             btnMinus = itemView.findViewById(R.id.btnMinus);
