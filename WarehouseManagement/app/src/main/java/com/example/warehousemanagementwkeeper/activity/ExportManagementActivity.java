@@ -1,5 +1,6 @@
 package com.example.warehousemanagementwkeeper.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,18 +44,18 @@ public class ExportManagementActivity extends AppCompatActivity {
         setData();
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == RESULT_OK){
-//            if (requestCode == SelectOrderImportActivity.REQUEST_NEW_RECEIPT_CREATED){
-//                setData();
-//            }
-//            else if (requestCode == ReceiptDetailActivity.REQUEST_RECEIPT_IS_UPDATED){
-//                setData();
-//            }
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            if (requestCode == SelectOrderExportActivity.REQUEST_NEW_DELIVERY_NOTE_CREATED){
+                setData();
+            }
+            else if (requestCode == DeliveryNoteDetailActivity.REQUEST_DELIVERY_NOTE_IS_UPDATED){
+                setData();
+            }
+        }
+    }
 
     private void setView() {
         btnBack = findViewById(R.id.btnBack);
