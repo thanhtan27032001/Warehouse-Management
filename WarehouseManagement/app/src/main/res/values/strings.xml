@@ -125,4 +125,6 @@
     <string name="tv_export_price">Export price:</string>
     <string name="tv_export_quantity">Export quantity:</string>
     <string name="tv_item_management">Item management</string>
+    <string name="tv_log_out">Log out</string>
+    <string name="tv_change_password">Change password</string>
 </resources>

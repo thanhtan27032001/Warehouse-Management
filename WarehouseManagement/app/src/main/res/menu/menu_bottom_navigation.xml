@@ -13,7 +13,7 @@
     <item
         android:id="@+id/menuItem"
         android:title="@string/tv_item_management"
-        android:icon="@drawable/baseline_fact_check_24"/>
+        android:icon="@drawable/baseline_category_24"/>
 
     <item
         android:id="@+id/menuAccount"

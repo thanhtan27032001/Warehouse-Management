@@ -68,6 +68,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:layout_gravity="center"
                             android:text="@string/tv_create_delivery_note"/>
                     </LinearLayout>
@@ -93,6 +94,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:layout_gravity="center"
                             android:text="@string/tv_export_management"/>
                     </LinearLayout>
@@ -123,10 +125,11 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/baseline_category_24"/>
+                            android:src="@drawable/baseline_fact_check_24"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:layout_gravity="center"
                             android:text="@string/tv_check_item_stock"/>
                     </LinearLayout>
@@ -137,7 +140,8 @@
                     android:layout_height="80dp"
                     android:layout_weight="1"
                     android:layout_margin="8dp"
-                    app:cardCornerRadius="6dp">
+                    app:cardCornerRadius="6dp"
+                    android:visibility="invisible">
                     <LinearLayout
                         android:id="@+id/cardCheckItemStockDelivery"
                         android:layout_width="match_parent"
@@ -152,6 +156,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:layout_gravity="center"
                             android:text="@string/tv_check_item_stock_delivery"/>
                     </LinearLayout>
