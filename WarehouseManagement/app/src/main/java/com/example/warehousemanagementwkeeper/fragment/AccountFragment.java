@@ -1,15 +1,18 @@
 package com.example.warehousemanagementwkeeper.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.warehousemanagementwkeeper.R;
+import com.example.warehousemanagementwkeeper.activity.LoginActivity;
 import com.example.warehousemanagementwkeeper.model.Employee;
 import com.example.warehousemanagementwkeeper.my_control.AuthorizationSingleton;
 
@@ -50,8 +53,19 @@ public class AccountFragment extends Fragment {
 
         });
         btnLogOut.setOnClickListener(view -> {
-
+            logOut();
         });
+    }
+
+    private void logOut() {
+        PreferenceManager.getDefaultSharedPreferences(getContext())
+                .edit()
+                .remove(LoginActivity.TAG_USERNAME)
+                .remove(LoginActivity.TAG_PASSWORD)
+                .remove(LoginActivity.TAG_REMEMBER)
+                .apply();
+        startActivity(new Intent(getContext(), LoginActivity.class));
+        getActivity().finish();
     }
 
     private void setData() {
