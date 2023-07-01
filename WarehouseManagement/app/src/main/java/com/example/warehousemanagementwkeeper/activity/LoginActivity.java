@@ -152,7 +152,9 @@ public class LoginActivity extends AppCompatActivity {
                                 // open main screen
                                 Intent intent = MainActivityFactory.getActivityIntent(LoginActivity.this, employee.getRole());
                                 if (intent != null){
-                                    rememberLogin(loginInfo);
+                                    if (cbRemember.isChecked()){
+                                        rememberLogin(loginInfo);
+                                    }
                                     startActivity(intent);
                                     switch (employee.getRole()){
                                         case Employee.ROLE_EMPLOYEE:
@@ -172,6 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             else {
                                 Toast.makeText(LoginActivity.this, R.string.error_500, Toast.LENGTH_SHORT).show();
+                                Log.e("error", response.code() + "");
                                 try {
                                     Log.e("error", response.errorBody().string());
                                 }
@@ -187,6 +190,9 @@ public class LoginActivity extends AppCompatActivity {
                             t.printStackTrace();
                         }
                     });
+                }
+                else if (response.code() == 424 || response.code() == 425){
+                    Toast.makeText(LoginActivity.this, R.string.error_login_fail, Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(LoginActivity.this, R.string.error_500, Toast.LENGTH_SHORT).show();

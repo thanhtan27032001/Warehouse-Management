@@ -87,7 +87,7 @@
     <string name="tv_in_stock">Tồn kho</string>
     <string name="tv_submit_create_delivery_note">Tôi đã kiểm tra và xác nhận tạo phiếu xuất</string>
     <string name="warning_do_not_have_enough">Không đủ số lượng của</string>
-    <string name="in_stock_available">Số lượng tồn không đủ để xuất hàng</string>
+    <string name="in_stock_available">Số lượng tồn phù hợp để xuất hàng</string>
     <string name="warning_create_delivery_note_title">Cảnh báo tạo phiếu xuất</string>
     <string name="warning_create_delivery_note_message">Số lượng tồn không thỏa. Bạn có chắc chắn muốn tạo phiếu xuất cho đơn hàng này?</string>
     <string name="success_create_delivery_note">Tạo phiếu xuất thành công</string>
@@ -138,4 +138,5 @@
     <string name="message_delete_receipt">Bạn có chắc chắn muốn xóa phiếu nhập này? Bạn vẫn có thể tạo lại phiếu nhập khác từ đơn đặt hàng này.</string>
     <string name="title_delete_delivery_note">Xóa phiếu xuất</string>
     <string name="message_delete_delivery_note">Bạn có chắc chắn muốn xóa phiếu xuất này? Bạn vẫn có thể tạo phiếu xuất khác từ đơn đặt hàng này.</string>
+    <string name="error_login_fail">Tài khoản hoặc Mật khẩu không chính xác</string>
 </resources>
