@@ -41,6 +41,7 @@ public class PutItemToShelfActivity extends AppCompatActivity {
     private RecyclerView rvItemNotOnShelf;
     private FloatingActionButton btnScanBarcode;
     private EditText edtBoxId;
+    private ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,8 @@ public class PutItemToShelfActivity extends AppCompatActivity {
         rvItemNotOnShelf.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         btnScanBarcode = findViewById(R.id.btnScanBarcode);
+
+        btnBack = findViewById(R.id.btnBack);
     }
 
     private void setEvent() {
@@ -65,6 +68,8 @@ public class PutItemToShelfActivity extends AppCompatActivity {
             isItemSearch = true;
             scanBarcode();
         });
+
+        btnBack.setOnClickListener(view -> finish());
     }
 
     private void setData() {

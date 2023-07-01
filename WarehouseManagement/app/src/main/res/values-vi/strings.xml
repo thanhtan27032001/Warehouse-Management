@@ -78,7 +78,7 @@
     <string name="option_export">Xuất hàng</string>
     <string name="tv_create_delivery_note">Tạo phiếu xuất</string>
     <string name="tv_export_management">Quản lý xuất hàng</string>
-    <string name="tv_check_item_stock">Kiểm tra tồn kho mặt hàng</string>
+    <string name="tv_check_item_stock">Kiểm tra hàng tồn</string>
     <string name="tv_check_item_stock_delivery">Kiểm tra tồn kho xuất hàng</string>
     <string name="tv_order_by">Đặt hàng bởi</string>
     <string name="tv_order_at">Đặt hàng vào</string>
@@ -120,7 +120,7 @@
     <string name="warning_miss_item_id">Vui lòng quét hoặc nhập id mặt hàng</string>
     <string name="warning_miss_box_id">Vui lòng quét hoặc nhập id ô</string>
     <string name="warning_quantity_invalid">Số lượng không thể nhỏ hơn 1</string>
-    <string name="tv_quantity_not_in_shelf">Không có trên kệ</string>
+    <string name="tv_quantity_not_in_shelf">Chưa lên kệ</string>
     <string name="warning_item_not_found">Không tìm thấy mặt hàng</string>
     <string name="btn_ok">OK</string>
     <string name="tv_export_price">Giá xuất:</string>
