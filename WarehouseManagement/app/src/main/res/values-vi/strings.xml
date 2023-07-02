@@ -139,4 +139,5 @@
     <string name="title_delete_delivery_note">Xóa phiếu xuất</string>
     <string name="message_delete_delivery_note">Bạn có chắc chắn muốn xóa phiếu xuất này? Bạn vẫn có thể tạo phiếu xuất khác từ đơn đặt hàng này.</string>
     <string name="error_login_fail">Tài khoản hoặc Mật khẩu không chính xác</string>
+    <string name="tv_view_all_item">Tất cả mặt hàng</string>
 </resources>
