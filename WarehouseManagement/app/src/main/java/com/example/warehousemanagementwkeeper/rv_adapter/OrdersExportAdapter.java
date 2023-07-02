@@ -27,7 +27,7 @@ public class OrdersExportAdapter extends RecyclerView.Adapter<OrdersExportAdapte
     @NonNull
     @Override
     public OrdersExportAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_import, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_export, parent, false));
     }
 
     @Override

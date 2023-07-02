@@ -198,6 +198,7 @@ public class ReceiptDetailActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     Toast.makeText(ReceiptDetailActivity.this, R.string.success_finish_importing, Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
+                    ReceiptDetailActivity.this.finish();
                 }
                 else {
                     receiptSelected.setStatus(false);
