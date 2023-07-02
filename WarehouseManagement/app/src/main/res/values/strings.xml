@@ -138,4 +138,5 @@
     <string name="title_delete_delivery_note">Delete delivery note</string>
     <string name="message_delete_delivery_note">Are you sure to delete this receipt? You can still create another receipt from order.</string>
     <string name="error_login_fail">Username or Password incorrect</string>
+    <string name="tv_view_all_item">All items</string>
 </resources>

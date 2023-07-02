@@ -14,9 +14,10 @@ import com.example.warehousemanagementwkeeper.R;
 import com.example.warehousemanagementwkeeper.activity.ImportManagementActivity;
 import com.example.warehousemanagementwkeeper.activity.PutItemToShelfActivity;
 import com.example.warehousemanagementwkeeper.activity.SelectOrderImportActivity;
+import com.example.warehousemanagementwkeeper.activity.ViewAllItemsActivity;
 
 public class ItemFragment extends Fragment {
-    private LinearLayout cardPutItemToShelf;
+    private LinearLayout cardPutItemToShelf, cardViewAllItem;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class ItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item, container, false);
 
         cardPutItemToShelf = view.findViewById(R.id.cardPutItemToShelf);
+        cardViewAllItem = view.findViewById(R.id.cardViewAllItem);
 
         setEvent();
 
@@ -39,6 +41,9 @@ public class ItemFragment extends Fragment {
     private void setEvent() {
         cardPutItemToShelf.setOnClickListener(view -> {
             startActivity(new Intent(getContext(), PutItemToShelfActivity.class));
+        });
+        cardViewAllItem.setOnClickListener(view -> {
+            startActivity(new Intent(getContext(), ViewAllItemsActivity.class));
         });
     }
 }

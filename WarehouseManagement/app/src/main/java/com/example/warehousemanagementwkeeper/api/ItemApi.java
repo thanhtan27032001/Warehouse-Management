@@ -29,4 +29,7 @@ public interface ItemApi {
 
     @POST("/api/v1/product/create")
     Call<ResponseObject> putItemToShelf(@Body PutItemToShelfInfo info);
+
+    @GET("/api/v1/product/getAllProduct")
+    Call<ResponseItems> getAllItems();
 }
